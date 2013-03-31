@@ -35,7 +35,7 @@ function filterByCity(city, state)
 			if (dataForYear[j].city == city &&
 			    dataForYear[j].state == state)
 			{
-				res.push({data: dataForYear[j].data, city: city, state: state});
+				res.push({data: dataForYear[j].data, city: city, state: state, year: i});
 				break;
 			}
 		}
