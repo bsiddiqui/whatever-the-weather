@@ -1,3 +1,8 @@
+/*
+ *  Whatever the Weather
+ *  drawLineGraph adapted http://bl.ocks.org/mbostock/3883245
+ *
+ */
 
 function drawLineGraph(city, state, datapoint){
 
@@ -33,12 +38,9 @@ function drawLineGraph(city, state, datapoint){
 
   var city = filterByCity(city, state);
   
-  console.log(city);
-
-
   city.forEach(function(d) {
     d["year"] = parseDate(d["year"]);
-    d.data[datapoint] = +d.data[datapoint];
+    d.data[datapoint] = +d.data[datapoint]
   });
 
   x.domain(d3.extent(city, function(d) { return d["year"]; }));
@@ -63,5 +65,9 @@ function drawLineGraph(city, state, datapoint){
   .datum(city)
   .attr("class", "line")
   .attr("d", line);
+
 };
 
+$(function(){
+  drawLineGraph("New York", "NY", "avg_max_temp");
+});
