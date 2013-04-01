@@ -1,5 +1,5 @@
 
-function drawLineGraph(city, state){
+function drawLineGraph(city, state, datapoint){
 
   var margin = {top: 20, right: 20, bottom: 30, left: 50},
   width = 960 - margin.left - margin.right,
@@ -23,7 +23,7 @@ function drawLineGraph(city, state){
 
   var line = d3.svg.line()
   .x(function(d) { return x(d["year"]); })
-  .y(function(d) { return y(d.data["avg_min_temp"]); });
+  .y(function(d) { return y(d.data[datapoint]); });
 
   var svg = d3.select("body").append("svg")
   .attr("width", width + margin.left + margin.right)
@@ -38,11 +38,11 @@ function drawLineGraph(city, state){
 
   city.forEach(function(d) {
     d["year"] = parseDate(d["year"]);
-    d.data["avg_min_temp"] = +d.data["avg_min_temp"];
+    d.data[datapoint] = +d.data[datapoint];
   });
 
   x.domain(d3.extent(city, function(d) { return d["year"]; }));
-  y.domain(d3.extent(city, function(d) { return d.data["avg_min_temp"]; }));
+  y.domain(d3.extent(city, function(d) { return d.data[datapoint]; }));
 
   svg.append("g")
   .attr("class", "x axis")
@@ -64,3 +64,4 @@ function drawLineGraph(city, state){
   .attr("class", "line")
   .attr("d", line);
 };
+
