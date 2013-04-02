@@ -1,0 +1,8 @@
+body {
+  overflow-y:scroll;
+}
+
+#chart1 {
+  height: 500px;
+}
+
