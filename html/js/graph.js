@@ -106,24 +106,54 @@ function compareLineChart(city1, state1, city2, state2, datapoint){
     .x(function(d) { return d[0] })
     .y(function(d) { return d[1] })
     .color(keyColor)
-                //.clipEdge(true);
+    //.clipEdge(true);
 
-                chart.xAxis
-                .showMaxMin(false)
+    chart.xAxis
+    .showMaxMin(false)
 
-                chart.yAxis
-                .tickFormat(d3.format(',.2f'));
+    chart.yAxis
+    .tickFormat(d3.format(',.2f'));
 
-                d3.select('#chart1')
-                .datum(data)
-                .transition().duration(500).call(chart);
+    d3.select('#chart1')
+    .datum(data)
+    .transition().duration(500).call(chart);
 
-                nv.utils.windowResize(chart.update);
+    nv.utils.windowResize(chart.update);
 
-                chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
+    chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
 
-                return chart;
+    return chart;
 
-              });
+  });
+};
 
+function compareStackedAreaChart(city1, state1, city2, state2, datapoint){
+  var data = compareCitiesData(city1, state1, city2, state2, datapoint);
+  var colors = d3.scale.category10();
+  keyColor = function(d, i) {return colors(d.key)};
+
+  var chart;
+  nv.addGraph(function() {
+    chart = nv.models.stackedAreaChart()
+    .x(function(d) { return d[0] })
+    .y(function(d) { return +d[1] })
+    .color(keyColor)
+
+    chart.xAxis
+    .showMaxMin(false)
+
+    chart.yAxis
+    .tickFormat(d3.format(',.2f'));
+
+    d3.select('#chart1')
+    .datum(data)
+    .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
+
+    return chart;
+
+  });
 };

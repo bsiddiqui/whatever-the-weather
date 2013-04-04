@@ -5,22 +5,28 @@
 
   <!-- Adapted from http://twitter.github.com/bootstrap/examples/starter-template.html -->
   <link href="css/bootstrap.css" rel="stylesheet">
-  <link href="css/bootstrap-responsive.css" rel="stylesheet">
-  <link href="css/lineChart.css" rel="stylesheet">
+  <link href="css/bootstrap-responsive.css" rel="stylesheet" >
+  <link href="css/nv.d3.css" rel="stylesheet" type="text/css">
+  <link href="css/compare.css" rel="stylesheet" type="text/css">
   <script type="text/javascript" src="js/jquery.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
   <script type="text/javascript" src="js/data.json"></script>
   <script type="text/javascript" src="js/map-data.js"></script>
   <script type="text/javascript" src="js/graph.js"></script>
-  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+  <script type="text/javascript" src="js/nv.d3.js"></script>
+  <script type="text/javascript" src="js/d3.v2.js"></script>
 
 </head>
 
 <body>
   <script>
-  lineChart("New York", "NY", "avg_max_temp");
+  compareStackedAreaChart("New York", "NY", "Los Angeles", "CA", "avg_max_temp");
   </script>
 
-</body>
+  <div>
+    <svg id="chart1"></svg>
+  </div>
 
+</body>
 </html>
