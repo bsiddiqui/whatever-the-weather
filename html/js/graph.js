@@ -4,7 +4,7 @@
  *
  */
 
- function drawLineGraph(city, state, datapoint){
+ function lineChart(city, state, datapoint){
 
   var margin = {top: 20, right: 20, bottom: 30, left: 50},
   width = 960 - margin.left - margin.right,
@@ -95,7 +95,7 @@ function compareCitiesData(city1, state1, city2, state2, datapoint){
   return data;
 };
 
-function compareCities(city1, state1, city2, state2, datapoint){
+function compareLineChart(city1, state1, city2, state2, datapoint){
   var data = compareCitiesData(city1, state1, city2, state2, datapoint);
   var colors = d3.scale.category10();
   keyColor = function(d, i) {return colors(d.key)};
