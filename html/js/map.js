@@ -109,12 +109,19 @@ function computeAverages(map)
 		$("#main_dewpoint").html(Math.round(avg_dewpoint) + " &deg;F");
 		$("#main_wind").html(Math.round(avg_windspeed) + " mph");
 		$("#main_precipitation").html(Math.round(avg_precipitation * 100)/100 + " \"\"");
+	} else {
+		$("#main_avg_temp").html("-");
+		$("#main_min_temp").html("-");
+		$("#main_max_temp").html("-");
+		$("#main_dewpoint").html("-");
+		$("#main_wind").html("-");
+		$("#main_precipitation").html("-");
+
 	}
 
 }
 
-function populate(map, year)
-{
+function populate(map, year) {
 	var year_data = filterByYear(year);
 
 	if (window.circles)
@@ -186,6 +193,8 @@ function initialize() {
 		var yr = $(this).val();
 
 		populate(map, yr);
+
+		computeAverages(map);
 	});
 
 	$("#main_city_input").typeahead({

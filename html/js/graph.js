@@ -14,10 +14,15 @@
 	return x >= bounds[0][0] && x <= bounds[1][0] && y >= bounds[0][1] && y <= bounds[1][1];
   }
 
- // year range is an extent
- function tempTable(city, state, datapoint, yearRange) {
+  function withinXExtent(x, y, bounds) {
+	return x >= bounds[0][0] && x <= bounds[1][0];
+  }
 
-  var city = filterByCity(city, state);
+  
+
+ function tempTable(cityName, state, datapoint, yearRange) {
+
+  var city = filterByCity(cityName, state);
 
   var points = ["Average ", "Maximum ", "Minimum "];
   var data = [0];
@@ -87,12 +92,21 @@
 	"padding": "10px", 
   });
 
+  var table = d3.select("." + datapoint + "-table-viz")
+  .append("button")
+  .text("Focus on Selection")
+  .style({
+	padding: "10px"
+  })
+  .on("click", function() {
+	lineChart(cityName, state, datapoint, yearRange);
+  });
+
+
    
  }
 
- function lineChart(cityName, state, datapoint){
-
- tempTable(cityName, state, datapoint, undefined);
+ function lineChart(cityName, state, datapoint, yearRange){
 
   var margin = {top: 20, right: 20, bottom: 30, left: 50},
   width = 600 - margin.left - margin.right,
@@ -115,7 +129,7 @@
   var line = d3.svg.line()
   .x(function(d) { return x(d["year"]); })
   .y(function(d) { return y(d.data[datapoint]); });
-
+ 
   var brush = d3.svg.brush()
   .x(x)
   .y(y)
@@ -144,11 +158,18 @@
   .attr("class", "brush")	
   .call(brush);
 
-  var city = filterByCity(cityName, state);
-  
-  city.forEach(function(d) {
+  var cityData = filterByCity(cityName, state);
+  var city = [];
+  cityData.forEach(function(d) {
     d["year"] = parseDate(d["year"]);
     d.data[datapoint] = +d.data[datapoint]
+    if (!yearRange) {
+	city.push(d);
+    }
+
+    if (yearRange && withinXExtent(d["year"], d.data[datapoint], yearRange)) {
+	city.push(d);
+    } 
   });
 
   x.domain(d3.extent(city, function(d) { return d["year"]; }));
@@ -173,7 +194,14 @@
   .datum(city)
   .attr("class", "lineGraph-line")
   .attr("d", line);
-
+  
+  if (yearRange) {
+  	d3.select("."  + datapoint + "-line-graph")
+        .append("button").text("Reset View")
+  	.on("click", function() {
+		lineChart(cityName, state, datapoint);
+	  });
+  }
 
 };
 
