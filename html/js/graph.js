@@ -6,18 +6,18 @@
 
   var parseDate = d3.time.format("%Y").parse;
 
+  function trivialBounds(bounds) { 
+	return (bounds[0][0].toString() == bounds[1][0].toString() && bounds[0][1].toString() == bounds[1][1].toString());
+
+  }
+
   function withinExtent(x, y, bounds) {
-	if (bounds[0][0].toString() == bounds[1][0].toString() && bounds[0][1].toString() == bounds[1][1].toString()) {
-		return true;
-	}
-	
-	return x >= bounds[0][0] && x <= bounds[1][0] && y >= bounds[0][1] && y <= bounds[1][1];
+	return trivialBounds(bounds) || (x >= bounds[0][0] && x <= bounds[1][0] && y >= bounds[0][1] && y <= bounds[1][1]);
   }
 
   function withinXExtent(x, y, bounds) {
 	return x >= bounds[0][0] && x <= bounds[1][0];
   }
-
   
 
  function tempTable(cityName, state, datapoint, yearRange) {
@@ -92,17 +92,18 @@
 	"padding": "10px", 
   });
 
-  var table = d3.select("." + datapoint + "-table-viz")
-  .append("button")
-  .text("Focus on Selection")
-  .style({
-	padding: "10px"
-  })
-  .on("click", function() {
-	lineChart(cityName, state, datapoint, yearRange);
-  });
 
-
+  if (yearRange && !trivialBounds(yearRange)) {
+  	var table = d3.select("." + datapoint + "-table-viz")
+  	.append("button")
+  	.text("Focus on Selection")
+  	.style({
+		padding: "10px"
+	  })
+  	.on("click", function() {
+		lineChart(cityName, state, datapoint, yearRange);
+  	});
+  }
    
  }
 
@@ -148,8 +149,10 @@
 	"avg_max_temp": "Average Maximum Temperature", 
 	"avg_min_temp": "Average Minimum Temperature"
   }
-  var header = d3.select("."  + datapoint + "-line-graph").append("h4").text(datamap[datapoint]);
+  console.log(cityName, state, datapoint);
+  tempTable(cityName, state, datapoint);
 
+  var header = d3.select("."  + datapoint + "-line-graph").append("h4").text(datamap[datapoint]);
   var svg = d3.select("." + datapoint + "-line-graph").append("svg")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
