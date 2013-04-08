@@ -4,13 +4,96 @@
  *
  */
 
- function lineChart(city, state, datapoint){
+  var parseDate = d3.time.format("%Y").parse;
+
+  function withinExtent(x, y, bounds) {
+	return x >= bounds[0][0] && x <= bounds[1][0] && y >= bounds[0][1] && y <= bounds[1][1];
+  }
+
+ // year range is an extent
+ function tempTable(city, state, datapoint, yearRange) {
+
+  console.log(yearRange);
+
+  var city = filterByCity(city, state);
+
+  var points = ["Average Temperature", "Maximum Temperature", "Minimum Temperature"];
+  var data = [0];
+  var total = 0;
+  city.forEach(function(d) {
+
+    d["year"] = parseDate(d["year"]);
+    d.data[datapoint] = +d.data[datapoint];
+
+    if (yearRange && !withinExtent(d["year"], d.data[datapoint], yearRange)) {
+	return;
+    }
+
+    data[0] += d.data[datapoint];
+    if (data[1]) {
+	data[1] = Math.max(data[1], d.data[datapoint]);
+    } else {
+	data[1] = d.data[datapoint];
+    }
+
+    if (data[2]) {
+	data[2] = Math.min(data[2], d.data[datapoint]);
+    } else {
+	data[2] = d.data[datapoint];
+    }
+
+    total++;
+
+  });
+  data[0] = data[0] / total;
+
+  var color = d3.scale.linear()
+  .domain(d3.extent(city, function(d) { return d["data"][datapoint]; }))
+  .range(["blue",  "orange"])
+
+  // http://christopheviau.com/d3_tutorial/
+  var table = d3.select(".table-viz").append("table");
+  table.selectAll("tr")
+  .data(points)
+  .enter()
+  .append("tr")
+  .selectAll("td")
+  .data(function(d, i) {
+	return [points[i], data[i]];
+  })
+  .enter()
+  .append("td")
+  .text(function(d, i) {
+	if (i ==0) {
+		return d;
+	}
+	else {
+		return Math.round(d * 100, 2) / 100;
+	}
+  })
+  .style({
+	"background-color": color,
+	"color": function(d, i) {
+		if (i == 0) {
+			return "black";
+		}
+		else {
+			return "white";
+		}
+	}, 
+	"padding": "10px", 
+  });
+
+   
+ }
+
+ function lineChart(cityName, state, datapoint){
+
+ tempTable(cityName, state, datapoint, undefined);
 
   var margin = {top: 20, right: 20, bottom: 30, left: 50},
-  width = 960 - margin.left - margin.right,
-  height = 500 - margin.top - margin.bottom;
-
-  var parseDate = d3.time.format("%Y").parse;
+  width = 600 - margin.left - margin.right,
+  height = 300 - margin.top - margin.bottom;
 
   var x = d3.time.scale()
   .range([0, width]);
@@ -30,13 +113,23 @@
   .x(function(d) { return x(d["year"]); })
   .y(function(d) { return y(d.data[datapoint]); });
 
-  var svg = d3.select("body").append("svg")
+  var brush = d3.svg.brush()
+  .x(x)
+  .y(y)
+  .on("brush", function(p) {
+    $(".table-viz").html("");
+    tempTable(cityName, state, datapoint, brush.extent());
+  });
+
+  var svg = d3.select(".line-graph").append("svg")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
-  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+  .attr("class", "brush")
+  .call(brush);
 
-  var city = filterByCity(city, state);
+  var city = filterByCity(cityName, state);
   
   city.forEach(function(d) {
     d["year"] = parseDate(d["year"]);
@@ -47,12 +140,12 @@
   y.domain(d3.extent(city, function(d) { return d.data[datapoint]; }));
 
   svg.append("g")
-  .attr("class", "x axis")
+  .attr("class", "lineGraph-x lineGraph-axis")
   .attr("transform", "translate(0," + height + ")")
   .call(xAxis);
 
   svg.append("g")
-  .attr("class", "y axis")
+  .attr("class", "lineGraph-y lineGraph-axis")
   .call(yAxis)
   .append("text")
   .attr("transform", "rotate(-90)")
@@ -63,7 +156,7 @@
 
   svg.append("path")
   .datum(city)
-  .attr("class", "line")
+  .attr("class", "lineGraph-line")
   .attr("d", line);
 
 };

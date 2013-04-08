@@ -135,6 +135,8 @@ function populate(map, year)
 
 			$("#modal_city_name").html(city + ", " + state);	
 			$("#city_modal").modal();
+  			lineChart(city, state, "avg_max_temp");
+			
 		});
 	});
 }

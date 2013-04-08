@@ -1,17 +1,25 @@
+// http://bl.ocks.org/mbostock/1667367
+// http://bl.ocks.org/mbostock/3884955
 
-.axis path,
-.axis line {
+.lineGraph-axis path,
+.lineGraph-axis line {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
 }
 
-.x.axis path {
+.lineGraph-x.axis path {
   display: none;
 }
 
-.line {
+.lineGraph-line {
   fill: none;
   stroke: steelblue;
   stroke-width: 1.5px;
+}
+
+.brush .extent {
+  stroke: #fff;
+  fill-opacity: .125;
+  shape-rendering: crispEdges;
 }
