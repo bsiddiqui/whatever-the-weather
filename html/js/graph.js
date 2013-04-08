@@ -7,17 +7,19 @@
   var parseDate = d3.time.format("%Y").parse;
 
   function withinExtent(x, y, bounds) {
+	if (bounds[0][0].toString() == bounds[1][0].toString() && bounds[0][1].toString() == bounds[1][1].toString()) {
+		return true;
+	}
+	
 	return x >= bounds[0][0] && x <= bounds[1][0] && y >= bounds[0][1] && y <= bounds[1][1];
   }
 
  // year range is an extent
  function tempTable(city, state, datapoint, yearRange) {
 
-  console.log(yearRange);
-
   var city = filterByCity(city, state);
 
-  var points = ["Average Temperature", "Maximum Temperature", "Minimum Temperature"];
+  var points = ["Average ", "Maximum ", "Minimum "];
   var data = [0];
   var total = 0;
   city.forEach(function(d) {
@@ -52,7 +54,8 @@
   .range(["blue",  "orange"])
 
   // http://christopheviau.com/d3_tutorial/
-  var table = d3.select(".table-viz").append("table");
+
+  var table = d3.select("." + datapoint + "-table-viz").append("table");
   table.selectAll("tr")
   .data(points)
   .enter()
@@ -117,16 +120,28 @@
   .x(x)
   .y(y)
   .on("brush", function(p) {
-    $(".table-viz").html("");
+    $("." + datapoint + "-table-viz").html("");
     tempTable(cityName, state, datapoint, brush.extent());
+  })
+  .on("brushend", function() {
   });
 
-  var svg = d3.select(".line-graph").append("svg")
+  $("." + datapoint + "-table-viz").html("");
+  $("." + datapoint + "-line-graph").html("");
+
+  var datamap = {
+	"avg_temp": "Average Temperature", 
+	"avg_max_temp": "Average Maximum Temperature", 
+	"avg_min_temp": "Average Minimum Temperature"
+  }
+  var header = d3.select("."  + datapoint + "-line-graph").append("h4").text(datamap[datapoint]);
+
+  var svg = d3.select("." + datapoint + "-line-graph").append("svg")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-  .attr("class", "brush")
+  .attr("class", "brush")	
   .call(brush);
 
   var city = filterByCity(cityName, state);
@@ -158,6 +173,7 @@
   .datum(city)
   .attr("class", "lineGraph-line")
   .attr("d", line);
+
 
 };
 

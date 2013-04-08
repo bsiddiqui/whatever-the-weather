@@ -88,16 +88,54 @@
 			<h3 id="modal_city_name"></h3>
 		</div>
 		<div class="modal-body">
-			<table>
-				<tr>
-					<td>
-						<div class="line-graph"></div>
-					</td>
-					<td>
-						<div class="table-viz">
-						</div>		
-					</td>
-				</tr>
+			<div class="tabbable">
+				<ul class="nav nav-tabs" id="historicTabs">
+					<li class="active"><a href="#avg_temp">Average Temperature</a></li>
+					<li><a href="#avg_max_temp">Average Maximum Temperature</a></li>
+					<li><a href="#avg_min_temp">Average Minimum Temperature</a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="avg_temp">
+						<table>
+							<tr>
+								<td>
+									<div class="avg_temp-line-graph"></div>
+								</td>
+								<td>
+									<div class="avg_temp-table-viz">
+									</div>		
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="tab-pane" id="avg_min_temp">
+						<table>
+							<tr>
+								<td>
+									<div class="avg_min_temp-line-graph"></div>
+								</td>
+								<td>
+									<div class="avg_min_temp-table-viz">
+									</div>		
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="tab-pane" id="avg_max_temp">
+						<table>
+							<tr>
+								<td>
+									<div class="avg_max_temp-line-graph"></div>
+								</td>
+								<td>
+									<div class="avg_max_temp-table-viz">
+									</div>		
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<button type="button" class="btn" id="main_restart">Full US</button>

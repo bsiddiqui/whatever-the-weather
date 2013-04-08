@@ -18,6 +18,7 @@ def urlForAirportAndYear(airport, year):
 
 def fetchWeatherDataForAirportAndYear(airport, year):
 	try:
+		print urlForAirportAndYear(airport, year)
 		url = URL(urlForAirportAndYear(airport, year))
 		dom = DOM(url.download(cached=True))
 		avg_temp = dom.by_class("contentData")[0].by_tag("table")[0].by_tag("tr")[3].by_class("b")[1].content
@@ -28,7 +29,8 @@ def fetchWeatherDataForAirportAndYear(airport, year):
 		avg_wind = dom.by_class("contentData")[0].by_tag("table")[0].by_tag("tr")[15].by_class("b")[1].content
 		avg_gust_wind = dom.by_class("contentData")[0].by_tag("table")[0].by_tag("tr")[16].by_class("b")[1].content
 		avg_sea_level_pressure = dom.by_class("contentData")[0].by_tag("table")[0].by_tag("tr")[18].by_class("b")[1].content
-	
+
+		print "good"	
 		return {"avg_temp": avg_temp, 
 			"avg_min_temp": avg_min_temp, 
 			"avg_max_temp": avg_max_temp, 
@@ -39,6 +41,7 @@ def fetchWeatherDataForAirportAndYear(airport, year):
 			"avg_sea_level_pressure": avg_sea_level_pressure
 		}
 	except URLTimeout:
+		print "timeout"
 		return {}
 
 yearData = {}

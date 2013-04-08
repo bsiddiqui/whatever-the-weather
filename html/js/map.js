@@ -13,7 +13,23 @@ var INIT_ZOOM_LEVEL = 4;
 var INIT_LAT = 39;
 var INIT_LNG = -96;
 
+// Pulled off of Google, added to object.
 var latlng = {
+	"WA": {
+		"Seattle": {lat: 47.6097, lng: -122.3331}
+	},
+	"TX": {
+		"Houston": {lat: 29.7631, lng: -95.3631}
+	},
+	"AK": {
+		"Juneau": {lat: 58.3514, lng: -134.5116}
+	},
+	"MA": {
+		"Cambridge": {lat: 42.37, lng: -71.13}
+	},
+	"MT": {
+		"Billings": {lat: 45.7833, lng: -108.5}
+	},
 	"NY": {
 		"New York": {lat: 40, lng: -73}
 	}, 
@@ -136,7 +152,14 @@ function populate(map, year)
 			$("#modal_city_name").html(city + ", " + state);	
 			$("#city_modal").modal();
   			lineChart(city, state, "avg_max_temp");
-			
+  			lineChart(city, state, "avg_temp");
+  			lineChart(city, state, "avg_min_temp");
+
+			// http://twitter.github.io/bootstrap/javascript.html#tabs
+			$("#historicTabs a").click(function (e) {
+				e.preventDefault();
+				$(this).tab('show');
+			});
 		});
 	});
 }
