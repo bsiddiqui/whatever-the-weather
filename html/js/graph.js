@@ -216,14 +216,28 @@ function compareCitiesData(city1, state1, city2, state2, datapoint){
   var values2 = [];
   var data = [];
 
+  var minCity1, minCity2;
+
+    var dataForYear = city1[0]; 
+    minCity1 = +dataForYear.year;
+    var dataForYear = city2[0];
+    minCity2 = +dataForYear.year;
+    
+  var minYear = Math.max(minCity1, minCity2);
+
+ 
   for (var i in city1){
-    var dataForYear = city1[i];
-    values1.push([+dataForYear.year, +dataForYear.data[datapoint]]); 
+    var dataForYear = city1[i]; 
+    if (+dataForYear.year >= minYear) {
+        values1.push([+dataForYear.year, +dataForYear.data[datapoint]]); 
+    }
   }
 
   for (var i in city2){
     var dataForYear = city2[i];
-    values2.push([+dataForYear.year, +dataForYear.data[datapoint]]); 
+    if (+dataForYear.year >= minYear) {
+    	values2.push([+dataForYear.year, +dataForYear.data[datapoint]]); 
+    }
   }
 
   data.push({key: city1[0].city, values: values1});
@@ -237,6 +251,7 @@ function compareLineChart(city1, state1, city2, state2, datapoint){
   $('#' + datapoint + "-compare-line-graph").show();
   $('#' + datapoint + "-compare-stacked").hide();
   $("#" + datapoint + "-compare-btn").html("Show Stacked Area Chart")
+  $("#" + datapoint + "-compare-btn").unbind('click');
   $("#" + datapoint + "-compare-btn").on('click', function() {
     	$('#' + datapoint + "-compare-line-graph").hide();
     	$('#' + datapoint + "-compare-stacked").show();
@@ -278,6 +293,7 @@ function compareStackedAreaChart(city1, state1, city2, state2, datapoint){
   $("#" + datapoint + "-compare-btn").show();
   $('#' + datapoint + "-compare-stacked").show();
   $("#" + datapoint + "-compare-btn").html("Show Line Graph Chart")
+  $("#" + datapoint + "-compare-btn").unbind('click');
   $("#" + datapoint + "-compare-btn").on('click', function() {
     	$('#' + datapoint + "-compare-stacked").hide();
     	$('#' + datapoint + "-compare-line-graph").show();
