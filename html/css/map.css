@@ -6,4 +6,9 @@
 .nv_svg {
 	width: 900px;
 	height: 400px;
+	display: none;
+}
+
+.compareBtn {
+	display: none;
 }

@@ -233,6 +233,15 @@ function compareCitiesData(city1, state1, city2, state2, datapoint){
 };
 
 function compareLineChart(city1, state1, city2, state2, datapoint){
+  $("#" + datapoint + "-compare-btn").show();
+  $('#' + datapoint + "-compare-line-graph").show();
+  $("#" + datapoint + "-compare-btn").html("Show Stacked Area Chart")
+  $("#" + datapoint + "-compare-btn").on('click', function() {
+    	$('#' + datapoint + "-compare-line-graph").hide();
+    	$('#' + datapoint + "-compare-stacked").show();
+	compareStackedAreaChart(city1, state1, city2, state2, datapoint);	
+  });
+
   var data = compareCitiesData(city1, state1, city2, state2, datapoint);
 
   var colors = d3.scale.category10();
@@ -266,6 +275,16 @@ function compareLineChart(city1, state1, city2, state2, datapoint){
 };
 
 function compareStackedAreaChart(city1, state1, city2, state2, datapoint){
+  $("#" + datapoint + "-compare-btn").show();
+  $('#' + datapoint + "-compare-stacked").show();
+  $("#" + datapoint + "-compare-btn").html("Show Line Graph Chart")
+  $("#" + datapoint + "-compare-btn").on('click', function() {
+    	$('#' + datapoint + "-compare-stacked").hide();
+    	$('#' + datapoint + "-compare-line-graph").show();
+	compareLineChart(city1, state1, city2, state2, datapoint);	
+  });
+
+
   var data = compareCitiesData(city1, state1, city2, state2, datapoint);
   var colors = d3.scale.category10();
   keyColor = function(d, i) {return colors(d.key)};
@@ -283,7 +302,7 @@ function compareStackedAreaChart(city1, state1, city2, state2, datapoint){
     chart.yAxis
     .tickFormat(d3.format(',.2f'));
 
-    d3.select('#' + datapoint + "-compare-line-graph")
+    d3.select('#' + datapoint + "-compare-stacked")
     .datum(data)
     .transition().duration(500).call(chart);
 

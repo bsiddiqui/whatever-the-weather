@@ -56,6 +56,6 @@ for i in range(1970, 2013):
 			continue
 
 
-f = open("js/data.json", "w")
+f = open("js/data7.json", "w")
 f.write(json.dumps(yearData))
 f.close()
