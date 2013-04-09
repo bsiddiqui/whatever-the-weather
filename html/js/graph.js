@@ -218,12 +218,12 @@ function compareCitiesData(city1, state1, city2, state2, datapoint){
 
   for (var i in city1){
     var dataForYear = city1[i];
-    values1.push([dataForYear.year, +dataForYear.data[datapoint]]); 
+    values1.push([+dataForYear.year, +dataForYear.data[datapoint]]); 
   }
 
   for (var i in city2){
     var dataForYear = city2[i];
-    values2.push([dataForYear.year, +dataForYear.data[datapoint]]); 
+    values2.push([+dataForYear.year, +dataForYear.data[datapoint]]); 
   }
 
   data.push({key: city1[0].city, values: values1});
@@ -244,7 +244,6 @@ function compareLineChart(city1, state1, city2, state2, datapoint){
   });
 
   var data = compareCitiesData(city1, state1, city2, state2, datapoint);
-
   var colors = d3.scale.category10();
   keyColor = function(d, i) {return colors(d.key)};
 
@@ -287,6 +286,7 @@ function compareStackedAreaChart(city1, state1, city2, state2, datapoint){
 
 
   var data = compareCitiesData(city1, state1, city2, state2, datapoint);
+
   var colors = d3.scale.category10();
   keyColor = function(d, i) {return colors(d.key)};
 
