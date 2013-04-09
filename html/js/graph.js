@@ -200,7 +200,7 @@
   
   if (yearRange) {
   	d3.select("."  + datapoint + "-line-graph")
-        .append("button").text("Reset View")
+        .insert("button", ":first-child").text("Reset View")
   	.on("click", function() {
 		lineChart(cityName, state, datapoint);
 	  });
