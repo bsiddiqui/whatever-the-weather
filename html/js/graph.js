@@ -100,6 +100,7 @@
   	.style({
 		padding: "10px"
 	  })
+         .attr("class", "btn btn-inverse btn-small")
   	.on("click", function() {
 		lineChart(cityName, state, datapoint, yearRange);
   	});
@@ -201,6 +202,7 @@
   if (yearRange) {
   	d3.select("."  + datapoint + "-line-graph")
         .insert("button", ":first-child").text("Reset View")
+	.attr("class", "btn btn-inverse btn-small")
   	.on("click", function() {
 		lineChart(cityName, state, datapoint);
 	  });
