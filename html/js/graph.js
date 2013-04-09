@@ -1,7 +1,7 @@
 /*
  *  Whatever the Weather
- *  drawLineGraph adapted http://bl.ocks.org/mbostock/3883245
- *
+ *  drawLineChart adapted http://bl.ocks.org/mbostock/3883245
+ *  compareLineChart and compareStackedAreaChart adapted from examples http://nvd3.org/ghpages/examples.html
  */
 
   var parseDate = d3.time.format("%Y").parse;
