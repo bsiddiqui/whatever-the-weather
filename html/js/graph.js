@@ -235,6 +235,7 @@ function compareCitiesData(city1, state1, city2, state2, datapoint){
 function compareLineChart(city1, state1, city2, state2, datapoint){
   $("#" + datapoint + "-compare-btn").show();
   $('#' + datapoint + "-compare-line-graph").show();
+  $('#' + datapoint + "-compare-stacked").hide();
   $("#" + datapoint + "-compare-btn").html("Show Stacked Area Chart")
   $("#" + datapoint + "-compare-btn").on('click', function() {
     	$('#' + datapoint + "-compare-line-graph").hide();
