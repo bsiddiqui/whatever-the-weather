@@ -1,89 +1,90 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-<meta http-equiv="content-type" content="text/html; charset=UTF8">
-    <title>Whatever the Weather</title>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF8">
+	<title>Whatever the Weather</title>
 
-    <!-- Adapted from http://twitter.github.com/bootstrap/examples/starter-template.html -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <style>
-      body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
+	<!-- Adapted from http://twitter.github.com/bootstrap/examples/starter-template.html -->
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<style>
+	body {
+		padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+	}
 
-    </style>
+	</style>
 
-    <link href="css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="css/lineChart.css" rel="stylesheet">
-    <link href="css/map.css" rel="stylesheet">
-    <link href="css/nv.d3.css" rel="stylesheet" type="text/css">
-    <link href="css/compare.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/bootstrap.js"></script>
-    <script type="text/javascript" src="js/map.js"></script>
-    <script type="text/javascript" src="js/data.json"></script>
-    <script type="text/javascript" src="js/map-data.js"></script>
-    <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
-    <script type="text/javascript" src="js/graph.js"></script>=
-    <script type="text/javascript" src="js/nv.d3.js"></script>
-  </head>
+	<link href="css/bootstrap-responsive.css" rel="stylesheet">
+	<link href="css/lineChart.css" rel="stylesheet">
+	<link href="css/map.css" rel="stylesheet">
+	<link href="css/nv.d3.css" rel="stylesheet" type="text/css">
+	<link href="css/compare.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+	<script type="text/javascript" src="js/map.js"></script>
+	<script type="text/javascript" src="js/data.json"></script>
+	<script type="text/javascript" src="js/map-data.js"></script>
+	<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+	<script type="text/javascript" src="js/graph.js"></script>=
+	<script type="text/javascript" src="js/nv.d3.js"></script>
+</head>
 
-  <body>
+<body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="brand" href="#">Whatever the Weather</a>
-        </div>
-      </div>
-    </div>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="index.html">Whatever the Weather</a>
+				<a class="brand" href="about.html">About</a>
+			</div>
+		</div>
+	</div>
 
-    <div class="container">
-	<table class="table">
-		<tr>
-			<td><div id="map"></div></td>
-			<td>
-				<label for="main_year_input">Year:</label>
-				<input type="number" value="2012" id="main_year_input" />
+	<div class="container">
+		<table class="table">
+			<tr>
+				<td><div id="map"></div></td>
+				<td>
+					<label for="main_year_input">Year:</label>
+					<input type="number" value="2012" id="main_year_input" />
 
-				<label for="main_city_input">City:</label>
-				<input type="text" placeholder="Find a city." id="main_city_input" />
-				<br />
-				<br />
-				<div>
-					<table class="table">
-						<tr>
-							<td><h2 id="main_min_temp"></h2></td>
-							<td><h2 id="main_avg_temp"></h2></td>
-							<td><h2 id="main_max_temp"></h2></td>
-						</tr>
-						<tr>
-							<td><small>Avg. Minimum Temperature</small></td>
-							<td><small>Avg. Mean Temperature</small></td>
-							<td><small>Avg. Maximum Temperature</small></td>
-						</tr>
-					</table>
-					<table>
-						<tr>
-							<td><h2 id="main_precipitation"></h2></td>
-							<td><h2 id="main_wind"></h2></td>
-							<td><h2 id="main_dewpoint"></h2></td>
-
-						</tr>
-						<tr>
-							<td><small>Avg. Precipitation</small></td>
-							<td><small>Avg. Wind Speed</small></td>
-							<td><small>Avg. Dewpoint</small></td>
-						</tr>
-					</table>
+					<label for="main_city_input">City:</label>
+					<input type="text" placeholder="Find a city." id="main_city_input" />
 					<br />
-					<button id="main_region_data" type="button" class="btn btn-inverse">Compare...</button>
-				</div>
-			</td>
-		</tr>
-	</table>
+					<br />
+					<div>
+						<table class="table">
+							<tr>
+								<td><h2 id="main_min_temp"></h2></td>
+								<td><h2 id="main_avg_temp"></h2></td>
+								<td><h2 id="main_max_temp"></h2></td>
+							</tr>
+							<tr>
+								<td><small>Avg. Minimum Temperature</small></td>
+								<td><small>Avg. Mean Temperature</small></td>
+								<td><small>Avg. Maximum Temperature</small></td>
+							</tr>
+						</table>
+						<table>
+							<tr>
+								<td><h2 id="main_precipitation"></h2></td>
+								<td><h2 id="main_wind"></h2></td>
+								<td><h2 id="main_dewpoint"></h2></td>
+
+							</tr>
+							<tr>
+								<td><small>Avg. Precipitation</small></td>
+								<td><small>Avg. Wind Speed</small></td>
+								<td><small>Avg. Dewpoint</small></td>
+							</tr>
+						</table>
+						<br />
+						<button id="main_region_data" type="button" class="btn btn-inverse">Compare...</button>
+					</div>
+				</td>
+			</tr>
+		</table>
         <!-- https://groups.google.com/forum/?fromgroups=#!topic/twitter-bootstrap/nxq0HaBpsqU --!>
 	<div class="modal hide fade" id="city_modal" style="width:1000px; margin-left: -500px; height: 700px">
 		<div class="modal-header">
