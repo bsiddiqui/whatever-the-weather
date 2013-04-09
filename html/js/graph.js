@@ -305,7 +305,7 @@ function compareStackedAreaChart(city1, state1, city2, state2, datapoint){
 
     d3.select('#' + datapoint + "-compare-stacked")
     .datum(data)
-    .transition().duration(500).call(chart);
+    .call(chart);
 
     nv.utils.windowResize(chart.update);
 
