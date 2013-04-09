@@ -15,11 +15,19 @@ var INIT_LNG = -96;
 
 // Pulled off of Google, added to object.
 var latlng = {
+	"AZ": {
+		"Phoenix": {lat: 33, lng: -112}
+	},
+	"PA": {
+		"Philadelphia": {lat: 39.9522, lng: -75.1642}
+	},
 	"WA": {
 		"Seattle": {lat: 47.6097, lng: -122.3331}
 	},
 	"TX": {
-		"Houston": {lat: 29.7631, lng: -95.3631}
+		"Houston": {lat: 29.7631, lng: -95.3631},
+		"San Antonio": {lat: 29.4239, lng: -98.4933},
+		"Dallas": {lat: 32.7828, lng: -96.8039}
 	},
 	"AK": {
 		"Juneau": {lat: 58.3514, lng: -134.5116}
@@ -34,7 +42,15 @@ var latlng = {
 		"New York": {lat: 40, lng: -73}
 	}, 
 	"CA": {
-		"Los Angeles": {lat: 34.0522, lng: -118.2428}
+		"Los Angeles": {lat: 34.0522, lng: -118.2428}, 
+		"San Diego": {lat: 32.7153, lng: -117.1564},
+		"San Jose": {lat: 37.3041, lng: -121.8727}
+	}, 
+	"FL": {
+		"Jacksonville": {lat: 30.3319, lng: -81.6558}
+	}, 
+	"IL": {
+		"Chicago": {lat: 41.85, lng: -87.65}
 	}
 }
 
@@ -45,15 +61,15 @@ function chooseColor(temp)
 		return "#00FFFF";
 	
 	}
-	else if (temp < 40)
+	else if (temp < 60)
 	{
 		return "#3333FF";
 	}
-	else if (temp < 60)
+	else if (temp < 80)
 	{
 		return "#FF9966"
 	}
-	else if (temp < 80)
+	else if (temp < 100)
 	{
 		return "#FF9900";
 	}
@@ -139,6 +155,7 @@ function populate(map, year) {
 
 		var state = city_data.state;
 		var lookup = latlng[state][city];
+		console.log(city);
 		var loc = new google.maps.LatLng(lookup.lat, lookup.lng);
 
 		var temp = city_data.data.avg_temp;
