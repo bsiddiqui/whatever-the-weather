@@ -283,7 +283,7 @@ function compareStackedAreaChart(city1, state1, city2, state2, datapoint){
     chart.yAxis
     .tickFormat(d3.format(',.2f'));
 
-    d3.select('#chart1')
+    d3.select('#' + datapoint + "-compare-line-graph")
     .datum(data)
     .transition().duration(500).call(chart);
 

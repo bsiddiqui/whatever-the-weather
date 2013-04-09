@@ -264,6 +264,10 @@ function initialize() {
 
 }
 
+function toggleCompareGraph() {
+	
+}
+
 function compareUpdate() {
 
 	// if there is a clear definition of the first and second city
