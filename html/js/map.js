@@ -281,6 +281,9 @@ function compareUpdate() {
 		var secondCityName = secondCity[0].trim();
 		var secondStateName = secondCity[1].trim();
 
+		alert("got here.");
+		console.log(window.first, window.second);
+
 		compareLineChart(firstCityName, firstStateName, secondCityName, secondStateName, "avg_temp");
 		compareLineChart(firstCityName, firstStateName, secondCityName, secondStateName, "avg_min_temp");
 		compareLineChart(firstCityName, firstStateName, secondCityName, secondStateName, "avg_max_temp");
