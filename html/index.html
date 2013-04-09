@@ -17,12 +17,16 @@
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
     <link href="css/lineChart.css" rel="stylesheet">
     <link href="css/map.css" rel="stylesheet">
+    <link href="css/nv.d3.css" rel="stylesheet" type="text/css">
+    <link href="css/compare.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/map.js"></script>
     <script type="text/javascript" src="js/data.json"></script>
     <script type="text/javascript" src="js/map-data.js"></script>
+    <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+    <script type="text/javascript" src="js/nv.d3.js"></script>
     <script type="text/javascript" src="js/d3.v2.js"></script>
     <script type="text/javascript" src="js/graph.js"></script>
   </head>
@@ -111,7 +115,6 @@
 						</table>
 					</div>
 					<div class="tab-pane" id="avg_min_temp">
-						<input type="text" style="width: 80%" placeholder="Compare to..." />
 						<table>
 							<tr>
 								<td>
@@ -126,7 +129,6 @@
 						</table>
 					</div>
 					<div class="tab-pane" id="avg_max_temp">
-						<input type="text" style="width: 80%" placeholder="Compare to..." />
 						<table>
 							<tr>
 								<td>
@@ -134,6 +136,71 @@
 								</td>
 								<td>
 									<div class="avg_max_temp-table-viz">
+									</div>		
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal hide fade" id="compare_modal" style="width:1000px; margin-left: -500px; height: 600px">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3>Compare</h3>
+		</div>
+		<div class="modal-body">
+			<table>
+				<tr>
+					<td>Compare </td>
+					<td><input type="text" id="compareFirstCity" placeholder="first city" /></td>
+					<td>with </td>
+					<td><input type="text" id="compareSecondCity" placeholder="second city" /></td>
+					<td>.</td>
+				</tr>
+			</table>
+			<div class="tabbable">
+				<ul class="nav nav-tabs" id="compareTabs">
+					<li class="active"><a href="#avg_temp_compare">Average Temperature</a></li>
+					<li><a href="#avg_max_temp_compare">Average Maximum Temperature</a></li>
+					<li><a href="#avg_min_temp_compare">Average Minimum Temperature</a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="avg_temp_compare">
+						<table>
+							<tr>
+								<td>
+									<svg class="nv_svg" id="avg_temp-compare-line-graph"></svg>
+								</td>
+								<td>
+									<div id="avg_temp-compare-table-viz">
+									</div>		
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="tab-pane" id="avg_max_temp_compare">
+						<table>
+							<tr>
+								<td>
+									<svg class="nv_svg" id="avg_max_temp-compare-line-graph"></svg>
+								</td>
+								<td>
+									<div id="avg_max_temp-compare-table-viz">
+									</div>		
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="tab-pane" id="avg_min_temp_compare">
+						<table>
+							<tr>
+								<td>
+									<svg class="nv_svg" id="avg_min_temp-compare-line-graph"></svg>
+								</td>
+								<td>
+									<div id="avg_min_temp-compare-table-viz">
 									</div>		
 								</td>
 							</tr>

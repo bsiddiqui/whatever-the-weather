@@ -239,23 +239,57 @@ function initialize() {
 	});
 
 	$("#main_region_data").click(function() {
-		$("#city_modal").modal();
+		$("#compare_modal").modal();
 
-		var bounds = map.getBounds();
+		$("#compareFirstCity").typeahead({
+			source: cities, 
+			updater: function(item) {
+					window.first = item;
+					compareUpdate();
+					return item;
+				}
+		});
 
-		var curYear = $("#main_year_input").val();
-		var cities = filterByYear(curYear);
-
-		cities.forEach(function(c) {
-			var lookup = latlng[c.state][c.city];
-			var loc = new google.maps.LatLng(lookup.lat, lookup.lng);
-	
-			if (bounds.contains(loc)) {
-				console.log(c.city, c.state);	
+		$("#compareSecondCity").typeahead({
+			source: cities, 
+			updater: function(item) {
+					window.second = item;
+					compareUpdate();
+					return item;
 			}
 		});
 
+
 	});
+
+}
+
+function compareUpdate() {
+
+	// if there is a clear definition of the first and second city
+	if (window.first && window.second) {
+
+		var firstCity = window.first.split(",");
+		var firstCityName = firstCity[0].trim();
+		var firstStateName = firstCity[1].trim();
+
+		var secondCity = window.second.split(",");
+		var secondCityName = secondCity[0].trim();
+		var secondStateName = secondCity[1].trim();
+
+		compareLineChart(firstCityName, firstStateName, secondCityName, secondStateName, "avg_temp");
+		compareLineChart(firstCityName, firstStateName, secondCityName, secondStateName, "avg_min_temp");
+		compareLineChart(firstCityName, firstStateName, secondCityName, secondStateName, "avg_max_temp");
+		
+		$("#compareTabs a").click(function (e) {
+				e.preventDefault();
+				$(this).tab('show');
+			});
+
+
+	}
+
+
 
 }
 

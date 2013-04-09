@@ -229,14 +229,12 @@ function compareCitiesData(city1, state1, city2, state2, datapoint){
   data.push({key: city1[0].city, values: values1});
   data.push({key: city2[0].city, values: values2});
 
-  console.log(data);
-
-
   return data;
 };
 
 function compareLineChart(city1, state1, city2, state2, datapoint){
   var data = compareCitiesData(city1, state1, city2, state2, datapoint);
+
   var colors = d3.scale.category10();
   keyColor = function(d, i) {return colors(d.key)};
 
@@ -254,9 +252,9 @@ function compareLineChart(city1, state1, city2, state2, datapoint){
     chart.yAxis
     .tickFormat(d3.format(',.2f'));
 
-    d3.select('#chart1')
+    d3.select('#' + datapoint + "-compare-line-graph")
     .datum(data)
-    .transition().duration(500).call(chart);
+    .call(chart);
 
     nv.utils.windowResize(chart.update);
 
