@@ -230,14 +230,17 @@ function compareCitiesData(city1, state1, city2, state2, datapoint){
  
   for (var i in city1){
     var dataForYear = city1[i]; 
-    if (+dataForYear.year >= minYear) {
+    console.log(dataForYear);
+
+    if (+dataForYear.year >= minYear && dataForYear.data[datapoint]) {
         values1.push([+dataForYear.year, +dataForYear.data[datapoint]]); 
-    }
+    } 
   }
 
   for (var i in city2){
     var dataForYear = city2[i];
-    if (+dataForYear.year >= minYear) {
+    console.log(dataForYear);
+    if (+dataForYear.year >= minYear && dataForYear.data[datapoint]) {
     	values2.push([+dataForYear.year, +dataForYear.data[datapoint]]); 
     }
   }
