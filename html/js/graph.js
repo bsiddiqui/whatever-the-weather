@@ -229,23 +229,34 @@ function compareCitiesData(city1, state1, city2, state2, datapoint){
 
   var nonincludes = [] 
 
+  for (var i in city1) {
+      if (!city1[i].data[datapoint]) {
+	nonincludes[city1[i].year] = true
+      }
+  }
+
+  for (var i in city2) {
+      if (!city2[i].data[datapoint]) {
+	nonincludes[city2[i].year] = true
+      }
+  }
+
   for (var i in city1){
     var dataForYear = city1[i]; 
-    console.log(dataForYear);
 
-    if (+dataForYear.year >= minYear && dataForYear.data[datapoint]) {
+    if (+dataForYear.year >= minYear && !nonincludes[dataForYear.year]) {
         values1.push([+dataForYear.year, +dataForYear.data[datapoint]]); 
-    } else{
-	nonincludes[dataForYear.year] = true;
-    }
+    } 
   }
 
   for (var i in city2){
     var dataForYear = city2[i];
-    if (+dataForYear.year >= minYear && dataForYear.data[datapoint] && !nonincludes[dataForYear.year]) {
+    if (+dataForYear.year >= minYear && !nonincludes[dataForYear.year]) {
     	values2.push([+dataForYear.year, +dataForYear.data[datapoint]]); 
     }
   }
+
+  console.log(nonincludes)
 
   data.push({key: city1[0].city, values: values1});
   data.push({key: city2[0].city, values: values2});
