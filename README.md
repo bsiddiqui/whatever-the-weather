@@ -1,1 +1,1 @@
-historical weather visualization created by @kevinschmid and @bsiddiqui for CS171
+historical weather visualization handcoded with love by @kevinschmid and @bsiddiqui for CS171
