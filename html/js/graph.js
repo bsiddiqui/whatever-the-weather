@@ -227,20 +227,22 @@ function compareCitiesData(city1, state1, city2, state2, datapoint){
     
   var minYear = Math.max(minCity1, minCity2);
 
- 
+  var nonincludes = [] 
+
   for (var i in city1){
     var dataForYear = city1[i]; 
     console.log(dataForYear);
 
     if (+dataForYear.year >= minYear && dataForYear.data[datapoint]) {
         values1.push([+dataForYear.year, +dataForYear.data[datapoint]]); 
-    } 
+    } else{
+	nonincludes[dataForYear.year] = true;
+    }
   }
 
   for (var i in city2){
     var dataForYear = city2[i];
-    console.log(dataForYear);
-    if (+dataForYear.year >= minYear && dataForYear.data[datapoint]) {
+    if (+dataForYear.year >= minYear && dataForYear.data[datapoint] && !nonincludes[dataForYear.year]) {
     	values2.push([+dataForYear.year, +dataForYear.data[datapoint]]); 
     }
   }

@@ -46,8 +46,7 @@ var latlng = {
 		"Houston": {lat: 29.7631, lng: -95.3631},
 		"San Antonio": {lat: 29.4239, lng: -98.4933},
 		"Dallas": {lat: 32.7828, lng: -96.8039},
-		"Arlington": {lat: 42.4153, lng: -71.1569}
-
+		"Arlington": {lat: 32.7356, lng: -97.1078}
 	},
 	"NE": {
 		"Omaha": {lat: 41.2586, lng: -95.9375}
