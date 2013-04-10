@@ -15,8 +15,16 @@ var INIT_LNG = -96;
 
 // Pulled off of Google, added to object.
 var latlng = {
+	"IN": {
+		"Indianapolis": {lat: 39.7683, lng: -86.1581}
+	},
 	"AZ": {
-		"Phoenix": {lat: 33, lng: -112}
+		"Phoenix": {lat: 33, lng: -112}, 
+		"Tucson": {lat: 32.2217, lng: -110.9258}, 
+		"Mesa": {lat: 33.4222, lng: -111.8219}
+	},
+	"GA": {
+		"Atlanta": {lat: 32.9605, lng: -83.1132}
 	},
 	"PA": {
 		"Philadelphia": {lat: 39.9522, lng: -75.1642}
@@ -24,33 +32,104 @@ var latlng = {
 	"WA": {
 		"Seattle": {lat: 47.6097, lng: -122.3331}
 	},
+	"MI": {
+		"Detroit": {lat: 42.3314, lng: -83.0458}
+	},
+	"NC": {
+		"Charlotte": {lat: 35.2269, lng: -80.8433},
+		"Raleigh": {lat: 35.7719, lng: -78.6389},
+	},
 	"TX": {
+		"El Paso": {lat: 31.7586, lng: -106.4864},
+		"Fort Worth": {lat: 32.7253, lng: -97.3206},
+		"Austin": {lat: 30.2669, lng: -97.7428},
 		"Houston": {lat: 29.7631, lng: -95.3631},
 		"San Antonio": {lat: 29.4239, lng: -98.4933},
-		"Dallas": {lat: 32.7828, lng: -96.8039}
+		"Dallas": {lat: 32.7828, lng: -96.8039},
+		"Arlington": {lat: 42.4153, lng: -71.1569}
+
+	},
+	"NE": {
+		"Omaha": {lat: 41.2586, lng: -95.9375}
 	},
 	"AK": {
 		"Juneau": {lat: 58.3514, lng: -134.5116}
 	},
 	"MA": {
-		"Cambridge": {lat: 42.37, lng: -71.13}
+		"Cambridge": {lat: 42.37, lng: -71.13}, 
+		"Boston": {lat: 42.3583, lng: -71.0603}
+	},
+	"CO": {
+		"Denver": {lat: 39.7392, lng: -104.9842},
+		"Colorado Springs": {lat: 38.8339, lng: -104.8208}
+	},
+	"TN": {
+		"Memphis": {lat: 35.1494, lng: -90.0489}, 
+		"Nashville": {lat: 36.1658, lng: -86.7844}
+	},
+	"KY": {
+		"Louisville": {lat: 38.2542, lng: -85.7594}
+	},
+	"WI": {
+		"Milwaukee": {lat: 43.0389, lng: -87.9064}
+	},
+	"OR": {
+		"Portland": {lat: 45.5236, lng: -122.6750}
+	},
+	"OK": {
+		"Oklahoma City": {lat: 35.4675, lng: -97.5161}, 
+		"Tulsa": {lat: 36.1539, lng: -95.9925}
+	},
+	"NV": {
+		"Las Vegas": {lat: 36.1131, lng: -115.1764}
+	},
+	"NM": {
+		"Albuquerque": {lat: 35.0844, lng: -106.6506}
 	},
 	"MT": {
 		"Billings": {lat: 45.7833, lng: -108.5}
 	},
+	"MD": {
+		"Baltimore": {lat: 39.2833, lng: -76.6167}
+	},	
 	"NY": {
 		"New York": {lat: 40, lng: -73}
 	}, 
+	"MO": {
+		"Kansas City": {lat: 39.0997, lng: -94.5783}
+	},
+	"DC": {
+		"Washington": {lat: 38.89, lng: -77.03}
+	},
 	"CA": {
+		"San Francisco": {lat: 37.7750, lng: -122.4183},
 		"Los Angeles": {lat: 34.0522, lng: -118.2428}, 
 		"San Diego": {lat: 32.7153, lng: -117.1564},
-		"San Jose": {lat: 37.3041, lng: -121.8727}
+		"San Jose": {lat: 37.3041, lng: -121.8727}, 
+		"Fresno": {lat: 36.7478, lng: -119.7714}, 
+		"Sacramento": {lat: 38.5817, lng: -121.4933}, 
+		"Long Beach": {lat: 33.7669, lng: -118.1883}, 
+		"Oakland": {lat: 37.8044, lng: -122.2697}
 	}, 
 	"FL": {
-		"Jacksonville": {lat: 30.3319, lng: -81.6558}
+		"Jacksonville": {lat: 30.3319, lng: -81.6558},
+		"Miami": {lat: 25.7216, lng: -80.2793}
 	}, 
 	"IL": {
 		"Chicago": {lat: 41.85, lng: -87.65}
+	}, 
+	"OH": {
+		"Columbus": {lat: 39.9611, lng: -82.9989}, 
+		"Cleveland": {lat: 41.4994, lng: -81.6956}
+	}, 
+	"MN": {
+		"Minneapolis": {lat: 44.98, lng: -93.2636}
+	}, 
+	"KS": {
+		"Wichita": {lat: 37.6922, lng: -97.3372}
+	}, 
+	"LA": {
+		"New Orleans": {lat: 29.9728, lng: -90.0590}
 	}
 }
 
