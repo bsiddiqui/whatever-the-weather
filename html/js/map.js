@@ -367,8 +367,43 @@ function initialize() {
 	});
 
 	$("#curYear").html(1970);
+	$("#endYear").hide();
 
+	$("#playMode").click(function() {
+		initializeRangeSlider(map);
+	});
 	
+
+}
+
+function initializeRangeSlider(map) {
+	
+	var startingYear = $("#curYear").html();
+
+	var oldLeftYear;
+
+	$("#yearSlider").slider("destroy");
+	$("#yearSlider").slider({
+		min: 1970, 
+		max: 2013, 
+		animate: "fast",
+		range: true, 
+		values: [startingYear, 2013],
+		slide: function(event, ui) {
+			$("#curYear").html(ui.values[0]);
+			$("#endYear").html(ui.values[1]);
+			
+			if (oldLeftYear != ui.values[0]) {
+				populate(map, ui.values[0]);
+				computeAverages(map);
+			}
+
+			oldLeftYear = ui.values[0];
+		}
+	});
+
+	$("#endYear").html(2013);
+	$("#endYear").show();
 
 }
 
