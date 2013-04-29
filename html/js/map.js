@@ -158,14 +158,11 @@ function chooseColor(temp)
 
 }
 
-function computeAverages(map)
+function computeAverages(map, curYear)
 {
-
 	var bounds = map.getBounds();
 
-	var curYear = $("#curYear").html();
-
-	var cities = filterByYear(curYear);
+	var cities = filterByYear(curYear || START_YEAR);
 
 	var total_mean_temp = 0;
 	var total_min_temp = 0;
@@ -216,7 +213,6 @@ function computeAverages(map)
 		$("#main_precipitation").html("-");
 
 	}
-
 }
 
 function populate(map, year) {
@@ -287,7 +283,10 @@ function initialize() {
 
 	var cities = getCities();
 
-	populate(map, 2012);
+	populate(map, 1970);
+
+	window.start = 0;
+	window.end = NUM_INCREMENTS;
 
 	$("#main_city_input").typeahead({
 		source: cities, 
@@ -361,7 +360,7 @@ function initialize() {
 			$("#curYear").html(yearStr(ui.value));
 			populate(map, extractYear(ui.value));
 
-			computeAverages(map);
+			computeAverages(map, extractYear(ui.value));
 
 		}
 	});
@@ -391,7 +390,7 @@ function startTimelapse(map) {
 			$("#curYear").html(yearStr(++start));
 			$("#yearSlider").slider("option", "values", [start, end]);
 			populate(map, extractYear(start));
-			computeAverages(map);
+			computeAverages(map, extractYear(start));
 		} 
 		else {
 			clearInterval(timelapseId);
@@ -443,7 +442,7 @@ function initializeRangeSlider(map) {
 			
 			if (oldLeftYear != ui.values[0]) {
 				populate(map, extractYear(ui.values[0]));
-				computeAverages(map);
+				computeAverages(map, extractYear(ui.values[0]));
 			}
 
 			oldLeftYear = ui.values[0];
