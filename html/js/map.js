@@ -372,12 +372,17 @@ function initialize() {
 	$("#playMode").click(function() {
 		initializeRangeSlider(map);
 	});
-	
+
+	$("#startAnimationBtn").click(function() {
+		startTimelapse(map)
+	});
 
 }
 
 function startTimelapse(map) {
 	window.map = map;
+	restoreStart = $("#curYear").html();
+	restoreEnd = $("#endYear").html();
 	start = $("#curYear").html();
 	end = $("#endYear").html();
 
@@ -392,15 +397,16 @@ function startTimelapse(map) {
 		} 
 		else {
 			clearInterval(timelapseId);
-			$("#yearSlider").slider("enable");
+			initializeRangeSlider(map);
 		}
-	}, 1000)
+	}, 1000);
 
 }
 
 function initializeRangeSlider(map) {
 	
-	var startingYear = $("#curYear").html();
+	var startingYear = window.restoreStart || $("#curYear").html();
+	var endingYear = window.restoreEnd || $("#endYear").html();
 
 	var oldLeftYear;
 
@@ -410,7 +416,7 @@ function initializeRangeSlider(map) {
 		max: 2013, 
 		animate: "fast",
 		range: true, 
-		values: [startingYear, 2013],
+		values: [startingYear, endingYear],
 		slide: function(event, ui) {
 			$("#curYear").html(ui.values[0]);
 			$("#endYear").html(ui.values[1]);
@@ -424,7 +430,8 @@ function initializeRangeSlider(map) {
 		}
 	});
 
-	$("#endYear").html(2013);
+	$("#curYear").html(startingYear);
+	$("#endYear").html(endingYear);
 	$("#endYear").show();
 
 	$("#startAnimationBtn").show();
@@ -432,10 +439,6 @@ function initializeRangeSlider(map) {
 
 	$("#startAnimationBtn").css('margin-left', 'auto');
 	$("#startAnimationBtn").css('margin-right', 'auto');
-
-	$("#startAnimationBtn").click(function() {
-		startTimelapse(map)
-	});
 
 }
 
