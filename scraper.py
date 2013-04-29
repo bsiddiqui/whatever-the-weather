@@ -14,7 +14,6 @@ with open('cities', 'r') as csvfile:
 		airports.append({"airport": row[0], "city": row[1], "state": row[2]})
 
 def urlForAirportAndYear(airport, year, month):
-	# return "http://www.wunderground.com/history/airport/" + airport + "/" + str(year) + "/1/01/CustomHistory.html?dayend=01&monthend=1&yearend=" + str(year+1)
 	return "http://www.wunderground.com/history/airport/" + airport + "/" + str(year) + "/" + str(month) + "/1/MonthlyHistory.html"
 
 def fetchWeatherDataForAirportAndYear(airport, year, month):
@@ -55,6 +54,7 @@ for i in range(1948, 2013):
 				yearData[i].append({str(k):{"data": fetchWeatherDataForAirportAndYear(j["airport"], i, k), "city": j["city"], "state": j["state"]}})
 				print("got month " + str(k) + ", year " + str(i) + ", city " + j["city"] + "\n")
 			except IndexError:
+				print "index error"
 				continue
 
 
