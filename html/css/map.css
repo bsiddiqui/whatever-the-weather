@@ -25,4 +25,10 @@
 .resetBtn {
 }
 
-
+/* http://stackoverflow.com/questions/618097/how-do-you-easily-horizontally-center-a-div-using-css */
+#yearSlider {
+	width: 75%;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}

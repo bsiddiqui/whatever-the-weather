@@ -335,7 +335,6 @@ function initialize() {
 
 	$("#main_region_data").click(function() {
 		$("#compare_modal").modal();
-
 		$("#compareFirstCity").typeahead({
 			source: cities, 
 			updater: function(item) {
@@ -356,6 +355,17 @@ function initialize() {
 
 
 	});
+
+	var slider = $("#yearSlider").slider({
+		min: 1970, 
+		max: 2013, 
+		animate: "fast", 
+		slide: function(event, ui) {
+			$("#curYear").html(ui.value);
+		}
+	});
+
+	
 
 }
 

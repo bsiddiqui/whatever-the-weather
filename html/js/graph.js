@@ -298,9 +298,11 @@ function compareLineChart(city1, state1, city2, state2, datapoint){
     .datum(data)
     .call(chart);
 
+//    .transition().duration(500).call(chart); 
+
     nv.utils.windowResize(chart.update);
 
-    chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
+//    chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
 
     return chart;
 
@@ -339,13 +341,16 @@ function compareStackedAreaChart(city1, state1, city2, state2, datapoint){
 
     d3.select('#' + datapoint + "-compare-stacked")
     .datum(data)
-    .call(chart);
+   .call(chart);
+
+//    .transition().duration(500).call(chart); 
 
     nv.utils.windowResize(chart.update);
 
-    chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
+//    chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
 
     return chart;
 
   });
 };
+
