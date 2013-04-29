@@ -296,13 +296,9 @@ function compareLineChart(city1, state1, city2, state2, datapoint){
 
     d3.select('#' + datapoint + "-compare-line-graph")
     .datum(data)
-    .call(chart);
-
-//    .transition().duration(500).call(chart); 
+    .transition().duration(500).call(chart); 
 
     nv.utils.windowResize(chart.update);
-
-//    chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
 
     return chart;
 

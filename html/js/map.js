@@ -237,7 +237,7 @@ function populate(map, year) {
 		var circ = new google.maps.Circle({
 			center:  loc,
 			fillColor: chooseColor(temp), 
-			radius: 100000,
+			radius: 40000,
 			map: map, 
 			strokeWeight: 0, 
 			fillOpacity: .8
@@ -381,18 +381,16 @@ function initialize() {
 
 function startTimelapse(map) {
 	window.map = map;
-	restoreStart = $("#curYear").html();
-	restoreEnd = $("#endYear").html();
-	start = $("#curYear").html();
-	end = $("#endYear").html();
+	restoreStart = start;
+	restoreEnd = end;
 
 	$("#yearSlider").slider("disable");
 
 	timelapseId = setInterval(function() {
 		if (start < end) {
-			$("#curYear").html(++start);
+			$("#curYear").html(yearStr(++start));
 			$("#yearSlider").slider("option", "values", [start, end]);
-			populate(map, start);
+			populate(map, extractYear(start));
 			computeAverages(map);
 		} 
 		else {
@@ -403,26 +401,48 @@ function startTimelapse(map) {
 
 }
 
+var START_YEAR = 1970;
+var END_YEAR = 2013;
+var MONTHS_PER_YEAR = 12;
+var NUM_INCREMENTS = (END_YEAR - START_YEAR) * MONTHS_PER_YEAR;
+var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+
+// TODO: once we get month data this needs to be replaced.
+function extractYear(n) {
+	return START_YEAR + Math.floor(n / MONTHS_PER_YEAR);
+
+}
+
+function yearStr(n) {
+	var year = extractYear(n);
+	var month = MONTHS[n % 12];
+
+	return month + " " + year;
+}
+
 function initializeRangeSlider(map) {
 	
-	var startingYear = window.restoreStart || $("#curYear").html();
-	var endingYear = window.restoreEnd || $("#endYear").html();
+	var startingYear = window.restoreStart || 0;
+	var endingYear = window.restoreEnd || NUM_INCREMENTS;
 
 	var oldLeftYear;
 
 	$("#yearSlider").slider("destroy");
 	$("#yearSlider").slider({
-		min: 1970, 
-		max: 2013, 
+		min: startingYear, 
+		max: endingYear, 
 		animate: "fast",
 		range: true, 
 		values: [startingYear, endingYear],
 		slide: function(event, ui) {
-			$("#curYear").html(ui.values[0]);
-			$("#endYear").html(ui.values[1]);
+			window.start = ui.values[0];
+			window.end = ui.values[1];
+			$("#curYear").html(yearStr(ui.values[0]));
+			$("#endYear").html(yearStr(ui.values[1]));
 			
 			if (oldLeftYear != ui.values[0]) {
-				populate(map, ui.values[0]);
+				populate(map, extractYear(ui.values[0]));
 				computeAverages(map);
 			}
 
@@ -430,8 +450,8 @@ function initializeRangeSlider(map) {
 		}
 	});
 
-	$("#curYear").html(startingYear);
-	$("#endYear").html(endingYear);
+	$("#curYear").html(yearStr(startingYear));
+	$("#endYear").html(yearStr(endingYear));
 	$("#endYear").show();
 
 	$("#startAnimationBtn").show();
