@@ -163,7 +163,7 @@ function computeAverages(map)
 
 	var bounds = map.getBounds();
 
-	var curYear = $("#main_year_input").val();
+	var curYear = $("#curYear").html();
 
 	var cities = filterByYear(curYear);
 
@@ -180,6 +180,10 @@ function computeAverages(map)
 		var loc = new google.maps.LatLng(lookup.lat, lookup.lng);
 
 		if (bounds.contains(loc)) {
+			if (!c.data.avg_temp) {
+				return;
+			}
+
 			total_mean_temp += +c.data.avg_temp;
 			total_min_temp += +c.data.avg_min_temp;
 			total_max_temp += +c.data.avg_max_temp;
@@ -218,22 +222,14 @@ function computeAverages(map)
 function populate(map, year) {
 	var year_data = filterByYear(year);
 
-	if (window.circles)
-	{
-		window.circles.forEach(function(c) {
-			c.setMap(null);
-		});
-	}
-
+	var oldCircles = window.circles;
 	window.circles = [];
-
 	year_data.forEach(function(city_data) {
 
 		var city = city_data.city;
 
 		var state = city_data.state;
 		var lookup = latlng[state][city];
-		console.log(city);
 		var loc = new google.maps.LatLng(lookup.lat, lookup.lng);
 
 		var temp = city_data.data.avg_temp;
@@ -247,7 +243,7 @@ function populate(map, year) {
 			fillOpacity: .8
 		});
 
-		circles.push(circ);
+		window.circles.push(circ);
 
 		google.maps.event.addListener(circ, 'click', function() {
 
@@ -264,6 +260,15 @@ function populate(map, year) {
 			});
 		});
 	});
+
+
+	if (oldCircles)
+	{
+		oldCircles.forEach(function(c) {
+			c.setMap(null);
+		});
+	}
+
 }
 
 function initialize() {
@@ -283,14 +288,6 @@ function initialize() {
 	var cities = getCities();
 
 	populate(map, 2012);
-
-	$("#main_year_input").change(function() {
-		var yr = $(this).val();
-
-		populate(map, yr);
-
-		computeAverages(map);
-	});
 
 	$("#main_city_input").typeahead({
 		source: cities, 
@@ -362,8 +359,14 @@ function initialize() {
 		animate: "fast", 
 		slide: function(event, ui) {
 			$("#curYear").html(ui.value);
+			populate(map, ui.value);
+
+			computeAverages(map);
+
 		}
 	});
+
+	$("#curYear").html(1970);
 
 	
 
