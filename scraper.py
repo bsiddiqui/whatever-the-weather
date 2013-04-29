@@ -47,7 +47,7 @@ def fetchWeatherDataForAirportAndYear(airport, year, month):
 
 yearData = {}
 
-for i in range(2012, 2013):
+for i in range(1948, 2013):
 	yearData[i] = []
 	for j in airports: 
 		for k in range(1, 13):
