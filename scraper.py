@@ -13,14 +13,14 @@ with open('cities', 'r') as csvfile:
 	for row in reader:
 		airports.append({"airport": row[0], "city": row[1], "state": row[2]})
 
-def urlForAirportAndYear(airport, year):
+def urlForAirportAndYear(airport, year, month):
 	# return "http://www.wunderground.com/history/airport/" + airport + "/" + str(year) + "/1/01/CustomHistory.html?dayend=01&monthend=1&yearend=" + str(year+1)
-	return "http://www.wunderground.com/history/airport/" + airport + "/" + str(year) + "/1/1/MonthlyHistory.html"
+	return "http://www.wunderground.com/history/airport/" + airport + "/" + str(year) + "/" + str(month) "/1/MonthlyHistory.html"
 
-def fetchWeatherDataForAirportAndYear(airport, year):
+def fetchWeatherDataForAirportAndYear(airport, year, month):
 	try:
-		print urlForAirportAndYear(airport, year)
-		url = URL(urlForAirportAndYear(airport, year))
+		print urlForAirportAndYear(airport, year, month)
+		url = URL(urlForAirportAndYear(airport, year, month))
 		dom = DOM(url.download(cached=True))
 		avg_temp = dom.by_class("contentData")[0].by_tag("table")[0].by_tag("tr")[3].by_class("b")[1].content
 		avg_max_temp = dom.by_class("contentData")[0].by_tag("table")[0].by_tag("tr")[2].by_class("b")[1].content
@@ -47,14 +47,15 @@ def fetchWeatherDataForAirportAndYear(airport, year):
 
 yearData = {}
 
-for i in range(2000, 2013):
+for i in range(2000, 2007):
 	yearData[i] = []
 	for j in airports: 
-		try:
-			yearData[i].append({"data": fetchWeatherDataForAirportAndYear(j["airport"], i), "city": j["city"], "state": j["state"]})
-			print("got year " + str(i) + ", city " + j["city"] + "\n")
-		except IndexError:
-			continue
+		for k in range(1, 4):
+			try:
+				yearData[i].append("month":{ k:[{"data": fetchWeatherDataForAirportAndYear(j["airport"], i), "city": j["city"], "state": j["state"]}]})
+				print("got month" + str(k) + ", year " + str(i) + ", city " + j["city"] + "\n")
+			except IndexError:
+				continue
 
 
 f = open("data/data8.json", "w")
