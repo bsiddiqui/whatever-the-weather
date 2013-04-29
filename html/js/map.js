@@ -352,29 +352,7 @@ function initialize() {
 
 	});
 
-	var slider = $("#yearSlider").slider({
-		min: 0, 
-		max: NUM_INCREMENTS, 
-		animate: "fast", 
-		slide: function(event, ui) {
-			$("#curYear").html(yearStr(ui.value));
-			populate(map, extractYear(ui.value));
-
-			computeAverages(map, extractYear(ui.value));
-
-		}
-	});
-
-	$("#curYear").html("January 1970");
-	$("#endYear").hide();
-
-	$("#playMode").click(function() {
-		initializeRangeSlider(map);
-	});
-
-	$("#startAnimationBtn").click(function() {
-		startTimelapse(map)
-	});
+	initializeSlider(map);
 
 }
 
@@ -420,6 +398,39 @@ function yearStr(n) {
 	return month + " " + year;
 }
 
+function initializeSlider(map, destroy) {
+
+	if (destroy) {
+		$("#yearSlider").slider("destroy");
+	}
+
+	var slider = $("#yearSlider").slider({
+		min: 0, 
+		max: NUM_INCREMENTS, 
+		animate: "fast", 
+		slide: function(event, ui) {
+			$("#curYear").html(yearStr(ui.value));
+			populate(map, extractYear(ui.value));
+
+			computeAverages(map, extractYear(ui.value));
+
+		}
+	});
+
+	$("#curYear").html("January 1970");
+	$("#endYear").hide();
+
+	$("#playMode").click(function() {
+		initializeRangeSlider(map);
+	});
+
+	$("#startAnimationBtn").click(function() {
+		startTimelapse(map)
+	});
+
+
+}
+
 function initializeRangeSlider(map) {
 	
 	var startingYear = window.restoreStart || 0;
@@ -458,6 +469,13 @@ function initializeRangeSlider(map) {
 
 	$("#startAnimationBtn").css('margin-left', 'auto');
 	$("#startAnimationBtn").css('margin-right', 'auto');
+
+	$("#playMode").html("Browse...");
+	$("#playMode").unbind();
+	$("#playMode").click(function() {
+		$("#startAnimationBtn").hide();
+		initializeSlider(map, true);
+	});
 
 }
 
