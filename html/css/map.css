@@ -44,3 +44,7 @@
 	float: right;
 	position: absolute;
 }
+
+#startAnimationBtn {
+	display: none;
+}

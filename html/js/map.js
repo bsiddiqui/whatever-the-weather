@@ -376,6 +376,28 @@ function initialize() {
 
 }
 
+function startTimelapse(map) {
+	window.map = map;
+	start = $("#curYear").html();
+	end = $("#endYear").html();
+
+	$("#yearSlider").slider("disable");
+
+	timelapseId = setInterval(function() {
+		if (start < end) {
+			$("#curYear").html(++start);
+			$("#yearSlider").slider("option", "values", [start, end]);
+			populate(map, start);
+			computeAverages(map);
+		} 
+		else {
+			clearInterval(timelapseId);
+			$("#yearSlider").slider("enable");
+		}
+	}, 1000)
+
+}
+
 function initializeRangeSlider(map) {
 	
 	var startingYear = $("#curYear").html();
@@ -404,6 +426,16 @@ function initializeRangeSlider(map) {
 
 	$("#endYear").html(2013);
 	$("#endYear").show();
+
+	$("#startAnimationBtn").show();
+	$("#startAnimationBtn").css('display', 'block');
+
+	$("#startAnimationBtn").css('margin-left', 'auto');
+	$("#startAnimationBtn").css('margin-right', 'auto');
+
+	$("#startAnimationBtn").click(function() {
+		startTimelapse(map)
+	});
 
 }
 
