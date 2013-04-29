@@ -25,21 +25,21 @@ def fetchWeatherDataForAirportAndYear(airport, year, month):
 		avg_temp = dom.by_class("contentData")[0].by_tag("table")[0].by_tag("tr")[3].by_class("b")[1].content
 		avg_max_temp = dom.by_class("contentData")[0].by_tag("table")[0].by_tag("tr")[2].by_class("b")[1].content
 		avg_min_temp = dom.by_class("contentData")[0].by_tag("table")[0].by_tag("tr")[4].by_class("b")[1].content
-		# avg_dew_point = dom.by_class("contentData")[0].by_tag("table")[0].by_tag("tr")[10].by_class("b")[1].content
-		# avg_precipitation = dom.by_class("contentData")[0].by_tag("table")[0].by_tag("tr")[12].by_class("b")[1].content
-		# avg_wind = dom.by_class("contentData")[0].by_tag("table")[0].by_tag("tr")[15].by_class("b")[1].content
-		# avg_gust_wind = dom.by_class("contentData")[0].by_tag("table")[0].by_tag("tr")[16].by_class("b")[1].content
-		# avg_sea_level_pressure = dom.by_class("contentData")[0].by_tag("table")[0].by_tag("tr")[18].by_class("b")[1].content
+		avg_dew_point = dom.by_class("contentData")[0].by_tag("table")[0].by_tag("tr")[10].by_class("b")[1].content
+		avg_precipitation = dom.by_class("contentData")[0].by_tag("table")[0].by_tag("tr")[12].by_class("b")[1].content
+		avg_wind = dom.by_class("contentData")[0].by_tag("table")[0].by_tag("tr")[15].by_class("b")[1].content
+		avg_gust_wind = dom.by_class("contentData")[0].by_tag("table")[0].by_tag("tr")[16].by_class("b")[1].content
+		avg_sea_level_pressure = dom.by_class("contentData")[0].by_tag("table")[0].by_tag("tr")[18].by_class("b")[1].content
 
 		print "good"	
 		return {"avg_temp": avg_temp, 
 			"avg_min_temp": avg_min_temp, 
 			"avg_max_temp": avg_max_temp, 
-			# "avg_dew_point": avg_dew_point, 
-			# "avg_precipitation": avg_precipitation, 
-			# "avg_wind": avg_wind,
-			# "avg_gust_wind": avg_gust_wind, 
-			# "avg_sea_level_pressure": avg_sea_level_pressure
+			"avg_dew_point": avg_dew_point, 
+			"avg_precipitation": avg_precipitation, 
+			"avg_wind": avg_wind,
+			"avg_gust_wind": avg_gust_wind, 
+			"avg_sea_level_pressure": avg_sea_level_pressure
 		}
 	except URLTimeout:
 		print "timeout"
@@ -47,12 +47,12 @@ def fetchWeatherDataForAirportAndYear(airport, year, month):
 
 yearData = {}
 
-for i in range(2008, 2013):
+for i in range(2012, 2013):
 	yearData[i] = []
 	for j in airports: 
 		for k in range(1, 13):
 			try:
-				yearData[i].append({"data": fetchWeatherDataForAirportAndYear(j["airport"], i, k), "city": j["city"], "state": j["state"], "month": str(k)})
+				yearData[i].append({str(k):{"data": fetchWeatherDataForAirportAndYear(j["airport"], i, k), "city": j["city"], "state": j["state"]}})
 				print("got month " + str(k) + ", year " + str(i) + ", city " + j["city"] + "\n")
 			except IndexError:
 				continue
