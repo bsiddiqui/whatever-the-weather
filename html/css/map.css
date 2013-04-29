@@ -32,3 +32,15 @@
 	margin-right: auto;
 	display: block;
 }
+
+#curYear {
+	float: left;
+	left: 100px;
+	position: absolute;
+}
+
+#endYear {
+	right: 100px;
+	float: right;
+	position: absolute;
+}
