@@ -354,19 +354,19 @@ function initialize() {
 	});
 
 	var slider = $("#yearSlider").slider({
-		min: 1970, 
-		max: 2013, 
+		min: 0, 
+		max: NUM_INCREMENTS, 
 		animate: "fast", 
 		slide: function(event, ui) {
-			$("#curYear").html(ui.value);
-			populate(map, ui.value);
+			$("#curYear").html(yearStr(ui.value));
+			populate(map, extractYear(ui.value));
 
 			computeAverages(map);
 
 		}
 	});
 
-	$("#curYear").html(1970);
+	$("#curYear").html("January 1970");
 	$("#endYear").hide();
 
 	$("#playMode").click(function() {
