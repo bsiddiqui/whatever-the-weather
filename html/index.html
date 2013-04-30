@@ -34,14 +34,10 @@
 </head>
 
 <body>
-    <footer>
-	<a href="about.html">About</a>
-    </footer>
 	<img src="img/banner.png" id="banner"/>
 		<table class="table">
 			<tr>
 				<td>
-					<div id="map"></div>
 					<table id="stats">
 						<tr>
 							<td><h2 id="main_min_temp"></h2></td>
@@ -60,6 +56,7 @@
 							<td><small>Avg. Dewpoint</small></td>
 						</tr>
 					</table>
+					<div id="map"></div>
 				</td>
 				<td>
 					<label for="main_city_input">City:</label>
@@ -68,8 +65,10 @@
 					<br />
 					<div>
 						<br />
+						<button id="about_btn" type="button" class="btn btn-inverse">About...</button>
 						<button id="main_region_data" type="button" class="btn btn-inverse">Compare...</button>
 					    	<button id="playMode" type="button" class="btn btn-inverse">Play...</button>
+						<button type="button" class="btn btn-inverse" id="main_restart">Full US</button>
 						<table>
 
 							<tr>
@@ -85,6 +84,41 @@
 				</td>
 			</tr>
 		</table>
+	<div class="modal hide fade" id="about_modal" style="width:1000px; margin-left: -500px; height: 700px">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>	
+			<h3>About</h3>
+		</div>
+		<div class="modal-body" style="height: 700px">
+			<div class="video">
+				<iframe width="853" height="480" src="http://www.youtube.com/embed/jvom52Y1WIE"></iframe>
+			</div>
+			<div class="description">
+				<p>
+					In this visualization, we explore climate change across cities in the United States! On the visualization's home page, 
+					you'll be greeted with a map (powered by Google Maps) with circles for major United States cities.  You can use the
+					filtering tools in the map's right pane to adjust the year of the data.  (Also, feel free to pan around the map and 
+					glance at the right hand side to see statistics for the region you are currently viewing!)
+				</p>
+				<p>
+					We hope that the initial map view proves to be a springboard for further exploration, allowing you to tenatively
+					explore various statistics of interest.  For a more detailed look at the change in climate, though, you may consider
+				</p>
+				<ul>
+					<li>
+						<b>Clicking on one of the cities.</b>  A modal window will pop up, containing line graphs for 
+						various temperature statistics.  You can brush around the graph here, and see some average statistics, 
+						and focus the graph too!
+					</li>
+					<li>
+						<b>Using the comparison tool.</b> You can compare two cities' average temperature data to explore relative trends in both a stacked area graph and a multi-series line graph.
+					</li>
+				</ul>
+				<p>Special thanks to mbostock's examples!</p>
+				<p>We hope you enjoy our visualization!</p>
+			</div>
+		</div>
+	</div>
 	<div class="modal hide fade" id="compare_modal" style="width:1000px; margin-left: -500px; height: 700px">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -122,7 +156,6 @@
 			</div>
 		</div>
 	</div>
-	<button type="button" class="btn" id="main_restart">Full US</button>
     	<div>
 		<h3 id="curYear"></h1>
 		<div id="yearSlider"></div>
