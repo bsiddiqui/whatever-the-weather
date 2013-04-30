@@ -36,7 +36,6 @@
 <body>
 
 	<img src="img/banner.png" id="banner"/>
-	<div class="container">
 		<table class="table">
 			<tr>
 				<td>
@@ -69,62 +68,21 @@
 						<br />
 						<button id="main_region_data" type="button" class="btn btn-inverse">Compare...</button>
 					    	<button id="playMode" type="button" class="btn btn-inverse">Play...</button>
+						<table>
+							<tr>
+								<td>
+									<div class="avg_temp-line-graph tall"></div>
+								</td>
+								<td>
+									<div class="avg_temp-table-viz tall"></div>		
+								</td>
+							</tr>
+						</table>
 
 					</div>
 				</td>
 			</tr>
 		</table>
-        <!-- https://groups.google.com/forum/?fromgroups=#!topic/twitter-bootstrap/nxq0HaBpsqU -->
-	<div id="city_modal">
-		<div class="tabbable">
-			<ul class="nav nav-tabs" id="historicTabs">
-				<li class="active"><a href="#avg_temp">Average Temperature</a></li>
-				<li><a href="#avg_max_temp">Average Maximum Temperature</a></li>
-				<li><a href="#avg_min_temp">Average Minimum Temperature</a></li>
-			</ul>
-			<div class="tab-content">
-				<div class="tab-pane active" id="avg_temp">
-					<table>
-						<tr>
-							<td>
-								<div class="avg_temp-line-graph tall"></div>
-							</td>
-							<td>
-								<div class="avg_temp-table-viz tall">
-								</div>		
-							</td>
-						</tr>
-					</table>
-				</div>
-				<div class="tab-pane" id="avg_min_temp">
-					<table>
-						<tr>
-							<td>
-								<div class="avg_min_temp-line-graph tall"></div>
-							</td>
-							<td>
-								<div class="avg_min_temp-table-viz tall">
-								</div>		
-							</td>
-						</tr>
-					</table>
-				</div>
-				<div class="tab-pane" id="avg_max_temp">
-					<table>
-						<tr>
-							<td>
-								<div class="avg_max_temp-line-graph tall"></div>
-							</td>
-							<td>
-								<div class="avg_max_temp-table-viz tall">
-								</div>		
-							</td>
-						</tr>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
 	<div class="modal hide fade" id="compare_modal" style="width:1000px; margin-left: -500px; height: 700px">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

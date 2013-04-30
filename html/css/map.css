@@ -3,12 +3,6 @@
 	height: 500px;
 }
 
-.nv_svg {
-	width: 900px;
-	height: 400px;
-	display: none;
-}
-
 .compareBtn {
 	display: none;
 }
@@ -55,8 +49,8 @@ body {
 }
 
 #banner {
-	width: 50%;
-	height: 50%;
+	width: 1230px;
+	height: 182px;
 	margin-left: auto;
 	margin-right: auto;
 	display:block;
@@ -68,4 +62,8 @@ body {
 
 #stats {
 	width: 1000px;
+}
+
+.mainview {
+	width: 100%;
 }
