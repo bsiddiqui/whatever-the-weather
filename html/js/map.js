@@ -244,18 +244,19 @@ function populate(map, year) {
 		google.maps.event.addListener(circ, 'click', function() {
 
 			$("#modal_city_name").html(city + ", " + state);	
-  			lineChart(city, state, "avg_max_temp");
   			lineChart(city, state, "avg_temp");
-  			lineChart(city, state, "avg_min_temp");
 
 			// http://twitter.github.io/bootstrap/javascript.html#tabs
 			$("#historicTabs a").click(function (e) {
 				e.preventDefault();
 				$(this).tab('show');
 			});
-		});
-	});
 
+			$(".graph").css("visibility", "");
+
+		});
+
+	});
 
 	if (oldCircles)
 	{
@@ -352,6 +353,8 @@ function initialize() {
 	});
 
 	initializeSlider(map);
+
+	$(".graph").css('visibility', 'hidden');
 
 }
 

@@ -12,8 +12,8 @@
 }
 
 .tall {
-	height: 600px;
-	width: 600px;
+	height: 400px;
+	width: 700px;
 }
 
 .resetBtn {
@@ -66,4 +66,8 @@ body {
 
 .mainview {
 	width: 100%;
+}
+
+.graph {
+	background-color: white;
 }
