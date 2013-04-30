@@ -48,3 +48,7 @@
 #startAnimationBtn {
 	display: none;
 }
+
+body {
+	background-color: black;
+}
