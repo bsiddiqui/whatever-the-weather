@@ -36,41 +36,36 @@
 <body>
 
 	<img src="img/banner.png" id="banner"/>
-
 	<div class="container">
-    <br/><br/><br/>
 		<table class="table">
 			<tr>
-				<td><div id="map"></div></td>
+				<td>
+					<div id="map"></div>
+					<table id="stats">
+						<tr>
+							<td><h2 id="main_min_temp"></h2></td>
+							<td><h2 id="main_avg_temp"></h2></td>
+							<td><h2 id="main_max_temp"></h2></td>
+							<td><h2 id="main_precipitation"></h2></td>
+							<td><h2 id="main_wind"></h2></td>
+							<td><h2 id="main_dewpoint"></h2></td>
+						</tr>
+						<tr>
+							<td><small>Avg. Minimum Temperature</small></td>
+							<td><small>Avg. Mean Temperature</small></td>
+							<td><small>Avg. Maximum Temperature</small></td>
+							<td><small>Avg. Precipitation</small></td>
+							<td><small>Avg. Wind Speed</small></td>
+							<td><small>Avg. Dewpoint</small></td>
+						</tr>
+					</table>
+				</td>
 				<td>
 					<label for="main_city_input">City:</label>
 					<input type="text" placeholder="Find a city." id="main_city_input" />
 					<br />
 					<br />
 					<div>
-						<table>
-							<tr>
-								<td><h2 id="main_min_temp"></h2></td>
-								<td><h2 id="main_avg_temp"></h2></td>
-								<td><h2 id="main_max_temp"></h2></td>
-							</tr>
-							<tr>
-								<td><small>Avg. Minimum Temperature</small></td>
-								<td><small>Avg. Mean Temperature</small></td>
-								<td><small>Avg. Maximum Temperature</small></td>
-							</tr>
-							<tr>
-								<td><h2 id="main_precipitation"></h2></td>
-								<td><h2 id="main_wind"></h2></td>
-								<td><h2 id="main_dewpoint"></h2></td>
-
-							</tr>
-							<tr>
-								<td><small>Avg. Precipitation</small></td>
-								<td><small>Avg. Wind Speed</small></td>
-								<td><small>Avg. Dewpoint</small></td>
-							</tr>
-						</table>
 						<br />
 						<button id="main_region_data" type="button" class="btn btn-inverse">Compare...</button>
 					    	<button id="playMode" type="button" class="btn btn-inverse">Play...</button>
