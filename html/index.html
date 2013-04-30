@@ -88,58 +88,52 @@
 			</tr>
 		</table>
         <!-- https://groups.google.com/forum/?fromgroups=#!topic/twitter-bootstrap/nxq0HaBpsqU -->
-	<div class="modal hide fade" id="city_modal" style="width:1000px; margin-left: -500px; height: 700px">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			<h3 id="modal_city_name"></h3>
-		</div>
-		<div class="modal-body">
-			<div class="tabbable">
-				<ul class="nav nav-tabs" id="historicTabs">
-					<li class="active"><a href="#avg_temp">Average Temperature</a></li>
-					<li><a href="#avg_max_temp">Average Maximum Temperature</a></li>
-					<li><a href="#avg_min_temp">Average Minimum Temperature</a></li>
-				</ul>
-				<div class="tab-content">
-					<div class="tab-pane active" id="avg_temp">
-						<table>
-							<tr>
-								<td>
-									<div class="avg_temp-line-graph tall"></div>
-								</td>
-								<td>
-									<div class="avg_temp-table-viz tall">
-									</div>		
-								</td>
-							</tr>
-						</table>
-					</div>
-					<div class="tab-pane" id="avg_min_temp">
-						<table>
-							<tr>
-								<td>
-									<div class="avg_min_temp-line-graph tall"></div>
-								</td>
-								<td>
-									<div class="avg_min_temp-table-viz tall">
-									</div>		
-								</td>
-							</tr>
-						</table>
-					</div>
-					<div class="tab-pane" id="avg_max_temp">
-						<table>
-							<tr>
-								<td>
-									<div class="avg_max_temp-line-graph tall"></div>
-								</td>
-								<td>
-									<div class="avg_max_temp-table-viz tall">
-									</div>		
-								</td>
-							</tr>
-						</table>
-					</div>
+	<div id="city_modal">
+		<div class="tabbable">
+			<ul class="nav nav-tabs" id="historicTabs">
+				<li class="active"><a href="#avg_temp">Average Temperature</a></li>
+				<li><a href="#avg_max_temp">Average Maximum Temperature</a></li>
+				<li><a href="#avg_min_temp">Average Minimum Temperature</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="avg_temp">
+					<table>
+						<tr>
+							<td>
+								<div class="avg_temp-line-graph tall"></div>
+							</td>
+							<td>
+								<div class="avg_temp-table-viz tall">
+								</div>		
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="tab-pane" id="avg_min_temp">
+					<table>
+						<tr>
+							<td>
+								<div class="avg_min_temp-line-graph tall"></div>
+							</td>
+							<td>
+								<div class="avg_min_temp-table-viz tall">
+								</div>		
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="tab-pane" id="avg_max_temp">
+					<table>
+						<tr>
+							<td>
+								<div class="avg_max_temp-line-graph tall"></div>
+							</td>
+							<td>
+								<div class="avg_max_temp-table-viz tall">
+								</div>		
+							</td>
+						</tr>
+					</table>
 				</div>
 			</div>
 		</div>
@@ -150,10 +144,11 @@
 			<h3>Compare</h3>
 		</div>
 		<div class="modal-body" style="height: 700px">
-					<label for="compareFirstCity"><b>First city:</b></label>
-					<input type="text" id="compareFirstCity" />
-					<label><b>Second city:</b></label>
-					<label><input type="text" id="compareSecondCity" /></label>
+	
+			<label for="compareFirstCity"><b>First city:</b></label>
+			<input type="text" id="compareFirstCity" />
+			<label><b>Second city:</b></label>
+			<label><input type="text" id="compareSecondCity" /></label>
 			<div class="tabbable" style="height: 600px">
 				<ul class="nav nav-tabs" id="compareTabs">
 					<li class="active"><a href="#avg_temp_compare">Average Temperature</a></li>
