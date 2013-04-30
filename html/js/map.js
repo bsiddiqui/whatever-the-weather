@@ -244,7 +244,6 @@ function populate(map, year) {
 		google.maps.event.addListener(circ, 'click', function() {
 
 			$("#modal_city_name").html(city + ", " + state);	
-			$("#city_modal").modal();
   			lineChart(city, state, "avg_max_temp");
   			lineChart(city, state, "avg_temp");
   			lineChart(city, state, "avg_min_temp");
