@@ -8,7 +8,7 @@ airports = []
 
 # http://docs.python.org/2/library/csv.html
 import csv
-with open('cities4', 'r') as csvfile: 
+with open('cities', 'r') as csvfile: 
 	reader = csv.reader(csvfile, delimiter=",")
 	for row in reader:
 		airports.append({"airport": row[0], "city": row[1], "state": row[2]})
@@ -96,6 +96,6 @@ for i in range(1948, 2013):
 				continue
 
 
-f = open("data/data4.json", "w")
+f = open("data/data.json", "w")
 f.write(json.dumps(yearData))
 f.close()
