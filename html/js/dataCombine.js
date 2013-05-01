@@ -14,11 +14,7 @@ window.onload = function() {
         return target;
     }
 
-    var json0 = ;
+    var finalJSON = mergeJson({}, data, data1);
 
-    var json1 = ;
-
-    var finalJson = mergeJson({}, json0, json1);
-
-    console.log(finalJson);
+    console.log(JSON.stringify(finalJSON));
 };
