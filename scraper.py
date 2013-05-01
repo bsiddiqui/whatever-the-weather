@@ -8,7 +8,7 @@ airports = []
 
 # http://docs.python.org/2/library/csv.html
 import csv
-with open('cities0', 'r') as csvfile: 
+with open('cities4', 'r') as csvfile: 
 	reader = csv.reader(csvfile, delimiter=",")
 	for row in reader:
 		airports.append({"airport": row[0], "city": row[1], "state": row[2]})
@@ -18,7 +18,7 @@ def urlForAirportAndYear(airport, year, month):
 
 def fetchWeatherDataForAirportAndYear(airport, year, month):
 	try:
-		print urlForAirportAndYear(airport, year, month)
+		# print urlForAirportAndYear(airport, year, month)
 		url = URL(urlForAirportAndYear(airport, year, month))
 		dom = DOM(url.download(cached=True))
 		avg_temp = dom.by_class("contentData")[0].by_tag("table")[0].by_tag("tr")[3].by_class("b")
@@ -42,7 +42,7 @@ def fetchWeatherDataForAirportAndYear(airport, year, month):
 		else:
 			avg_dew_point = ""
 		avg_precipitation = dom.by_class("contentData")[0].by_tag("table")[0].by_tag("tr")[12].by_class("b")
-		if avg_precipitation:
+		if avg_precipitation[1]:
 			avg_precipitation = avg_precipitation[1].content
 		else:
 			avg_precipitation = ""
@@ -62,7 +62,7 @@ def fetchWeatherDataForAirportAndYear(airport, year, month):
 		else:
 			avg_sea_level_pressure = ""
 
-		print "good"	
+		# print "good"	
 		return {"avg_temp": avg_temp, 
 			"avg_min_temp": avg_min_temp, 
 			"avg_max_temp": avg_max_temp, 
@@ -73,12 +73,15 @@ def fetchWeatherDataForAirportAndYear(airport, year, month):
 			"avg_sea_level_pressure": avg_sea_level_pressure
 		}
 	except URLTimeout:
-		print "timeout"
+		# print "timeout fetching data"
+		return {}
+	except:
+		# print "unknown error fetching data"
 		return {}
 
 yearData = {}
 
-for i in range(1950, 1951):
+for i in range(1948, 2013):
 	yearData[i] = []
 	for k in range(1, 13): 
 		for j in airports:
@@ -86,10 +89,13 @@ for i in range(1950, 1951):
 				yearData[i].append({j["city"]:{"data": fetchWeatherDataForAirportAndYear(j["airport"], i, k), "city": j["city"], "state": j["state"], "month":str(k)}})
 				print("got month " + str(k) + ", year " + str(i) + ", city " + j["city"] + "\n")
 			except IndexError:
-				print "index error"
+				# print "index error"
+				continue
+			except:
+				# print "unknown error"
 				continue
 
 
-f = open("data/data0.json", "w")
+f = open("data/data4.json", "w")
 f.write(json.dumps(yearData))
 f.close()
