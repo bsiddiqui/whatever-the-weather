@@ -32,7 +32,12 @@
   for(var year in city) {
     var d = city[year];
 
+    if (!d.data[datapoint]) {
+	continue;
+    }
+
     year = parseDate(year);
+    d["year"] = year;
     d.data[datapoint] = +d.data[datapoint];
 
     if (yearRange && !withinExtent(d["year"], d.data[datapoint], yearRange)) {
