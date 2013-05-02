@@ -319,16 +319,15 @@ function computeAverages(map)
 
 function populate(map) {
 	var year_data = filterByMonthYear(MapState.month, MapState.year);
-
 	var oldCircles = window.circles;
 	window.circles = [];
 
-	for(var city in year_data) {
-		var city_data = year_data[city];
+	for(var cityName in year_data) {
+
+		var city_data = year_data[cityName];
+
 		var city = city_data.city;
-
 		var state = city_data.state;
-
 
 		var lookup = latlng[state][city];
 		var loc = new google.maps.LatLng(lookup.lat, lookup.lng);
@@ -345,21 +344,8 @@ function populate(map) {
 		});
 
 		window.circles.push(circ);
+		setupClickEventListener(circ, city, state);
 
-		google.maps.event.addListener(circ, 'click', function() {
-
-			$("#modal_city_name").html(city + ", " + state);	
-  			lineChart(city, state, "avg_temp");
-
-			// http://twitter.github.io/bootstrap/javascript.html#tabs
-			$("#historicTabs a").click(function (e) {
-				e.preventDefault();
-				$(this).tab('show');
-			});
-
-			$(".graph").css("visibility", "");
-
-		});
 	}
 
 	if (oldCircles)
@@ -368,6 +354,26 @@ function populate(map) {
 			c.setMap(null);
 		});
 	}
+
+}
+
+function setupClickEventListener(circ, city, state)
+{
+
+	google.maps.event.addListener(circ, 'click', function() {
+
+		$("#cityName").html(city + ", " + state);	
+		lineChart(city, state, "avg_temp");
+
+		// http://twitter.github.io/bootstrap/javascript.html#tabs
+		$("#historicTabs a").click(function (e) {
+			e.preventDefault();
+			$(this).tab('show');
+		});
+
+		$(".graph").css("visibility", "");
+
+	});
 
 }
 
@@ -387,7 +393,7 @@ function initialize() {
 
 	var cities = getCities(MapState.month, MapState.year);
 
-	populate(map, 1948);
+	populate(map);
 
 	window.start = 0;
 	window.end = NUM_INCREMENTS;
@@ -478,8 +484,8 @@ function startTimelapse(map) {
 		if (start < end) {
 			$("#curYear").html(yearStr(++start));
 			$("#yearSlider").slider("option", "values", [start, end]);
-			populate(map, extractYear(start));
-			computeAverages(map, extractYear(start));
+			populate(map);
+			computeAverages(map);
 		} 
 		else {
 			clearInterval(timelapseId);
@@ -521,13 +527,11 @@ function initializeSlider(map, destroy) {
 		min: 0, 
 		max: NUM_INCREMENTS, 
 		animate: "fast", 
+		value: MapState.year * MONTHS_PER_YEAR + (MapState.month - 1),
 		slide: function(event, ui) {
 
 			MapState.month = extractMonth(ui.value);
 			MapState.year = extractYear(ui.value);
-
-			console.log(MapState.month);
-			console.log(MapState.year);
 
 			$("#curYear").html(yearStr(ui.value));
 			populate(map);
@@ -536,7 +540,7 @@ function initializeSlider(map, destroy) {
 		}
 	});
 
-	$("#curYear").html("January 1970");
+	$("#curYear").html("December 2012");
 	$("#endYear").hide();
 
 	$("#playMode").click(function() {

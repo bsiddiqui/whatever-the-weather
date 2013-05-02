@@ -163,6 +163,7 @@
   .attr("class", "brush")	
   .call(brush);
 
+  console.log(cityName, state);
   var cityData = filterByCity(cityName, state);
   var city = [];
 
