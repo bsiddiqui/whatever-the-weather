@@ -356,6 +356,10 @@ function initialize() {
 
 	$(".graph").css('visibility', 'hidden');
 
+	$("#about_btn").click(function() {
+		$("#about_modal").modal();
+	});
+
 }
 
 function startTimelapse(map) {

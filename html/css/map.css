@@ -71,3 +71,7 @@ body {
 .graph {
 	background-color: white;
 }
+
+#about_modal {
+	color: black;
+}

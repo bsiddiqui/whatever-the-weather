@@ -2,14 +2,31 @@ var WhateverTheWeather = {};
 
 function initWithData(data) {
 	WhateverTheWeather.data = data;	
+	filterByCity("Cambridge", "MA");
 }
 
-function filterByYear(year)
+function filterByMonthYear(month, year)
 {
 	// http://stackoverflow.com/questions/455338/how-do-i-check-if-an-object-has-a-key-in-javascript
 	if (WhateverTheWeather.data.hasOwnProperty(year))
 	{
-		return WhateverTheWeather.data[year];
+		var res = {};
+		
+		var yearData = WhateverTheWeather.data[year];
+		for(var i = 0; i < yearData.length; i++)
+		{
+			var cityName = undefined;
+			for(var key in yearData[i]) {
+				cityName = key;
+			}
+			if (yearData[i][cityName].month == month)
+			{
+				res[cityName] = yearData[i][cityName]
+			}
+
+		}
+		return res;
+
 	}
 	else
 	{
@@ -19,30 +36,26 @@ function filterByYear(year)
 
 function filterByCity(city, state)
 {
-	if (!city || !state)
+	var res = {};
+
+	for(var yr in WhateverTheWeather.data)
 	{
-		return [];
-	}
-
-	var res = [];
-
-	for(var i in WhateverTheWeather.data)
-	{
-
-		var dataForYear = WhateverTheWeather.data[i];
-		for(var j = 0; j < dataForYear.length; j++)
+		var yearData = WhateverTheWeather.data[yr];
+		for(var i = 0; i < yearData.length; i++)
 		{
-			if (dataForYear[j].city == city &&
-			    dataForYear[j].state == state)
-			{
-				res.push({data: dataForYear[j].data, city: city, state: state, year: i});
-				break;
+			var cityName = undefined;
+			for(var key in yearData[i]) {
+				cityName = key;
+			}
+
+			if (cityName == city) {
+				res[yr]= yearData[i][cityName];
 			}
 		}
-
 	}
 
-	return res;
+	console.log(res);
+	
 }
 
 /* 
