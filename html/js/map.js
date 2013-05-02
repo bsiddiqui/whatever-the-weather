@@ -357,22 +357,20 @@ function populate(map) {
 
 }
 
+function plotCity(city, state)
+{
+
+	$("#cityName").html(city + ", " + state);	
+	lineChart(city, state, "avg_temp");
+
+	$(".graph").css("visibility", "");
+}
+
 function setupClickEventListener(circ, city, state)
 {
 
 	google.maps.event.addListener(circ, 'click', function() {
-
-		$("#cityName").html(city + ", " + state);	
-		lineChart(city, state, "avg_temp");
-
-		// http://twitter.github.io/bootstrap/javascript.html#tabs
-		$("#historicTabs a").click(function (e) {
-			e.preventDefault();
-			$(this).tab('show');
-		});
-
-		$(".graph").css("visibility", "");
-
+		plotCity(city, state);
 	});
 
 }
@@ -413,6 +411,7 @@ function initialize() {
 			map.setCenter(new google.maps.LatLng(new_center.lat, new_center.lng));
 			map.setZoom(6);
 
+			plotCity(city, state);
 
 			return item;
 		}

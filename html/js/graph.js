@@ -23,7 +23,6 @@
  function tempTable(cityName, state, datapoint, yearRange) {
 
   var city = filterByCity(cityName, state);
-  console.log(city);
 
   var points = ["Average "];
   var sum = 0;
@@ -40,7 +39,6 @@
     	}
 
     	year = parseDate(mo + " " + year);
-	console.log(year);
     	d["year"] = year;
     	d.data[datapoint] = +d.data[datapoint];
 
@@ -163,18 +161,14 @@
   .attr("class", "brush")	
   .call(brush);
 
-  console.log(cityName, state);
   var cityData = filterByCity(cityName, state);
   var city = [];
-
-  console.log(cityData);
 
   for(var year in cityData)
   {
 
 	for(var mo in cityData[year]) {
 
-		console.log(mo, year);
 		var d = cityData[year][mo];
 		d["year"] = parseDate(mo + " " + year);
 		d.data[datapoint] = +d.data[datapoint]
@@ -194,8 +188,6 @@
 	}
 
   }
-
-  console.log(city);
 
   x.domain(d3.extent(city, function(d) { return d["year"]; }));
   y.domain(d3.extent(city, function(d) { return +d.data[datapoint]; }));
