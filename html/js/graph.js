@@ -16,7 +16,7 @@
   }
 
   function withinXExtent(x, y, bounds) {
-	return x >= bounds[0][0] && x <= bounds[1][0];
+	return x >= +bounds[0][0].getFullYear() && x <= +bounds[1][0].getFullYear();
   }
   
 
@@ -55,10 +55,15 @@
  var average = sum / total;
  $("#selection_avg").html(Math.round(average * 100) / 100);
 
-
   var color = d3.scale.linear()
   .domain(d3.extent(city, function(d) { return d["data"][datapoint]; }))
   .range(["blue",  "orange"])
+
+  appendButton(yearRange, datapoint, cityName, state);
+   
+ }
+
+ function appendButton(yearRange, datapoint, cityName, state) {
 
   if (yearRange && !trivialBounds(yearRange)) {
 	$("." + datapoint + "-table-viz").html("");
@@ -71,9 +76,8 @@
          .attr("class", "btn btn-inverse btn-small")
   	.on("click", function() {
 		lineChart(cityName, state, datapoint, yearRange);
-  	});
+  	 });
   }
-   
  }
 
  function lineChart(cityName, state, datapoint, yearRange){
@@ -104,7 +108,6 @@
   .x(x)
   .y(y)
   .on("brush", function(p) {
-    console.log(cityName, state, datapoint, brush.extent());
     tempTable(cityName, state, datapoint, brush.extent());
   })
   .on("brushend", function() {
@@ -152,7 +155,7 @@
 
         	if (yearRange && withinXExtent(year, d.data[datapoint], yearRange)) {
 	  		city.push(d);
-        	}
+        	} 
 	}
 
   }

@@ -366,7 +366,6 @@ function populate(map) {
 
 function plotCity(city, state)
 {
-
 	$("#cityName").html(city + ", " + state);	
 	lineChart(city, state, "avg_temp");
 
