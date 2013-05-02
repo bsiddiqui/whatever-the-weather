@@ -61,8 +61,6 @@ function filterByCity(city, state)
 		}
 	}
 
-	console.log(res);
-	
 	return res;
 
 }

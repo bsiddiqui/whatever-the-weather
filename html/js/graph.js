@@ -53,45 +53,12 @@
   }
 
  var average = sum / total;
+ $("#selection_avg").html(average);
+
 
   var color = d3.scale.linear()
   .domain(d3.extent(city, function(d) { return d["data"][datapoint]; }))
   .range(["blue",  "orange"])
-
-  // http://christopheviau.com/d3_tutorial/
-
-  var table = d3.select("." + datapoint + "-table-viz").append("table");
-  table.selectAll("tr")
-  .data(points)
-  .enter()
-  .append("tr")
-  .selectAll("td")
-  .data(function(d, i) {
-	return [points[i], data[i]];
-  })
-  .enter()
-  .append("td")
-  .text(function(d, i) {
-	if (i ==0) {
-		return d;
-	}
-	else {
-		return Math.round(d * 100, 2) / 100;
-	}
-  })
-  .style({
-	"background-color": color,
-	"color": function(d, i) {
-		if (i == 0) {
-			return "white";
-		}
-		else {
-			return "white";
-		}
-	}, 
-	"padding": "10px", 
-  });
-
 
   if (yearRange && !trivialBounds(yearRange)) {
   	var table = d3.select("." + datapoint + "-table-viz")
