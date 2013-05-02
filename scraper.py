@@ -96,6 +96,6 @@ for i in range(1948, 2013):
 				continue
 
 
-f = open("data/data.json", "w")
+f = open("data/dataPulls/data.json", "w")
 f.write(json.dumps(yearData))
 f.close()

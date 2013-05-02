@@ -100,7 +100,9 @@ var latlng = {
 		"Green Bay": {lat: 44.5192, lng: -88.0197}
 	},
 	"OR": {
-		"Portland": {lat: 45.5236, lng: -122.6750}
+		"Portland": {lat: 45.5236, lng: -122.6750},
+		"Salem": {lat: 44.942898, lng: -123.035096},
+		"Klamath Falls": {lat: 42.224867, lng: -121.78167}
 	},
 	"OK": {
 		"Oklahoma City": {lat: 35.4675, lng: -97.5161}, 
@@ -111,7 +113,8 @@ var latlng = {
 		"Philadelphia": {lat: 39.9522, lng: -75.1642}
 	},
 	"NV": {
-		"Las Vegas": {lat: 36.1131, lng: -115.1764}
+		"Las Vegas": {lat: 36.1131, lng: -115.1764},
+		"Reno": {lat: 39.529633, lng: -119.813803}
 	},
 	"NM": {
 		"Albuquerque": {lat: 35.0844, lng: -106.6506}
@@ -132,7 +135,8 @@ var latlng = {
 		"Spokane": {lat: 36.8681, lng: -93.2967}
 	},
 	"MS": {
-		"Billings": {lat: 45.7833, lng: -108.5}
+		"Billings": {lat: 45.7833, lng: -108.5},
+		"Jackson": {lat: 32.298757, lng: -90.18481}
 	},
 	"DC": {
 		"Washington": {lat: 38.89, lng: -77.03}
@@ -176,7 +180,8 @@ var latlng = {
 		"Cincinnati": {lat: 39.1619, lng: -84.4569}
 	}, 
 	"MN": {
-		"Minneapolis": {lat: 44.98, lng: -93.2636}
+		"Minneapolis": {lat: 44.98, lng: -93.2636},
+		"Bemidji": {lat: 47.473611, lng: -94.880278}
 	}, 
 	"KS": {
 		"Wichita": {lat: 37.6922, lng: -97.3372}, 
@@ -197,13 +202,31 @@ var latlng = {
 		"Lowell": {lat: 36.2553, lng: -94.1306}
 	}, 
 	"ME": {
-		"Fairfield": {lat: 41.1411, lng: -73.2642}
+		"Fairfield": {lat: 41.1411, lng: -73.2642},
+		"Augusta": {lat: 44.310624, lng: -69.77949}
 	}, 
 	"Virginia": {
 		"Richmond": {lat: 35, lng: -77}
 	}, 
 	"Iowa": {
 		"Des Moines": {lat: 47.4019, lng: -122.3231}
+	}.
+	"UT": {
+		"Salt Lake City": {lat: 40.760779, lng: -111.891047}
+	},
+	"WY": {
+		"Casper": {lat: 42.866632, lng: -106.313081},
+		"Cheyenne": {lat: 41.139981, lng: -104.820246}
+
+	},
+	"SD": {
+		"Pierre": {lat: 44.368316, lng: -100.350966},
+		"Rapid City": {lat: 44.080543, lng: -103.231015},
+		"Sioux Falls": {lat: 43.549975, lng:-96.700327}
+	},
+	"ND": {
+		"Bismark": {lat: 46.808327, lng: -100.783739},
+		"Minot": {lat: 48.23251, lng: -101.296273}
 	}
 }
 
