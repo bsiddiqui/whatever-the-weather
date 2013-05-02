@@ -232,28 +232,90 @@ var latlng = {
 
 function chooseColor(temp) 
 {
-	if (temp < 20)
+	if (temp < 0)
 	{
-		return "#00FFFF";
-
+		return "#0022ff";
+	}
+	else if (temp < 5)
+	{
+		return "#0054ff";
+	}
+	else if (temp < 10)
+	{
+		return "#0074ff";
+	}
+	else if (temp < 15)
+	{
+		return "#0084ff";
+	}
+	else if (temp < 20)
+	{
+		return "#0094ff";
+	}
+	else if (temp < 25)
+	{
+		return "#00a4ff";
+	}
+	else if (temp < 30)
+	{
+		return "#00c4ff";
+	}
+	else if (temp < 35)
+	{
+		return "#00d4ff";
+	}
+	else if (temp < 40)
+	{
+		return "#00e4ff";
+	}
+	else if (temp < 45)
+	{
+		return "#00ffd0";
+	}
+	else if (temp < 50)
+	{
+		return "#00ff83";
+	}
+	else if (temp < 55)
+	{
+		return "#00ff10";
 	}
 	else if (temp < 60)
 	{
-		return "#3333FF";
+		return "#65ff00";
+	}
+	else if (temp < 65)
+	{
+		return "#d7ff00";
+	}
+	else if (temp < 70)
+	{
+		return "#FFfa00";
+	}
+	else if (temp < 75)
+	{
+		return "#FFe600";
 	}
 	else if (temp < 80)
 	{
-		return "#FF9966"
+		return "#FFbe00";
 	}
-	else if (temp < 100)
+	else if (temp < 85)
 	{
-		return "#FF9900";
+		return "#FF8c00";
+	}
+	else if (temp < 90)
+	{
+		return "#FF6e00";
+	}
+	else if (temp < 95)
+	{
+		return "#FF5000";
 	}
 	else
 	{
-		return "#FF0000";
-	}
-	
+		return "#FF0010";
+	}	
 }
 
 function computeAverages(map)
