@@ -30,7 +30,9 @@
   var data = [0];
   var total = 0;
   for(var year in city) {
-    d["year"] = parseDate(d["year"]);
+    var d = city[year];
+
+    year = parseDate(year);
     d.data[datapoint] = +d.data[datapoint];
 
     if (yearRange && !withinExtent(d["year"], d.data[datapoint], yearRange)) {
@@ -152,7 +154,6 @@
 	"avg_max_temp": "Average Maximum Temperature", 
 	"avg_min_temp": "Average Minimum Temperature"
   }
-  console.log(cityName, state, datapoint);
   tempTable(cityName, state, datapoint);
 
   var header = d3.select("."  + datapoint + "-line-graph").append("h4").text(datamap[datapoint]);
@@ -166,20 +167,30 @@
 
   var cityData = filterByCity(cityName, state);
   var city = [];
-  cityData.forEach(function(d) {
-    d["year"] = parseDate(d["year"]);
-    d.data[datapoint] = +d.data[datapoint]
-    if (!yearRange) {
-	city.push(d);
-    }
 
-    if (yearRange && withinXExtent(d["year"], d.data[datapoint], yearRange)) {
-	city.push(d);
-    } 
-  });
+  for(var year in cityData)
+  {
+	var d = cityData[year];
+	console.log(d, year);
+	d.data[datapoint] = +d.data[datapoint]
+
+	if (!d.data[datapoint])
+	{
+		continue;
+	}
+	
+        if (!yearRange) {
+	  city.push(d);
+        }
+
+        if (yearRange && withinXExtent(year, d.data[datapoint], yearRange)) {
+	  city.push(d);
+        } 
+
+  }
 
   x.domain(d3.extent(city, function(d) { return d["year"]; }));
-  y.domain(d3.extent(city, function(d) { return d.data[datapoint]; }));
+  y.domain(d3.extent(city, function(d) { return +d.data[datapoint]; }));
 
   svg.append("g")
   .attr("class", "lineGraph-x lineGraph-axis")
@@ -195,6 +206,8 @@
   .attr("dy", ".71em")
   .style("text-anchor", "end")
   .text("Temp (F)");
+
+  console.log(city);
 
   svg.append("path")
   .datum(city)
