@@ -385,7 +385,7 @@ function initialize() {
 
 	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-	var cities = getCities();
+	var cities = getCities(MapState.month, MapState.year);
 
 	populate(map, 1948);
 
@@ -536,7 +536,7 @@ function initializeSlider(map, destroy) {
 		}
 	});
 
-	$("#curYear").html("January 1948");
+	$("#curYear").html("January 1970");
 	$("#endYear").hide();
 
 	$("#playMode").click(function() {

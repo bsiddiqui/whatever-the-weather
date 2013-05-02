@@ -85,4 +85,3 @@ function getCities(month, year) {
 
 }
 initWithData(data);
-getCities("1", "1965");
