@@ -1,6 +1,8 @@
 #map {
 	height: 600px;
 	width: 800px;
+	padding: 0px;
+	margin-right: 0px;
 }
 
 .compareBtn {
@@ -21,10 +23,10 @@
 
 /* http://stackoverflow.com/questions/618097/how-do-you-easily-horizontally-center-a-div-using-css */
 #yearSlider {
-	width: 75%;
 	margin-left: auto;
 	margin-right: auto;
 	display: block;
+	width: 70%;
 }
 
 #curYear {
@@ -47,6 +49,7 @@ body {
 	background-color: black;
 	color: white;
 	font-family: 'Vollkorn', serif;
+	padding: 20px 0px;
 }
 
 .header {
@@ -71,8 +74,9 @@ body {
 	width: 800px;
 }
 
+å
 .mainview {
-	width: 100%;
+	width: 1009px;
 }
 
 #timeLapse {
