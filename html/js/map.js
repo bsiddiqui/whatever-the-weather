@@ -13,31 +13,49 @@ var INIT_ZOOM_LEVEL = 4;
 var INIT_LAT = 39;
 var INIT_LNG = -96;
 
+
+/*
+ *	Visualization state
+ */
+
+MapState = {year: "2012", month: "12"};
+
 // Pulled off of Google, added to object.
 var latlng = {
+	"NH": {
+		"Manchester": {lat: 42.9956, lng: -71.4553}, 
+		"Rochester": {lat: 43.3044, lng: -70.9761}
+	},
 	"IN": {
-		"Indianapolis": {lat: 39.7683, lng: -86.1581}
+		"Indianapolis": {lat: 39.7683, lng: -86.1581}, 
+		"South Bend": {lat: 41.6833, lng: -86.25}
 	},
 	"AZ": {
 		"Phoenix": {lat: 33, lng: -112}, 
 		"Tucson": {lat: 32.2217, lng: -110.9258}, 
-		"Mesa": {lat: 33.4222, lng: -111.8219}
+		"Mesa": {lat: 33.4222, lng: -111.8219}, 
+		"Round Rock": {lat: 36.5131, lng: -109.4728}
 	},
 	"GA": {
-		"Atlanta": {lat: 32.9605, lng: -83.1132}
+		"Atlanta": {lat: 32.9605, lng: -83.1132}, 
+		"Blakely": {lat: 31.3775, lng: -84.9342}, 
+		"Fargo": {lat: 30.6817, lng: -82.5667}
 	},
 	"PA": {
 		"Philadelphia": {lat: 39.9522, lng: -75.1642}
 	},
 	"WA": {
-		"Seattle": {lat: 47.6097, lng: -122.3331}
+		"Seattle": {lat: 47.6097, lng: -122.3331}, 
+		"Everett": {lat: 47.9792, lng: -122.2008}
 	},
 	"MI": {
-		"Detroit": {lat: 42.3314, lng: -83.0458}
+		"Detroit": {lat: 42.3314, lng: -83.0458}, 
+		"Flint": {lat: 43.0125, lng: -83.6875}
 	},
 	"NC": {
 		"Charlotte": {lat: 35.2269, lng: -80.8433},
 		"Raleigh": {lat: 35.7719, lng: -78.6389},
+		"Wilmington": {lat: 39.7458, lng: -75.5469}
 	},
 	"TX": {
 		"El Paso": {lat: 31.7586, lng: -106.4864},
@@ -46,31 +64,40 @@ var latlng = {
 		"Houston": {lat: 29.7631, lng: -95.3631},
 		"San Antonio": {lat: 29.4239, lng: -98.4933},
 		"Dallas": {lat: 32.7828, lng: -96.8039},
-		"Arlington": {lat: 32.7356, lng: -97.1078}
+		"Arlington": {lat: 32.7356, lng: -97.1078}, 
+		"Carlsbad": {lat: 31.579, lng: -100.664}
 	},
 	"NE": {
-		"Omaha": {lat: 41.2586, lng: -95.9375}
+		"Omaha": {lat: 41.2586, lng: -95.9375}, 
+		"Gresham": {lat: 41.0283, lng: -97.4019}
 	},
 	"AK": {
 		"Juneau": {lat: 58.3514, lng: -134.5116}
 	},
 	"MA": {
 		"Cambridge": {lat: 42.37, lng: -71.13}, 
-		"Boston": {lat: 42.3583, lng: -71.0603}
+		"Boston": {lat: 42.3583, lng: -71.0603}, 
+		"Westminster": {lat: 42.5459, lng: -71.9106}
 	},
 	"CO": {
 		"Denver": {lat: 39.7392, lng: -104.9842},
-		"Colorado Springs": {lat: 38.8339, lng: -104.8208}
+		"Colorado Springs": {lat: 38.8339, lng: -104.8208}, 
+		"Broomfield": {lat: 39.9206, lng: -105.0861}, 
+		"Arvada": {lat: 39.8028, lng: -105.0869}, 
+		"Centennial": {lat: 39.5792, lng: -104.8769}
 	},
 	"TN": {
 		"Memphis": {lat: 35.1494, lng: -90.0489}, 
-		"Nashville": {lat: 36.1658, lng: -86.7844}
+		"Nashville": {lat: 36.1658, lng: -86.7844}, 
+		"Murfreesboro": {lat: 35.8456, lng: -86.3903}
 	},
 	"KY": {
-		"Louisville": {lat: 38.2542, lng: -85.7594}
+		"Louisville": {lat: 38.2542, lng: -85.7594}, 
+		"Pueblo": {lat: 36.8381, lng: -84.8500}
 	},
 	"WI": {
-		"Milwaukee": {lat: 43.0389, lng: -87.9064}
+		"Milwaukee": {lat: 43.0389, lng: -87.9064}, 
+		"Green Bay": {lat: 44.5192, lng: -88.0197}
 	},
 	"OR": {
 		"Portland": {lat: 45.5236, lng: -122.6750}
@@ -78,6 +105,10 @@ var latlng = {
 	"OK": {
 		"Oklahoma City": {lat: 35.4675, lng: -97.5161}, 
 		"Tulsa": {lat: 36.1539, lng: -95.9925}
+	},
+	"PA": {
+		"Elgin": {lat: 41.9019, lng: -79.7447}, 
+		"Philadelphia": {lat: 39.9522, lng: -75.1642}
 	},
 	"NV": {
 		"Las Vegas": {lat: 36.1131, lng: -115.1764}
@@ -92,10 +123,16 @@ var latlng = {
 		"Baltimore": {lat: 39.2833, lng: -76.6167}
 	},	
 	"NY": {
-		"New York": {lat: 40, lng: -73}
+		"New York": {lat: 40, lng: -73}, 
+		"Odessa": {lat: 42.3364, lng: -76.7892}, 
+		"Fayetteville": {lat: 36.0625, lng: -94.1572}
 	}, 
 	"MO": {
-		"Kansas City": {lat: 39.0997, lng: -94.5783}
+		"Kansas City": {lat: 39.0997, lng: -94.5783}, 
+		"Spokane": {lat: 36.8681, lng: -93.2967}
+	},
+	"MS": {
+		"Billings": {lat: 45.7833, lng: -108.5}
 	},
 	"DC": {
 		"Washington": {lat: 38.89, lng: -77.03}
@@ -108,27 +145,65 @@ var latlng = {
 		"Fresno": {lat: 36.7478, lng: -119.7714}, 
 		"Sacramento": {lat: 38.5817, lng: -121.4933}, 
 		"Long Beach": {lat: 33.7669, lng: -118.1883}, 
-		"Oakland": {lat: 37.8044, lng: -122.2697}
+		"Oakland": {lat: 37.8044, lng: -122.2697}, 
+		"Costa Mesa": {lat: 33.6411, lng: -117.9178},
+		"Inglewood": {lat: 33.9617, lng: -118.3522}, 
+		"West Covina": {lat: 34.0686, lng: -117.9381}, 
+		"Murrieta": {lat: 33.4936, lng: -117.1475},
+		"Temecula": {lat: 33.4936, lng: -117.1475}, 
+		"Daly City": {lat: 37.7058, lng: -122.4608}, 
+		"Davenport": {lat: 37.0117, lng: -122.1908},
+		"Rialto": {lat: 34.1064, lng: -117.3694}
 	}, 
 	"FL": {
 		"Jacksonville": {lat: 30.3319, lng: -81.6558},
-		"Miami": {lat: 25.7216, lng: -80.2793}
+		"Miami": {lat: 25.7216, lng: -80.2793}, 
+		"Miami Gardens": {lat: 25.9420, lng: -80.2456}, 
+		"Palm Bay": {lat: 28.0342, lng: -80.5889},
+		"Pompano Beach": {lat: 26.2375, lng: -80.1250}, 
+		"West Palm Beach": {lat: 26.715, lng: -80.0536}
 	}, 
+	"ID": {
+		"Boise": {lat: 43.6136, lng: -116.2025}
+	},
 	"IL": {
-		"Chicago": {lat: 41.85, lng: -87.65}
+		"Chicago": {lat: 41.85, lng: -87.65}, 
+		"Modesto": {lat: 39.4769, lng: -89.9828}
 	}, 
 	"OH": {
 		"Columbus": {lat: 39.9611, lng: -82.9989}, 
-		"Cleveland": {lat: 41.4994, lng: -81.6956}
+		"Cleveland": {lat: 41.4994, lng: -81.6956}, 
+		"Cincinnati": {lat: 39.1619, lng: -84.4569}
 	}, 
 	"MN": {
 		"Minneapolis": {lat: 44.98, lng: -93.2636}
 	}, 
 	"KS": {
-		"Wichita": {lat: 37.6922, lng: -97.3372}
+		"Wichita": {lat: 37.6922, lng: -97.3372}, 
+		"High Point": {lat: 35.9556, lng: 80}
 	}, 
 	"LA": {
-		"New Orleans": {lat: 29.9728, lng: -90.0590}
+		"New Orleans": {lat: 29.9728, lng: -90.0590}, 
+		"Shreveport": {lat: 32.4681, lng: -93.7711}
+	},
+	"AL": {
+		"Columbia": {lat: 31.2925, lng: -85.1117}
+	}, 
+	"CT": {
+		"Waterbury": {lat: 41.5581, lng: -73.0519}, 
+		"Norwalk": {lat: 41.1175, lng: -73.4083}
+	},
+	"AR": {
+		"Lowell": {lat: 36.2553, lng: -94.1306}
+	}, 
+	"ME": {
+		"Fairfield": {lat: 41.1411, lng: -73.2642}
+	}, 
+	"Virginia": {
+		"Richmond": {lat: 35, lng: -77}
+	}, 
+	"Iowa": {
+		"Des Moines": {lat: 47.4019, lng: -122.3231}
 	}
 }
 
@@ -158,11 +233,11 @@ function chooseColor(temp)
 
 }
 
-function computeAverages(map, curYear)
+function computeAverages(map)
 {
 	var bounds = map.getBounds();
 
-	var cities = filterByYear(curYear || START_YEAR);
+	var cities = filterByMonthYear(MapState.month, MapState.year);
 
 	var total_mean_temp = 0;
 	var total_min_temp = 0;
@@ -215,16 +290,20 @@ function computeAverages(map, curYear)
 	}
 }
 
-function populate(map, year) {
-	var year_data = filterByYear(year);
+function populate(map) {
+	var year_data = filterByMonthYear(MapState.month, MapState.year);
 
 	var oldCircles = window.circles;
 	window.circles = [];
-	year_data.forEach(function(city_data) {
 
+	for(var city in year_data) {
+		var city_data = year_data[city];
 		var city = city_data.city;
 
 		var state = city_data.state;
+
+
+		console.log(city, state);
 		var lookup = latlng[state][city];
 		var loc = new google.maps.LatLng(lookup.lat, lookup.lng);
 
@@ -255,8 +334,7 @@ function populate(map, year) {
 			$(".graph").css("visibility", "");
 
 		});
-
-	});
+	}
 
 	if (oldCircles)
 	{
@@ -356,6 +434,10 @@ function initialize() {
 
 	$(".graph").css('visibility', 'hidden');
 
+	$("#about_btn").click(function() {
+		$("#about_modal").modal();
+	});
+
 }
 
 function startTimelapse(map) {
@@ -387,10 +469,12 @@ var NUM_INCREMENTS = (END_YEAR - START_YEAR) * MONTHS_PER_YEAR;
 var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 
-// TODO: once we get month data this needs to be replaced.
 function extractYear(n) {
 	return START_YEAR + Math.floor(n / MONTHS_PER_YEAR);
+}
 
+function extractMonth(n) {
+	return n - Math.floor(n / MONTHS_PER_YEAR);
 }
 
 function yearStr(n) {
@@ -411,10 +495,13 @@ function initializeSlider(map, destroy) {
 		max: NUM_INCREMENTS, 
 		animate: "fast", 
 		slide: function(event, ui) {
-			$("#curYear").html(yearStr(ui.value));
-			populate(map, extractYear(ui.value));
 
-			computeAverages(map, extractYear(ui.value));
+			MapState.month = extractMonth(ui.value);
+			MapState.year = extractYear(ui.value);
+
+			$("#curYear").html(yearStr(ui.value));
+			populate(map);
+			computeAverages(map);
 
 		}
 	});
@@ -448,14 +535,16 @@ function initializeRangeSlider(map) {
 		range: true, 
 		values: [startingYear, endingYear],
 		slide: function(event, ui) {
-			window.start = ui.values[0];
-			window.end = ui.values[1];
+
+			MapState.month = extractMonth(ui.values[0]);
+			MapState.year = extractMonth(ui.values[1]);
+	
 			$("#curYear").html(yearStr(ui.values[0]));
 			$("#endYear").html(yearStr(ui.values[1]));
 			
 			if (oldLeftYear != ui.values[0]) {
-				populate(map, extractYear(ui.values[0]));
-				computeAverages(map, extractYear(ui.values[0]));
+				populate(map);
+				computeAverages(map);
 			}
 
 			oldLeftYear = ui.values[0];

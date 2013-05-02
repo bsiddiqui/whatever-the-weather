@@ -4,12 +4,30 @@ function initWithData(data) {
 	WhateverTheWeather.data = data;	
 }
 
-function filterByYear(year)
+function filterByMonthYear(month, year)
 {
 	// http://stackoverflow.com/questions/455338/how-do-i-check-if-an-object-has-a-key-in-javascript
 	if (WhateverTheWeather.data.hasOwnProperty(year))
 	{
-		return WhateverTheWeather.data[year];
+		var res = {};
+		
+		var yearData = WhateverTheWeather.data[year];
+		for(var i = 0; i < yearData.length; i++)
+		{
+			var cityName = undefined;
+
+			for(var key in yearData[i]) {
+				cityName = key;
+			}
+
+			if (yearData[i][cityName].month == month)
+			{
+				res[cityName] = yearData[i][cityName]
+			}
+
+		}
+
+		return res;
 	}
 	else
 	{
@@ -19,49 +37,44 @@ function filterByYear(year)
 
 function filterByCity(city, state)
 {
-	if (!city || !state)
+	var res = {};
+
+	for(var yr in WhateverTheWeather.data)
 	{
-		return [];
-	}
-
-	var res = [];
-
-	for(var i in WhateverTheWeather.data)
-	{
-
-		var dataForYear = WhateverTheWeather.data[i];
-		for(var j = 0; j < dataForYear.length; j++)
+		var yearData = WhateverTheWeather.data[yr];
+		for(var i = 0; i < yearData.length; i++)
 		{
-			if (dataForYear[j].city == city &&
-			    dataForYear[j].state == state)
-			{
-				res.push({data: dataForYear[j].data, city: city, state: state, year: i});
-				break;
+			var cityName = undefined;
+			for(var key in yearData[i]) {
+				cityName = key;
+			}
+
+			if (cityName == city) {
+				res[yr]= yearData[i][cityName];
 			}
 		}
-
 	}
 
 	return res;
+
 }
 
 /* 
  *	Returns an array of strings in the format "City, State"
  *	Lists all of the cities in the dataset.
  */
-function getCities() {
+function getCities(month, year) {
 
-	// pick any year
-	var data =  WhateverTheWeather.data["2012"];
-
+	var moYearData = filterByMonthYear(month, year);
 	var cities = [];
 
-	data.forEach(function(d) {
-		cities.push(d.city + ", " + d.state);
-	});
+	for(var i in moYearData)
+	{
+		cities.push(moYearData[i].city + ", " + moYearData[i].state);
+	}
 
 	return cities;
 
 }
-
 initWithData(data);
+getCities("1", "1965");

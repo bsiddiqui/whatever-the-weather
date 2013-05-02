@@ -31,10 +31,10 @@
 	<script type="text/javascript" src="js/nv.d3.js"></script>
 	<script type="text/javascript" src="js/graph.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
-
 </head>
 
 <body>
+<<<<<<< HEAD
 	<!-- <img src="img/banner.png" id="banner"/> -->
 	<div class = "header">
 		<h1>Whatever the Weather</h1>
@@ -69,6 +69,36 @@
 				<br />
 				<br />
 				<div>
+=======
+	<img src="img/banner.png" id="banner"/>
+		<table>
+			<tr>
+				<td>
+					<table id="stats" class="table">
+						<tr>
+							<td><h2 id="main_min_temp"></h2></td>
+							<td><h2 id="main_avg_temp"></h2></td>
+							<td><h2 id="main_max_temp"></h2></td>
+							<td><h2 id="main_precipitation"></h2></td>
+							<td><h2 id="main_wind"></h2></td>
+							<td><h2 id="main_dewpoint"></h2></td>
+						</tr>
+						<tr>
+							<td><small>Avg. Minimum Temperature</small></td>
+							<td><small>Avg. Mean Temperature</small></td>
+							<td><small>Avg. Maximum Temperature</small></td>
+							<td><small>Avg. Precipitation</small></td>
+							<td><small>Avg. Wind Speed</small></td>
+							<td><small>Avg. Dewpoint</small></td>
+						</tr>
+					</table>
+					<div id="map"></div>
+				</td>
+				<td>
+					<label for="main_city_input">City:</label>
+					<input type="text" placeholder="Find a city." id="main_city_input" />
+					<br />
+>>>>>>> f4417478db01f098b82e38d7eaf34e46949d1022
 					<br />
 					<button id="about_btn" type="button" class="btn btn-inverse">About...</button>
 					<button id="main_region_data" type="button" class="btn btn-inverse">Compare...</button>
@@ -161,12 +191,22 @@
 			</div>
 		</div>
 	</div>
+<<<<<<< HEAD
 	<div id="timeLapse">
 		<h3 id="curYear"></h3>
 		<div id="yearSlider"></div>
 		<h3 id="endYear">2007</h3>
 		<button id="startAnimationBtn" type="button" class="btn btn-inverse">Start Timelapse</button>
 	</div>
+=======
+    	<footer>
+		<h3 id="curYear"></h1>
+		<div id="yearSlider"></div>
+		<h3 id="endYear">2007</h1>
+    		<button id="startAnimationBtn" type="button" class="btn btn-inverse">Start Timelapse</button>
+
+	</footer>
+>>>>>>> f4417478db01f098b82e38d7eaf34e46949d1022
 
 	<footer></footer>
 </body>
