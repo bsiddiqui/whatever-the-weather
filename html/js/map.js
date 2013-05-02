@@ -235,7 +235,7 @@ function chooseColor(temp)
 	if (temp < 20)
 	{
 		return "#00FFFF";
-	
+
 	}
 	else if (temp < 60)
 	{
@@ -253,7 +253,7 @@ function chooseColor(temp)
 	{
 		return "#FF0000";
 	}
-
+	
 }
 
 function computeAverages(map)
