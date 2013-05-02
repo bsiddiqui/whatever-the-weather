@@ -273,23 +273,30 @@ function computeAverages(map)
 	for(var k in cities) {
 		var c = cities[k];
 
+
 		var lookup = latlng[c.state][c.city];
 		var loc = new google.maps.LatLng(lookup.lat, lookup.lng);
+
+
+		var numKeys = 0;
+
+		for(var i in c.data)
+		{
+			numKeys++;
+		}
+
+		if (!numKeys || !bounds.contains(loc))
+		{
+			continue;
+		}
 	
-		if (bounds.contains(loc)) {
-
-			if (!c.data.avg_temp) {
-				return;
-			}
-
-		}	
-
 		total_mean_temp += +c.data.avg_temp;
 		total_min_temp += +c.data.avg_min_temp;
-		total_max_temp += +c.data.avg_max_temp;
+		total_max_temp += +c.data.avg_max_temp ;
 		total_dewpoint += +c.data.avg_dew_point;
 		total_windspeed += +c.data.avg_wind;
 		total_precipitation += +c.data.avg_precipitation;
+
 		items++;
 	}
 
