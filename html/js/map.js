@@ -386,6 +386,7 @@ function initialize() {
 			map.setCenter(new google.maps.LatLng(new_center.lat, new_center.lng));
 			map.setZoom(6);
 
+
 			return item;
 		}
 	});

@@ -7,14 +7,7 @@
 
 	<!-- Adapted from http://twitter.github.com/bootstrap/examples/starter-template.html -->
 	<link href="css/bootstrap.css" rel="stylesheet">
-	<style>
-	body {
-		padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-	}
-
-	</style>
-
-	<link href="css/bootstrap-responsive.css" rel="stylesheet">
+	<!-- <link href="css/bootstrap-responsive.css" rel="stylesheet"> -->
 	<link href="css/lineChart.css" rel="stylesheet">
 	<link href="css/map.css" rel="stylesheet">
 	<link href="css/nv.d3.css" rel="stylesheet" type="text/css">
@@ -42,7 +35,7 @@
 	</div>
 	<table class="table">
 		<tr>
-			<td>
+			<td id="vis_left">
 				<table id="stats">
 					<tr>
 						<td><h2 id="main_min_temp"></h2></td>
@@ -63,7 +56,7 @@
 				</table>
 				<div id="map"></div>
 			</td>
-			<td>
+			<td id="vis_right">
 				<label for="main_city_input">City:</label>
 				<input type="text" placeholder="Find a city." id="main_city_input" />
 				<br />
