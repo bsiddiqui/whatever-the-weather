@@ -194,9 +194,10 @@
 
 };
 
-function compareCitiesData(city1, state1, city2, state2, datapoint){
-  var city1 = filterByCity(city1, state1);
-  var city2 = filterByCity(city2, state2);
+
+function compareCitiesData(city1Name, state1, city2Name, state2, datapoint){
+  var city1 = filterByCity(city1Name, state1);
+  var city2 = filterByCity(city2Name, state2);
 
   var values1 = [];
   var values2 = [];
@@ -204,6 +205,51 @@ function compareCitiesData(city1, state1, city2, state2, datapoint){
 
   var minCity1, minCity2;
 
+for(var year in city1)
+{
+  var months = city1[year];
+  for(var month in months)
+  {
+    var key = month + "/" + year;
+    console.log(key);
+    values1.push([key, +city1[year][month].data.avg_temp]);
+
+  }
+}
+
+
+for(var year in city2)
+{
+  var months = city2[year];
+  for(var month in months)
+  {
+    var key = month + "/" + year;
+     values2.push([key, +city2[year][month].data.avg_temp]);
+  }
+}
+
+var data=  [{key: city1Name, values: values1}, {key: city2Name, values: values2}]
+console.log(JSON.stringify(data));
+
+return data; 
+// [{
+//   "key" : "Cambridge",
+//   "values" : [
+//   ["2000", 32],
+//   ["2001", 37],
+//   ["2002", 29]
+//   ]
+// },
+// {
+//   "key" : "New York",
+//   "values" : [
+//   ["2000", 35],
+//   ["2001", 40],
+//   ["2002", 39]
+//   ]
+// }]
+
+/*
     var dataForYear = city1[0]; 
     minCity1 = +dataForYear.year;
     var dataForYear = city2[0];
@@ -238,12 +284,10 @@ function compareCitiesData(city1, state1, city2, state2, datapoint){
     if (+dataForYear.year >= minYear && !nonincludes[dataForYear.year]) {
     	values2.push([+dataForYear.year, +dataForYear.data[datapoint]]); 
     }
-  }
-
-  data.push({key: city1[0].city, values: values1});
-  data.push({key: city2[0].city, values: values2});
-
-  return data;
+    }
+  
+*/
+ 
 };
 
 function compareLineChart(city1, state1, city2, state2, datapoint){
