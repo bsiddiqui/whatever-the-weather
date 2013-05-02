@@ -247,6 +247,8 @@ function computeAverages(map)
 	var total_precipitation = 0;
 	var items = 0;
 
+	console.log(cities);
+
 	cities.forEach(function(c) {
 		var lookup = latlng[c.state][c.city];
 		var loc = new google.maps.LatLng(lookup.lat, lookup.lng);
