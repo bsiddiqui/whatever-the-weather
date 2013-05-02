@@ -540,19 +540,23 @@ function initialize() {
 
 }
 
-function startTimelapse(map) {
+function startTimelapse(map, range) {
 	window.map = map;
-	restoreStart = start;
-	restoreEnd = end;
-
+	window.restoreRange = range;
+	window.range = range;
 	$("#yearSlider").slider("disable");
 
 	timelapseId = setInterval(function() {
-		if (start < end) {
-			$("#curYear").html(yearStr(++start));
-			$("#yearSlider").slider("option", "values", [start, end]);
+		if (range[0] <= range[1]) {
+
+			$("#curYear").html(yearStr(range[0]));
+			range[0] += 12;
+			$("#yearSlider").slider("option", "values", range);
+			MapState.month = extractMonth(range[0]);
+			MapState.year = extractYear(range[0]);
 			populate(map);
 			computeAverages(map);
+
 		} 
 		else {
 			clearInterval(timelapseId);
@@ -615,7 +619,8 @@ function initializeSlider(map, destroy) {
 	});
 
 	$("#startAnimationBtn").click(function() {
-		startTimelapse(map)
+		var range = $("#yearSlider").slider("values");
+		startTimelapse(map, range);
 	});
 
 
