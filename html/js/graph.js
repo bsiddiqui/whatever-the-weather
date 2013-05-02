@@ -43,7 +43,7 @@
     	d.data[datapoint] = +d.data[datapoint];
 
     	if (yearRange && !withinExtent(d["year"], d.data[datapoint], yearRange)) {
-		return;
+		continue;
     	}
 
     	sum += d.data[datapoint];
@@ -53,7 +53,7 @@
   }
 
  var average = sum / total;
- $("#selection_avg").html(average);
+ $("#selection_avg").html(Math.round(average * 100) / 100);
 
 
   var color = d3.scale.linear()
@@ -61,6 +61,7 @@
   .range(["blue",  "orange"])
 
   if (yearRange && !trivialBounds(yearRange)) {
+	$("." + datapoint + "-table-viz").html("");
   	var table = d3.select("." + datapoint + "-table-viz")
   	.append("button")
   	.text("Focus on Selection")
@@ -103,7 +104,7 @@
   .x(x)
   .y(y)
   .on("brush", function(p) {
-    $("." + datapoint + "-table-viz").html("");
+    console.log(cityName, state, datapoint, brush.extent());
     tempTable(cityName, state, datapoint, brush.extent());
   })
   .on("brushend", function() {
