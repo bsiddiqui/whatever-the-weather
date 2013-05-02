@@ -4,7 +4,7 @@
  *  compareLineChart and compareStackedAreaChart adapted from examples http://nvd3.org/ghpages/examples.html
  */
 
-  var parseDate = d3.time.format("%Y").parse;
+  var parseDate = d3.time.format("%m %Y").parse;
 
   function trivialBounds(bounds) { 
 	return (bounds[0][0].toString() == bounds[1][0].toString() && bounds[0][1].toString() == bounds[1][1].toString());
@@ -23,6 +23,7 @@
  function tempTable(cityName, state, datapoint, yearRange) {
 
   var city = filterByCity(cityName, state);
+  console.log(city);
 
   var points = ["Average "];
   var sum = 0;
@@ -31,14 +32,15 @@
     var months = city[year];
 
     for(var mo in months) {
-
+	
 	var d = months[mo];
 
 	if (!d.data[datapoint]) {
 		continue;
     	}
 
-    	year = parseDate(year);
+    	year = parseDate(mo + " " + year);
+	console.log(year);
     	d["year"] = year;
     	d.data[datapoint] = +d.data[datapoint];
 
@@ -168,24 +170,27 @@
 
   for(var year in cityData)
   {
-	console.log(year);
 
-	var d = cityData[year];
-	d["year"] = parseDate(year);
-	d.data[datapoint] = +d.data[datapoint]
+	for(var mo in cityData[year]) {
 
-	if (!d.data[datapoint])
-	{
-		continue;
-	}
+		console.log(mo, year);
+		var d = cityData[year][mo];
+		d["year"] = parseDate(mo + " " + year);
+		d.data[datapoint] = +d.data[datapoint]
+
+		if (!d.data[datapoint])
+		{
+			continue;
+		}
 	
-        if (!yearRange) {
-	  city.push(d);
-        }
+        	if (!yearRange) {
+	  		city.push(d);
+       		}
 
-        if (yearRange && withinXExtent(year, d.data[datapoint], yearRange)) {
-	  city.push(d);
-        } 
+        	if (yearRange && withinXExtent(year, d.data[datapoint], yearRange)) {
+	  		city.push(d);
+        	}
+	}
 
   }
 
