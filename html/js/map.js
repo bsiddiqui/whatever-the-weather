@@ -387,7 +387,7 @@ function initialize() {
 
 	var cities = getCities();
 
-	populate(map, 1970);
+	populate(map, 1948);
 
 	window.start = 0;
 	window.end = NUM_INCREMENTS;
@@ -489,7 +489,7 @@ function startTimelapse(map) {
 
 }
 
-var START_YEAR = 1970;
+var START_YEAR = 1948;
 var END_YEAR = 2013;
 var MONTHS_PER_YEAR = 12;
 var NUM_INCREMENTS = (END_YEAR - START_YEAR) * MONTHS_PER_YEAR;
@@ -536,7 +536,7 @@ function initializeSlider(map, destroy) {
 		}
 	});
 
-	$("#curYear").html("January 1970");
+	$("#curYear").html("January 1948");
 	$("#endYear").hide();
 
 	$("#playMode").click(function() {
