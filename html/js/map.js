@@ -547,10 +547,10 @@ function startTimelapse(map, range) {
 	$("#yearSlider").slider("disable");
 
 	timelapseId = setInterval(function() {
-		if (range[0] <= range[1]) {
+		range[0] += MONTHS_PER_YEAR;
+		if (range[0]<= range[1]) {
 
 			$("#curYear").html(yearStr(range[0]));
-			range[0] += 12;
 			$("#yearSlider").slider("option", "values", range);
 			MapState.month = extractMonth(range[0]);
 			MapState.year = extractYear(range[0]);
@@ -559,6 +559,7 @@ function startTimelapse(map, range) {
 
 		} 
 		else {
+			range[0] -= MONTHS_PER_YEAR;
 			clearInterval(timelapseId);
 			initializeRangeSlider(map);
 		}
@@ -628,22 +629,24 @@ function initializeSlider(map, destroy) {
 
 function initializeRangeSlider(map) {
 	
-	var startingYear = window.restoreStart || 0;
-	var endingYear = window.restoreEnd || NUM_INCREMENTS;
+	var startingYear = window.restoreRange ? window.restoreRange[0] : 0;
+	var endingYear = window.restoreRange ? window.restoreRange[1] :  NUM_INCREMENTS;
+	populate(map);
+	computeAverages(map);
 
 	var oldLeftYear;
 
 	$("#yearSlider").slider("destroy");
 	$("#yearSlider").slider({
-		min: startingYear, 
-		max: endingYear, 
+		min: 0, 
+		max: NUM_INCREMENTS, 
 		animate: "fast",
 		range: true, 
 		values: [startingYear, endingYear],
 		slide: function(event, ui) {
 
 			MapState.month = extractMonth(ui.values[0]);
-			MapState.year = extractMonth(ui.values[1]);
+			MapState.year = extractYear(ui.values[0]);
 	
 			$("#curYear").html(yearStr(ui.values[0]));
 			$("#endYear").html(yearStr(ui.values[1]));
@@ -651,7 +654,7 @@ function initializeRangeSlider(map) {
 			if (oldLeftYear != ui.values[0]) {
 				populate(map);
 				computeAverages(map);
-			}
+			} 
 
 			oldLeftYear = ui.values[0];
 		}
