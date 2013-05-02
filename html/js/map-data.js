@@ -2,7 +2,6 @@ var WhateverTheWeather = {};
 
 function initWithData(data) {
 	WhateverTheWeather.data = data;	
-	filterByCity("Cambridge", "MA");
 }
 
 function filterByMonthYear(month, year)
@@ -16,17 +15,19 @@ function filterByMonthYear(month, year)
 		for(var i = 0; i < yearData.length; i++)
 		{
 			var cityName = undefined;
+
 			for(var key in yearData[i]) {
 				cityName = key;
 			}
+
 			if (yearData[i][cityName].month == month)
 			{
 				res[cityName] = yearData[i][cityName]
 			}
 
 		}
-		return res;
 
+		return res;
 	}
 	else
 	{
@@ -54,27 +55,26 @@ function filterByCity(city, state)
 		}
 	}
 
-	console.log(res);
-	
+	return res;
+
 }
 
 /* 
  *	Returns an array of strings in the format "City, State"
  *	Lists all of the cities in the dataset.
  */
-function getCities() {
+function getCities(month, year) {
 
-	// pick any year
-	var data =  WhateverTheWeather.data["2012"];
-
+	var moYearData = filterByMonthYear(month, year);
 	var cities = [];
 
-	data.forEach(function(d) {
-		cities.push(d.city + ", " + d.state);
-	});
+	for(var i in moYearData)
+	{
+		cities.push(moYearData[i].city + ", " + moYearData[i].state);
+	}
 
 	return cities;
 
 }
-
 initWithData(data);
+getCities("1", "1965");
