@@ -248,8 +248,6 @@ function computeAverages(map)
 	var items = 0;
 
 	for(var k in cities) {
-
-
 		var c = cities[k];
 
 		var lookup = latlng[c.state][c.city];
