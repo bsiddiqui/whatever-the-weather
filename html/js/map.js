@@ -247,26 +247,30 @@ function computeAverages(map)
 	var total_precipitation = 0;
 	var items = 0;
 
-	console.log(cities);
+	for(var k in cities) {
 
-	cities.forEach(function(c) {
+
+		var c = cities[k];
+
 		var lookup = latlng[c.state][c.city];
 		var loc = new google.maps.LatLng(lookup.lat, lookup.lng);
-
+	
 		if (bounds.contains(loc)) {
+
 			if (!c.data.avg_temp) {
 				return;
 			}
 
-			total_mean_temp += +c.data.avg_temp;
-			total_min_temp += +c.data.avg_min_temp;
-			total_max_temp += +c.data.avg_max_temp;
-			total_dewpoint += +c.data.avg_dew_point;
-			total_windspeed += +c.data.avg_wind;
-			total_precipitation += +c.data.avg_precipitation;
-			items++;
-		}
-	});
+		}	
+
+		total_mean_temp += +c.data.avg_temp;
+		total_min_temp += +c.data.avg_min_temp;
+		total_max_temp += +c.data.avg_max_temp;
+		total_dewpoint += +c.data.avg_dew_point;
+		total_windspeed += +c.data.avg_wind;
+		total_precipitation += +c.data.avg_precipitation;
+		items++;
+	}
 
 	if (items) {
 		var avg_temp = total_mean_temp / items;
@@ -305,7 +309,6 @@ function populate(map) {
 		var state = city_data.state;
 
 
-		console.log(city, state);
 		var lookup = latlng[state][city];
 		var loc = new google.maps.LatLng(lookup.lat, lookup.lng);
 
@@ -476,7 +479,7 @@ function extractYear(n) {
 }
 
 function extractMonth(n) {
-	return n - Math.floor(n / MONTHS_PER_YEAR);
+	return (n % MONTHS_PER_YEAR) + 1;
 }
 
 function yearStr(n) {
@@ -500,6 +503,9 @@ function initializeSlider(map, destroy) {
 
 			MapState.month = extractMonth(ui.value);
 			MapState.year = extractYear(ui.value);
+
+			console.log(MapState.month);
+			console.log(MapState.year);
 
 			$("#curYear").html(yearStr(ui.value));
 			populate(map);

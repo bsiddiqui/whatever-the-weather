@@ -24,11 +24,12 @@
 
   var city = filterByCity(cityName, state);
 
-  var points = ["Average ", "Maximum ", "Minimum "];
+  console.log(city);
+
+  var points = ["Average "];
   var data = [0];
   var total = 0;
-  city.forEach(function(d) {
-
+  for(var year in city) {
     d["year"] = parseDate(d["year"]);
     d.data[datapoint] = +d.data[datapoint];
 
@@ -50,8 +51,9 @@
     }
 
     total++;
+	
+  }
 
-  });
   data[0] = data[0] / total;
 
   var color = d3.scale.linear()
