@@ -20,6 +20,7 @@
 	<link href="css/nv.d3.css" rel="stylesheet" type="text/css">
 	<link href="css/compare.css" rel="stylesheet" type="text/css">
 	<link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
+	<link href='http://fonts.googleapis.com/css?family=Playfair+Display' rel='stylesheet' type='text/css'>
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
@@ -34,56 +35,60 @@
 </head>
 
 <body>
-	<img src="img/banner.png" id="banner"/>
-		<table class="table">
-			<tr>
-				<td>
-					<table id="stats">
+	<!-- <img src="img/banner.png" id="banner"/> -->
+	<div class = "header">
+		<h1>Whatever the Weather</h1>
+		<h3>A visualization by Basil Siddiqui and Kevin Schmid</h3>
+	</div>
+	<table class="table">
+		<tr>
+			<td>
+				<table id="stats">
+					<tr>
+						<td><h2 id="main_min_temp"></h2></td>
+						<td><h2 id="main_avg_temp"></h2></td>
+						<td><h2 id="main_max_temp"></h2></td>
+						<td><h2 id="main_precipitation"></h2></td>
+						<td><h2 id="main_wind"></h2></td>
+						<td><h2 id="main_dewpoint"></h2></td>
+					</tr>
+					<tr>
+						<td><small>Minimum Temperature</small></td>
+						<td><small>Mean Temperature</small></td>
+						<td><small>Maximum Temperature</small></td>
+						<td><small>Precipitation</small></td>
+						<td><small>Wind Speed</small></td>
+						<td><small>Dewpoint</small></td>
+					</tr>
+				</table>
+				<div id="map"></div>
+			</td>
+			<td>
+				<label for="main_city_input">City:</label>
+				<input type="text" placeholder="Find a city." id="main_city_input" />
+				<br />
+				<br />
+				<div>
+					<br />
+					<button id="about_btn" type="button" class="btn btn-inverse">About...</button>
+					<button id="main_region_data" type="button" class="btn btn-inverse">Compare...</button>
+					<button id="playMode" type="button" class="btn btn-inverse">Play...</button>
+					<button type="button" class="btn btn-inverse" id="main_restart">Full US</button>
+					<table>
+
 						<tr>
-							<td><h2 id="main_min_temp"></h2></td>
-							<td><h2 id="main_avg_temp"></h2></td>
-							<td><h2 id="main_max_temp"></h2></td>
-							<td><h2 id="main_precipitation"></h2></td>
-							<td><h2 id="main_wind"></h2></td>
-							<td><h2 id="main_dewpoint"></h2></td>
-						</tr>
-						<tr>
-							<td><small>Avg. Minimum Temperature</small></td>
-							<td><small>Avg. Mean Temperature</small></td>
-							<td><small>Avg. Maximum Temperature</small></td>
-							<td><small>Avg. Precipitation</small></td>
-							<td><small>Avg. Wind Speed</small></td>
-							<td><small>Avg. Dewpoint</small></td>
+							<div class="avg_temp-table-viz graph"></div>		
+							<td class="graph">
+								<div class="avg_temp-line-graph tall"></div>
+							</td>
+
 						</tr>
 					</table>
-					<div id="map"></div>
-				</td>
-				<td>
-					<label for="main_city_input">City:</label>
-					<input type="text" placeholder="Find a city." id="main_city_input" />
-					<br />
-					<br />
-					<div>
-						<br />
-						<button id="about_btn" type="button" class="btn btn-inverse">About...</button>
-						<button id="main_region_data" type="button" class="btn btn-inverse">Compare...</button>
-					    	<button id="playMode" type="button" class="btn btn-inverse">Play...</button>
-						<button type="button" class="btn btn-inverse" id="main_restart">Full US</button>
-						<table>
 
-							<tr>
-								<div class="avg_temp-table-viz graph"></div>		
-								<td class="graph">
-									<div class="avg_temp-line-graph tall"></div>
-								</td>
-
-							</tr>
-						</table>
-
-					</div>
-				</td>
-			</tr>
-		</table>
+				</div>
+			</td>
+		</tr>
+	</table>
 	<div class="modal hide fade" id="about_modal" style="width:1000px; margin-left: -500px; height: 700px">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>	
@@ -125,7 +130,7 @@
 			<h3>Compare</h3>
 		</div>
 		<div class="modal-body" style="height: 700px">
-	
+
 			<label for="compareFirstCity"><b>First city:</b></label>
 			<input type="text" id="compareFirstCity" />
 			<label><b>Second city:</b></label>
@@ -156,16 +161,14 @@
 			</div>
 		</div>
 	</div>
-    	<div>
-		<h3 id="curYear"></h1>
+	<div id="timeLapse">
+		<h3 id="curYear"></h3>
 		<div id="yearSlider"></div>
-		<h3 id="endYear">2007</h1>
-    		<button id="startAnimationBtn" type="button" class="btn btn-inverse">Start Timelapse</button>
-
+		<h3 id="endYear">2007</h3>
+		<button id="startAnimationBtn" type="button" class="btn btn-inverse">Start Timelapse</button>
 	</div>
 
-    </div>
-
-  </body>
+	<footer></footer>
+</body>
 </html>
 

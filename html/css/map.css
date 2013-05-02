@@ -1,6 +1,6 @@
 #map {
 	height: 600px;
-	width: 1000px;
+	width: 800px;
 }
 
 .compareBtn {
@@ -46,6 +46,12 @@
 body {
 	background-color: black;
 	color: white;
+	font-family: 'Vollkorn', serif;
+}
+
+.header {
+	width: 1000px;
+	text-align: center;
 }
 
 #banner {
@@ -60,14 +66,14 @@ body {
 	padding:10px;
 }
 
+
 #stats {
-	width: 1000px;
+	width: 800px;
 }
 
 .mainview {
 	width: 100%;
 }
-
-.graph {
-	background-color: white;
+#timeLapse {
+	margin-bottom: 150px;
 }

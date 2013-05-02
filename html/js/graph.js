@@ -1,6 +1,6 @@
 /*
  *  Whatever the Weather
- *  drawLineChart adapted http://bl.ocks.org/mbostock/3883245
+ *  lineChart adapted http://bl.ocks.org/mbostock/3883245
  *  compareLineChart and compareStackedAreaChart adapted from examples http://nvd3.org/ghpages/examples.html
  */
 
@@ -83,7 +83,7 @@
 	"background-color": color,
 	"color": function(d, i) {
 		if (i == 0) {
-			return "black";
+			return "white";
 		}
 		else {
 			return "white";

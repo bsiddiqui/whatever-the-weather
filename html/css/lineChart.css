@@ -14,12 +14,27 @@
 
 .lineGraph-line {
   fill: none;
-  stroke: steelblue;
-  stroke-width: 1.5px;
+  stroke: #0FA8FF;
+  stroke-width: 2px;
 }
 
 .brush .extent {
   stroke: #fff;
   fill-opacity: .125;
   shape-rendering: crispEdges;
+}
+
+path {
+    stroke-width: 2;
+    fill: none;
+}
+
+.graph {
+  background-color: #000;
+  font-family: 'Vollkorn', serif;
+}
+
+.brush, .lineGraph-x .lineGraph-axis, .lineGraph-y .lineGraph-axis {
+  stroke: #FFF;
+  fill: #FFF;
 }
