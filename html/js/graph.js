@@ -4,21 +4,21 @@
  *  compareLineChart and compareStackedAreaChart adapted from examples http://nvd3.org/ghpages/examples.html
  */
 
- var parseDate = d3.time.format("%m %Y").parse;
+  var parseDate = d3.time.format("%m %Y").parse;
 
- function trivialBounds(bounds) { 
-   return (bounds[0][0].toString() == bounds[1][0].toString() && bounds[0][1].toString() == bounds[1][1].toString());
+  function trivialBounds(bounds) { 
+  return (bounds[0][0].toString() == bounds[1][0].toString() && bounds[0][1].toString() == bounds[1][1].toString());
 
- }
+  }
 
- function withinExtent(x, y, bounds) {
-   return trivialBounds(bounds) || (x >= bounds[0][0] && x <= bounds[1][0] && y >= bounds[0][1] && y <= bounds[1][1]);
- }
+  function withinExtent(x, y, bounds) {
+  return trivialBounds(bounds) || (x >= bounds[0][0] && x <= bounds[1][0] && y >= bounds[0][1] && y <= bounds[1][1]);
+  }
 
- function withinXExtent(x, y, bounds) {
-   return x >= +bounds[0][0].getFullYear() && x <= +bounds[1][0].getFullYear();
- }
-
+  function withinXExtent(x, y, bounds) {
+  return x >= +bounds[0][0].getFullYear() && x <= +bounds[1][0].getFullYear();
+  }
+  
 
  function tempTable(cityName, state, datapoint, yearRange) {
 
@@ -31,56 +31,56 @@
     var months = city[year];
 
     for(var mo in months) {
+  
+  var d = months[mo];
 
-     var d = months[mo];
+  if (!d.data[datapoint]) {
+    continue;
+      }
 
-     if (!d.data[datapoint]) {
-      continue;
+      year = parseDate(mo + " " + year);
+      d["year"] = year;
+      d.data[datapoint] = +d.data[datapoint];
+
+      if (yearRange && !withinExtent(d["year"], d.data[datapoint], yearRange)) {
+    continue;
+      }
+
+      sum += d.data[datapoint];
+      total++;
     }
 
-    year = parseDate(mo + " " + year);
-    d["year"] = year;
-    d.data[datapoint] = +d.data[datapoint];
-
-    if (yearRange && !withinExtent(d["year"], d.data[datapoint], yearRange)) {
-      continue;
-    }
-
-    sum += d.data[datapoint];
-    total++;
   }
 
-}
+ var average = sum / total;
+ $("#selection_avg").html(Math.round(average * 100) / 100);
 
-var average = sum / total;
-$("#selection_avg").html(Math.round(average * 100) / 100);
+  var color = d3.scale.linear()
+  .domain(d3.extent(city, function(d) { return d["data"][datapoint]; }))
+  .range(["blue",  "orange"])
 
-var color = d3.scale.linear()
-.domain(d3.extent(city, function(d) { return d["data"][datapoint]; }))
-.range(["blue",  "orange"])
+  appendButton(yearRange, datapoint, cityName, state);
+   
+ }
 
-appendButton(yearRange, datapoint, cityName, state);
-
-}
-
-function appendButton(yearRange, datapoint, cityName, state) {
+ function appendButton(yearRange, datapoint, cityName, state) {
 
   if (yearRange && !trivialBounds(yearRange)) {
-   $("." + datapoint + "-table-viz").html("");
-   var table = d3.select("." + datapoint + "-table-viz")
-   .append("button")
-   .text("Focus on Selection")
-   .style({
+  $("." + datapoint + "-table-viz").html("");
+    var table = d3.select("." + datapoint + "-table-viz")
+    .append("button")
+    .text("Focus on Selection")
+    .style({
     padding: "10px"
-  })
-   .attr("class", "btn btn-inverse btn-small")
-   .on("click", function() {
+    })
+         .attr("class", "btn btn-inverse btn-small")
+    .on("click", function() {
     lineChart(cityName, state, datapoint, yearRange);
-  });
+     });
+  }
  }
-}
 
-function lineChart(cityName, state, datapoint, yearRange){
+ function lineChart(cityName, state, datapoint, yearRange){
 
   var margin = {top: 20, right: 20, bottom: 30, left: 50},
   width = 600 - margin.left - margin.right,
@@ -103,7 +103,7 @@ function lineChart(cityName, state, datapoint, yearRange){
   var line = d3.svg.line()
   .x(function(d) { return x(d["year"]); })
   .y(function(d) { return y(d.data[datapoint]); });
-
+ 
   var brush = d3.svg.brush()
   .x(x)
   .y(y)
@@ -117,28 +117,28 @@ function lineChart(cityName, state, datapoint, yearRange){
   $("." + datapoint + "-line-graph").html("");
 
   var datamap = {
-   "avg_temp": "Average Temperature", 
-   "avg_max_temp": "Average Maximum Temperature", 
-   "avg_min_temp": "Average Minimum Temperature"
- }
- tempTable(cityName, state, datapoint);
+  "avg_temp": "Average Temperature", 
+  "avg_max_temp": "Average Maximum Temperature", 
+  "avg_min_temp": "Average Minimum Temperature"
+  }
+  tempTable(cityName, state, datapoint);
 
- var header = d3.select("."  + datapoint + "-line-graph").append("h4").text(datamap[datapoint]);
- var svg = d3.select("." + datapoint + "-line-graph").append("svg")
- .attr("width", width + margin.left + margin.right)
- .attr("height", height + margin.top + margin.bottom)
- .append("g")
- .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
- .attr("class", "brush")	
- .call(brush);
+  var header = d3.select("."  + datapoint + "-line-graph").append("h4").text(datamap[datapoint]);
+  var svg = d3.select("." + datapoint + "-line-graph").append("svg")
+  .attr("width", width + margin.left + margin.right)
+  .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+  .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+  .attr("class", "brush") 
+  .call(brush);
 
- var cityData = filterByCity(cityName, state);
- var city = [];
+  var cityData = filterByCity(cityName, state);
+  var city = [];
 
- for(var year in cityData)
- {
+  for(var year in cityData)
+  {
 
-   for(var mo in cityData[year]) {
+  for(var mo in cityData[year]) {
 
     var d = cityData[year][mo];
     d["year"] = parseDate(mo + " " + year);
@@ -146,51 +146,51 @@ function lineChart(cityName, state, datapoint, yearRange){
 
     if (!d.data[datapoint])
     {
-     continue;
-   }
+      continue;
+    }
+  
+          if (!yearRange) {
+        city.push(d);
+          }
 
-   if (!yearRange) {
-     city.push(d);
-   }
+          if (yearRange && withinXExtent(year, d.data[datapoint], yearRange)) {
+        city.push(d);
+          } 
+  }
 
-   if (yearRange && withinXExtent(year, d.data[datapoint], yearRange)) {
-     city.push(d);
-   } 
- }
+  }
 
-}
+  x.domain(d3.extent(city, function(d) { return d["year"]; }));
+  y.domain(d3.extent(city, function(d) { return +d.data[datapoint]; }));
 
-x.domain(d3.extent(city, function(d) { return d["year"]; }));
-y.domain(d3.extent(city, function(d) { return +d.data[datapoint]; }));
+  svg.append("g")
+  .attr("class", "lineGraph-x lineGraph-axis")
+  .attr("transform", "translate(0," + height + ")")
+  .call(xAxis);
 
-svg.append("g")
-.attr("class", "lineGraph-x lineGraph-axis")
-.attr("transform", "translate(0," + height + ")")
-.call(xAxis);
+  svg.append("g")
+  .attr("class", "lineGraph-y lineGraph-axis")
+  .call(yAxis)
+  .append("text")
+  .attr("transform", "rotate(-90)")
+  .attr("y", 6)
+  .attr("dy", ".71em")
+  .style("text-anchor", "end")
+  .text("Temp (F)");
 
-svg.append("g")
-.attr("class", "lineGraph-y lineGraph-axis")
-.call(yAxis)
-.append("text")
-.attr("transform", "rotate(-90)")
-.attr("y", 6)
-.attr("dy", ".71em")
-.style("text-anchor", "end")
-.text("Temp (F)");
-
-svg.append("path")
-.datum(city)
-.attr("class", "lineGraph-line")
-.attr("d", line);
-
-if (yearRange) {
- d3.select("."  + datapoint + "-line-graph")
- .insert("button", ":first-child").text("Reset View")
- .attr("class", "btn btn-inverse btn-small")
- .on("click", function() {
-  lineChart(cityName, state, datapoint);
-});
-}
+  svg.append("path")
+  .datum(city)
+  .attr("class", "lineGraph-line")
+  .attr("d", line);
+  
+  if (yearRange) {
+    d3.select("."  + datapoint + "-line-graph")
+        .insert("button", ":first-child").text("Reset View")
+  .attr("class", "btn btn-inverse btn-small")
+    .on("click", function() {
+    lineChart(cityName, state, datapoint);
+    });
+  }
 
 };
 
@@ -203,33 +203,52 @@ function compareCitiesData(city1Name, state1, city2Name, state2, datapoint){
   var values2 = [];
   var data = [];
 
-  var minCity1, minCity2;
+for(var year in city1)
+{
 
-  for(var year in city1)
+  var months = city1[year];
+  for(var month in months)
   {
-    var months = city1[year];
-    for(var month in months)
-    {
-      var key = month + "/" + year;
-      values1.push([key, +city1[year][month].data.avg_temp]);
+    var key = month + "/" + year;
+    if(+city1[year][month].data.avg_temp) 
+    values1.push([key, +city1[year][month].data.avg_temp]);
 
-    }
   }
+}
 
 
-  for(var year in city2)
+for(var year in city2)
+{
+  var months = city2[year];
+  for(var month in months)
   {
-    var months = city2[year];
-    for(var month in months)
-    {
-      var key = month + "/" + year;
-      values2.push([key, +city2[year][month].data.avg_temp]);
-    }
+    var key = month + "/" + year;
+     if (city1[year] && city1[year][month]) {
+       if (+city2[year][month].data.avg_temp)
+       values2.push([key, +city2[year][month].data.avg_temp]);
+     }
+     else {
+  console.log("not adding " + key);
+     }
   }
+}
 
-  var data = [{key: city1Name, values: values1}, {key: city2Name, values: values2}]
+var updatedValues1 = [];
+for(var k in values1)
+{
+  info = values1[k][0].split("/");
 
-  return data; 
+  if (city2[info[1]] && city2[info[1]][info[0]])
+  {
+
+    console.log("happening");
+    updatedValues1.push(values1[k]);
+  }
+}
+
+var data=  [{key: city1Name, values: updatedValues1}, {key: city2Name, values: values2}]
+console.log(data);
+return data; 
 
 };
 
@@ -240,10 +259,10 @@ function compareLineChart(city1, state1, city2, state2, datapoint){
   $("#" + datapoint + "-compare-btn").html("Show Stacked Area Chart")
   $("#" + datapoint + "-compare-btn").unbind('click');
   $("#" + datapoint + "-compare-btn").on('click', function() {
-   $('#' + datapoint + "-compare-line-graph").hide();
-   $('#' + datapoint + "-compare-stacked").show();
-	// compareStackedAreaChart(city1, state1, city2, state2, datapoint);	
-});
+      $('#' + datapoint + "-compare-line-graph").hide();
+      $('#' + datapoint + "-compare-stacked").show();
+  compareStackedAreaChart(city1, state1, city2, state2, datapoint); 
+  });
 
   var data = compareCitiesData(city1, state1, city2, state2, datapoint);
   var colors = d3.scale.category10();
@@ -280,14 +299,15 @@ function compareStackedAreaChart(city1, state1, city2, state2, datapoint){
   $("#" + datapoint + "-compare-btn").html("Show Line Graph Chart")
   $("#" + datapoint + "-compare-btn").unbind('click');
   $("#" + datapoint + "-compare-btn").on('click', function() {
-   $('#' + datapoint + "-compare-stacked").hide();
-   $('#' + datapoint + "-compare-line-graph").show();
-   compareLineChart(city1, state1, city2, state2, datapoint);	
- });
+      $('#' + datapoint + "-compare-stacked").hide();
+      $('#' + datapoint + "-compare-line-graph").show();
+  compareLineChart(city1, state1, city2, state2, datapoint);  
+  });
 
-
+  
   var data = compareCitiesData(city1, state1, city2, state2, datapoint);
-
+  console.log(JSON.stringify(data));
+  
   var colors = d3.scale.category10();
   keyColor = function(d, i) {return colors(d.key)};
 
@@ -306,16 +326,15 @@ function compareStackedAreaChart(city1, state1, city2, state2, datapoint){
 
     d3.select('#' + datapoint + "-compare-stacked")
     .datum(data)
-    .call(chart);
+   .call(chart);
 
 //    .transition().duration(500).call(chart); 
 
-nv.utils.windowResize(chart.update);
+    nv.utils.windowResize(chart.update);
 
 //    chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
 
-return chart;
+    return chart;
 
-});
+  });
 };
-
