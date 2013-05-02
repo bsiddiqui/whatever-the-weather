@@ -171,7 +171,7 @@
   for(var year in cityData)
   {
 	var d = cityData[year];
-	console.log(d, year);
+	d["year"] = parseDate(year);
 	d.data[datapoint] = +d.data[datapoint]
 
 	if (!d.data[datapoint])
