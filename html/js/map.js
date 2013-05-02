@@ -210,7 +210,7 @@ var latlng = {
 	}, 
 	"Iowa": {
 		"Des Moines": {lat: 47.4019, lng: -122.3231}
-	}.
+	},
 	"UT": {
 		"Salt Lake City": {lat: 40.760779, lng: -111.891047}
 	},
