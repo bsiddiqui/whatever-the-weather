@@ -50,11 +50,19 @@ function filterByCity(city, state)
 			}
 
 			if (cityName == city) {
-				res[yr]= yearData[i][cityName];
+
+				if (!res[yr])
+				{
+					res[yr] = {};
+				}
+
+				res[yr][yearData[i][cityName].month]= yearData[i][cityName];
 			}
 		}
 	}
 
+	console.log(res);
+	
 	return res;
 
 }

@@ -24,44 +24,35 @@
 
   var city = filterByCity(cityName, state);
 
-  console.log(city);
-
   var points = ["Average "];
-  var data = [0];
+  var sum = 0;
   var total = 0;
   for(var year in city) {
-    var d = city[year];
+    var months = city[year];
 
-    if (!d.data[datapoint]) {
-	continue;
+    for(var mo in months) {
+
+	var d = months[mo];
+
+	if (!d.data[datapoint]) {
+		continue;
+    	}
+
+    	year = parseDate(year);
+    	d["year"] = year;
+    	d.data[datapoint] = +d.data[datapoint];
+
+    	if (yearRange && !withinExtent(d["year"], d.data[datapoint], yearRange)) {
+		return;
+    	}
+
+    	sum += d.data[datapoint];
+    	total++;
     }
 
-    year = parseDate(year);
-    d["year"] = year;
-    d.data[datapoint] = +d.data[datapoint];
-
-    if (yearRange && !withinExtent(d["year"], d.data[datapoint], yearRange)) {
-	return;
-    }
-
-    data[0] += d.data[datapoint];
-    if (data[1]) {
-	data[1] = Math.max(data[1], d.data[datapoint]);
-    } else {
-	data[1] = d.data[datapoint];
-    }
-
-    if (data[2]) {
-	data[2] = Math.min(data[2], d.data[datapoint]);
-    } else {
-	data[2] = d.data[datapoint];
-    }
-
-    total++;
-	
   }
 
-  data[0] = data[0] / total;
+ var average = sum / total;
 
   var color = d3.scale.linear()
   .domain(d3.extent(city, function(d) { return d["data"][datapoint]; }))
@@ -173,8 +164,12 @@
   var cityData = filterByCity(cityName, state);
   var city = [];
 
+  console.log(cityData);
+
   for(var year in cityData)
   {
+	console.log(year);
+
 	var d = cityData[year];
 	d["year"] = parseDate(year);
 	d.data[datapoint] = +d.data[datapoint]
@@ -194,6 +189,8 @@
 
   }
 
+  console.log(city);
+
   x.domain(d3.extent(city, function(d) { return d["year"]; }));
   y.domain(d3.extent(city, function(d) { return +d.data[datapoint]; }));
 
@@ -211,8 +208,6 @@
   .attr("dy", ".71em")
   .style("text-anchor", "end")
   .text("Temp (F)");
-
-  console.log(city);
 
   svg.append("path")
   .datum(city)
@@ -275,8 +270,6 @@ function compareCitiesData(city1, state1, city2, state2, datapoint){
     	values2.push([+dataForYear.year, +dataForYear.data[datapoint]]); 
     }
   }
-
-  console.log(nonincludes)
 
   data.push({key: city1[0].city, values: values1});
   data.push({key: city2[0].city, values: values2});
