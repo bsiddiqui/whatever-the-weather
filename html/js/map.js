@@ -631,10 +631,31 @@ function initializeSlider(map, destroy) {
 	});
 
 	$("#startAnimationBtn").click(function() {
-		var range = $("#yearSlider").slider("values");
-		startTimelapse(map, range);
+		startAnimation(map);
 	});
 
+
+
+}
+
+function stopAnimation(map) {
+	$("#startAnimationBtn").html("Start Animation");
+	$("#startAnimationBtn").unbind();
+	$("#startAnimationBtn").click(function() {
+		startAnimation(map);
+	});
+	clearInterval(timelapseId);
+}
+
+function startAnimation(map) {
+	var range = $("#yearSlider").slider("values");
+	startTimelapse(map, range);
+	$("#startAnimationBtn").html("Stop Animation");
+	$("#startAnimationBtn").unbind();
+	$("#startAnimationBtn").click(function() {
+		stopAnimation(map)
+		initializeRangeSlider(map);
+	});
 
 }
 
