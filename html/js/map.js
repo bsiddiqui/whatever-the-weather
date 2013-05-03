@@ -344,7 +344,9 @@ function computeAverages(map)
 
 		for(var i in c.data)
 		{
-			numKeys++;
+			if (c.data[i] != NaN) {
+				numKeys++;
+			}
 		}
 
 		if (!numKeys || !bounds.contains(loc))
@@ -745,10 +747,23 @@ function compareUpdate() {
 
 }
 
+function secondTour() {
+	var part5 = document.getElementById("part5");
+	var part6 = document.getElementById("part6");
+	var part7 = document.getElementById("part7");
+	var part8 = document.getElementById("part8");
+
+	part5.play();
+
+	
+
+}
+
 function firstTour() {
 	var introduction = document.getElementById("introduction");
 	var part2 = document.getElementById("part2");
 	var part3 = document.getElementById("part3");
+	var part4 = document.getElementById("part4");
 
 	introduction.play();
 
@@ -775,7 +790,11 @@ function firstTour() {
 			
 				$(this).unbind(event);
 				part3.pause();
-				part4.start();
+				part4.play();
+				$("#main_avg_temp").css("background-color", "blue");
+				window.setTimeout(function() {
+					$("#main_avg_temp").css("background-color", "black");
+				}, 6000);
 			});
 		});
 
