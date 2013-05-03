@@ -431,7 +431,9 @@ function plotCity(city, state)
 	var month = $("#lineChartMonth").val();
 	
 	$("#cityName").html(city + ", " + state);	
-	lineChart(city, state, "avg_temp", month);
+	$("#main_city_input").val(city + ", " + state);	
+
+	lineChart(city, state, "avg_temp", undefined, month);
 
 	$(".graph").css("visibility", "");
 }
@@ -533,6 +535,10 @@ function initialize() {
 
 	$("#compareMonth").change(function() {
 		compareUpdate();
+	});
+
+	$("#lineChartMonth").change(function() {
+		lineChart(window.city, window.state, window.datapoint, window.yearRange, $(this).val());
 	});
 
 	initializeSlider(map);
