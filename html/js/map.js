@@ -702,9 +702,11 @@ function initializeRangeSlider(map) {
 	$("#startAnimationBtn").css('margin-left', 'auto');
 	$("#startAnimationBtn").css('margin-right', 'auto');
 
-	$("#playMode").html("Browse...");
+	$("#playMode").html("Exit Data Stream");
 	$("#playMode").unbind();
 	$("#playMode").click(function() {
+	$("#playMode").html("Enter Data Stream");
+
 		$("#startAnimationBtn").hide();
 		initializeSlider(map, true);
 	});
