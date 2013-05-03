@@ -436,7 +436,6 @@ function plotCity(city, state)
 
 function setupClickEventListener(circ, city, state)
 {
-
 	google.maps.event.addListener(circ, 'click', function() {
 		plotCity(city, state);
 	});
