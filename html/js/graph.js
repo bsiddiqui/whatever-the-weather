@@ -203,14 +203,15 @@ function compareCitiesData(city1Name, state1, city2Name, state2, datapoint){
   var values2 = [];
   var data = [];
 
+  var minCity1, minCity2;
+
 for(var year in city1)
 {
-
   var months = city1[year];
   for(var month in months)
   {
     var key = month + "/" + year;
-    if(+city1[year][month].data.avg_temp) 
+    console.log(key);
     values1.push([key, +city1[year][month].data.avg_temp]);
 
   }
@@ -223,33 +224,14 @@ for(var year in city2)
   for(var month in months)
   {
     var key = month + "/" + year;
-     if (city1[year] && city1[year][month]) {
-       if (+city2[year][month].data.avg_temp)
-       values2.push([key, +city2[year][month].data.avg_temp]);
-     }
-     else {
-  console.log("not adding " + key);
-     }
+     values2.push([key, +city2[year][month].data.avg_temp]);
   }
 }
 
-var updatedValues1 = [];
-for(var k in values1)
-{
-  info = values1[k][0].split("/");
+var data=  [{key: city1Name, values: values1}, {key: city2Name, values: values2}]
+console.log(JSON.stringify(data));
 
-  if (city2[info[1]] && city2[info[1]][info[0]])
-  {
-
-    console.log("happening");
-    updatedValues1.push(values1[k]);
-  }
-}
-
-var data=  [{key: city1Name, values: updatedValues1}, {key: city2Name, values: values2}]
-console.log(data);
 return data; 
-
 };
 
 function compareLineChart(city1, state1, city2, state2, datapoint){
@@ -304,10 +286,9 @@ function compareStackedAreaChart(city1, state1, city2, state2, datapoint){
   compareLineChart(city1, state1, city2, state2, datapoint);  
   });
 
-  
+
   var data = compareCitiesData(city1, state1, city2, state2, datapoint);
-  console.log(JSON.stringify(data));
-  
+
   var colors = d3.scale.category10();
   keyColor = function(d, i) {return colors(d.key)};
 
