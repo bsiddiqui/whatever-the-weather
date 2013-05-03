@@ -344,7 +344,7 @@ function computeAverages(map)
 
 		for(var i in c.data)
 		{
-			if (c.data[i] != NaN) {
+			if (!isNaN(c.data[i])) {
 				numKeys++;
 			}
 		}
@@ -612,7 +612,7 @@ function initializeSlider(map, destroy) {
 		min: 0, 
 		max: NUM_INCREMENTS, 
 		animate: "fast", 
-		value: MapState.year * MONTHS_PER_YEAR + (MapState.month - 1),
+		value: 0,
 		slide: function(event, ui) {
 
 			MapState.month = extractMonth(ui.value);
@@ -625,7 +625,7 @@ function initializeSlider(map, destroy) {
 		}
 	});
 
-	$("#curYear").html("December 2012");
+	$("#curYear").html("January 1948");
 	$("#endYear").hide();
 
 	$("#playMode").click(function() {
@@ -748,6 +748,10 @@ function compareUpdate() {
 }
 
 function secondTour() {
+
+	$("#firstTour").hide();
+	$("#secondTour").hide();
+
 	var part5 = document.getElementById("part5");
 	var part6 = document.getElementById("part6");
 	var part7 = document.getElementById("part7");
@@ -755,11 +759,56 @@ function secondTour() {
 
 	part5.play();
 
-	
+	if ($("#playMode").html() == "Enter Data Stream") {
+		$("#playMode").click();
+	}
+
+	$("#curYear").css("color", "yellow");
+
+	part5.addEventListener('ended', function() {
+		$("#curYear").css("color", "white");
+		$("#endYear").css("color", "yellow");
+		part6.play();
+		
+		part6.addEventListener('ended', function() {
+			part7.play();
+
+			$("#endYear").css("color", "white");
+			$("#startAnimationBtn").removeClass("btn-inverse");
+			$("#startAnimationBtn").addClass("btn-alert");
+			
+			$("#startAnimationBtn").click(function(event) {
+				$("#startAnimationBtn").addClass("btn-inverse");
+				$("#startAnimationBtn").removeClass("btn-alert");
+			
+				part7.pause();
+				$(this).unbind(event);
+				part8.play();
+
+				part8.addEventListener('ended', function() {
+					$("#main_city_input").val("Modesto, IL");
+					$("#main_city_input").change();
+ 
+		                        var new_center = latlng["IL"]["Modesto"];
+                		        map.setCenter(new google.maps.LatLng(new_center.lat, new_center.lng));
+                        		map.setZoom(6);
+
+		                       plotCity("Modesto", "IL");
+					$("#firstTour").show();
+				});
+			
+
+			});		
+		});
+
+	});	
 
 }
 
 function firstTour() {
+	$("#firstTour").hide();
+	$("#secondTour").hide();
+
 	var introduction = document.getElementById("introduction");
 	var part2 = document.getElementById("part2");
 	var part3 = document.getElementById("part3");
@@ -767,7 +816,7 @@ function firstTour() {
 
 	introduction.play();
 
-	if ($("#playMode").html() == "Play...") {
+	if ($("#playMode").html() == "Enter Data Stream") {
 		$("#playMode").click();
 	}
 	introduction.addEventListener('ended', function() {
@@ -780,7 +829,6 @@ function firstTour() {
 			$("#curYear").css("color", "white");
 
 			part3.play();
-			console.log($("#startAnimationBtn"));
 			$("#startAnimationBtn").removeClass("btn-inverse");
 			$("#startAnimationBtn").addClass("btn-alert");
 			
@@ -795,6 +843,7 @@ function firstTour() {
 				window.setTimeout(function() {
 					$("#main_avg_temp").css("background-color", "black");
 				}, 6000);
+				$("#secondTour").show();
 			});
 		});
 
