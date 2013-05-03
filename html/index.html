@@ -134,64 +134,64 @@
 				</ul>
 				<p>Special thanks to mbostock's examples!</p>
 				<p>We hope you enjoy our visualization!</p>
+
+				<p>Resources</p>
+				<p>We used the NVD3 library (http://nvd3.org/) to implement the comparison line chart.</p>
+				<p>We used D3 (http://d3js.org/) for color scales (and it's a dependency of NVD3). And the line chart.</p>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="modal hide fade blackText" id="compare_modal" style="margin-left: -500px; width: 1000px">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			<h3>Compare</h3>
+		<div class="modal hide fade blackText" id="compare_modal" style="margin-left: -500px; width: 1000px">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3>Compare</h3>
+			</div>
+			<div class="modal-body" style="height: 1000px">
+				<label for="compareFirstCity"><b>First city:</b></label>
+				<input type="text" id="compareFirstCity" />
+				<label><b>Second city:</b></label>
+				<label><input type="text" id="compareSecondCity" /></label>
+				<select id="compareMonth">
+					<option value="1">January</option>
+					<option value="2">February</option>
+					<option value="3">March</option>
+					<option value="4">April</option>
+					<option value="5">May</option>
+					<option value="6">June</option>
+					<option value="7">July</option>
+					<option value="8">August</option>
+					<option value="9">September</option>
+					<option value="10">October</option>
+					<option value="11">November</option>
+					<option value="12">December</option>
+				</select>
+				<svg class="nv_svg" id="avg_temp-compare-line-graph"></svg>
+			</div>
 		</div>
-		<div class="modal-body" style="height: 1000px">
-			<label for="compareFirstCity"><b>First city:</b></label>
-			<input type="text" id="compareFirstCity" />
-			<label><b>Second city:</b></label>
-			<label><input type="text" id="compareSecondCity" /></label>
-			<select id="compareMonth">
-				<option value="1">January</option>
-				<option value="2">February</option>
-				<option value="3">March</option>
-				<option value="4">April</option>
-				<option value="5">May</option>
-				<option value="6">June</option>
-				<option value="7">July</option>
-				<option value="8">August</option>
-				<option value="9">September</option>
-				<option value="10">October</option>
-				<option value="11">November</option>
-				<option value="12">December</option>
-			</select>
-			<svg class="nv_svg" id="avg_temp-compare-line-graph"></svg>
+		<div id="timeLapse">
+			<h3 id="curYear"></h3>
+			<div id="yearSlider"></div>
+			<h3 id="endYear">2007</h3>
+			<button id="startAnimationBtn" class="btn btn-inverse">Start Timelapse</button>
 		</div>
-	</div>
-	<div id="timeLapse">
-		<h3 id="curYear"></h3>
-		<div id="yearSlider"></div>
-		<h3 id="endYear">2007</h3>
-		<button id="startAnimationBtn" class="btn btn-inverse">Start Timelapse</button>
-	</div>
 
-	<div id="audio">
-		<audio src="audio/introduction.m4a" id="introduction"></audio>
-		<audio src="audio/part2.m4a" id="part2"></audio>
-		<audio src="audio/part3.m4a" id="part3"></audio>
-		<audio src="audio/part4.m4a" id="part4"></audio>
-		<audio src="audio/part5.m4a" id="part5"></audio>
-		<audio src="audio/part6.m4a" id="part6"></audio>
-		<audio src="audio/part7.m4a" id="part7"></audio>
-		<audio src="audio/part8.m4a" id="part8"></audio>
-	</div>
-	<div>
-		<button onclick="firstTour()" class="btn btn-primary" id="firstTour">Timelapse Tour</button>
-		<button onclick="secondTour()" class="btn btn-primary" id="secondTour">City Tour</button>
-	</div>
-	<footer>
-		<h4>Resources</h4>
-			<ul>
-				<li>We used the NVD3 library (http://nvd3.org/) to implement the comparison line chart.</li>
-				<li>We used D3 (http://d3js.org/) for color scales (and it's a dependency of NVD3).  And the line chart.</li>
-			</ul>
-	</footer>
-</body>
-</html>
+		<div id="audio">
+			<audio src="audio/introduction.m4a" id="introduction"></audio>
+			<audio src="audio/part2.m4a" id="part2"></audio>
+			<audio src="audio/part3.m4a" id="part3"></audio>
+			<audio src="audio/part4.m4a" id="part4"></audio>
+			<audio src="audio/part5.m4a" id="part5"></audio>
+			<audio src="audio/part6.m4a" id="part6"></audio>
+			<audio src="audio/part7.m4a" id="part7"></audio>
+			<audio src="audio/part8.m4a" id="part8"></audio>
+		</div>
+		<div>
+			<button onclick="firstTour()" class="btn btn-primary" id="firstTour">Timelapse Tour</button>
+			<button onclick="secondTour()" class="btn btn-primary" id="secondTour">City Tour</button>
+		</div>
+		<footer>
+
+		</footer>
+	</body>
+	</html>
 
