@@ -755,7 +755,49 @@ function secondTour() {
 
 	part5.play();
 
-	
+	if ($("#playMode").html() == "Enter Data Stream") {
+		$("#playMode").click();
+	}
+
+	$("#curYear").css("color", "yellow");
+
+	part5.addEventListener('ended', function() {
+		$("#curYear").css("color", "white");
+		$("#endYear").css("color", "yellow");
+		part6.play();
+		
+		part6.addEventListener('ended', function() {
+			part7.play();
+
+			$("#endYear").css("color", "white");
+			$("#startAnimationBtn").removeClass("btn-inverse");
+			$("#startAnimationBtn").addClass("btn-alert");
+			
+			$("#startAnimationBtn").click(function(event) {
+				$("#startAnimationBtn").addClass("btn-inverse");
+				$("#startAnimationBtn").removeClass("btn-alert");
+			
+				part7.pause();
+				$(this).unbind(event);
+				part8.play();
+
+				part8.addEventListener('ended', function() {
+					$("#main_city_input").val("Modesto, IL");
+					$("#main_city_input").change();
+ 
+		                        var new_center = latlng["IL"]["Modesto"];
+                		        map.setCenter(new google.maps.LatLng(new_center.lat, new_center.lng));
+                        		map.setZoom(6);
+
+		                        plotCity("Modesto", "IL");
+
+				});
+			
+
+			});		
+		});
+
+	});	
 
 }
 
@@ -767,7 +809,7 @@ function firstTour() {
 
 	introduction.play();
 
-	if ($("#playMode").html() == "Play...") {
+	if ($("#playMode").html() == "Enter Data Stream") {
 		$("#playMode").click();
 	}
 	introduction.addEventListener('ended', function() {
@@ -780,7 +822,6 @@ function firstTour() {
 			$("#curYear").css("color", "white");
 
 			part3.play();
-			console.log($("#startAnimationBtn"));
 			$("#startAnimationBtn").removeClass("btn-inverse");
 			$("#startAnimationBtn").addClass("btn-alert");
 			
