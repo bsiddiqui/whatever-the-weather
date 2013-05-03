@@ -639,7 +639,7 @@ function initializeSlider(map, destroy) {
 }
 
 function stopAnimation(map) {
-	$("#startAnimationBtn").html("Start Animation");
+	$("#startAnimationBtn").html("Start Timelapse");
 	$("#startAnimationBtn").unbind();
 	$("#startAnimationBtn").click(function() {
 		startAnimation(map);
@@ -743,4 +743,42 @@ function compareUpdate() {
 
 }
 
+function firstTour() {
+	var introduction = document.getElementById("introduction");
+	var part2 = document.getElementById("part2");
+	var part3 = document.getElementById("part3");
+
+	introduction.play();
+
+	if ($("#playMode").html() == "Play...") {
+		$("#playMode").click();
+	}
+	introduction.addEventListener('ended', function() {
+		
+		part2.play();
+
+		$("#curYear").css("color", "yellow");
+
+		part2.addEventListener('ended', function() {
+			$("#curYear").css("color", "white");
+
+			part3.play();
+			console.log($("#startAnimationBtn"));
+			$("#startAnimationBtn").removeClass("btn-inverse");
+			$("#startAnimationBtn").addClass("btn-alert");
+			
+			$("#startAnimationBtn").click(function(event) {
+				$("#startAnimationBtn").addClass("btn-inverse");
+				$("#startAnimationBtn").removeClass("btn-alert");
+			
+				$(this).unbind(event);
+				part3.pause();
+				part4.start();
+			});
+		});
+
+	});
+}
+
 google.maps.event.addDomListener(window, 'load', initialize);
+
