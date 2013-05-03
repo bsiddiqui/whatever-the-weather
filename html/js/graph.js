@@ -195,7 +195,7 @@ function lineChart(cityName, state, datapoint, yearRange){
 };
 
 
-function compareCitiesData(city1Name, state1, city2Name, state2, datapoint){
+function compareCitiesData(city1Name, state1, city2Name, state2, datapoint, monthNum){
   var city1 = filterByCity(city1Name, state1);
   var city2 = filterByCity(city2Name, state2);
 
@@ -210,7 +210,7 @@ function compareCitiesData(city1Name, state1, city2Name, state2, datapoint){
     var months = city1[year];
     for(var month in months)
     {
-     	if(month != "1")
+     	if(month != monthNum)
      	{
 		continue;
 	}
@@ -239,8 +239,8 @@ function compareCitiesData(city1Name, state1, city2Name, state2, datapoint){
   return data; 
 };
 
-function compareLineChart(city1, state1, city2, state2, datapoint){
-  var data = compareCitiesData(city1, state1, city2, state2, datapoint);
+function compareLineChart(city1, state1, city2, state2, datapoint, month){
+  var data = compareCitiesData(city1, state1, city2, state2, datapoint, month);
   var colors = d3.scale.category10();
   keyColor = function(d, i) {return colors(d.key)};
 

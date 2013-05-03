@@ -530,6 +530,10 @@ function initialize() {
 
 	});
 
+	$("#compareMonth").change(function() {
+		compareUpdate();
+	});
+
 	initializeSlider(map);
 
 	$(".graph").css('visibility', 'hidden');
@@ -696,9 +700,8 @@ function compareUpdate() {
 		var secondCityName = secondCity[0].trim();
 		var secondStateName = secondCity[1].trim();
 
-		compareLineChart(firstCityName, firstStateName, secondCityName, secondStateName, "avg_temp");
-		compareLineChart(firstCityName, firstStateName, secondCityName, secondStateName, "avg_min_temp");
-		compareLineChart(firstCityName, firstStateName, secondCityName, secondStateName, "avg_max_temp");
+		var month = $("#compareMonth").val();
+		compareLineChart(firstCityName, firstStateName, secondCityName, secondStateName, "avg_temp", month);
 		
 		$("#compareTabs a").click(function (e) {
 				e.preventDefault();
