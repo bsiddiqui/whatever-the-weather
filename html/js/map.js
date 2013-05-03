@@ -344,7 +344,7 @@ function computeAverages(map)
 
 		for(var i in c.data)
 		{
-			if (c.data[i] != NaN) {
+			if (!isNaN(c.data[i])) {
 				numKeys++;
 			}
 		}
