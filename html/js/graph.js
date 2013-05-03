@@ -210,11 +210,11 @@ function compareCitiesData(city1Name, state1, city2Name, state2, datapoint){
     var months = city1[year];
     for(var month in months)
     {
-      var date = new Date();
-      date.setMonth(month);
-      date.setFullYear(year);
-      var key = date.getTime();
-      values1.push([key, +city1[year][month].data.avg_temp]);
+     	if(month != "1")
+     	{
+		continue;
+	}
+        values1.push([year, +city1[year][month].data.avg_temp]);
     }
   }
 
@@ -224,11 +224,12 @@ function compareCitiesData(city1Name, state1, city2Name, state2, datapoint){
     var months = city2[year];
     for(var month in months)
     {
-      var date = new Date();
-      date.setMonth(month);
-      date.setFullYear(year);
-      var key = date.getTime();
-      values2.push([key, +city2[year][month].data.avg_temp]);
+
+     	if(month != "1")
+     	{
+		continue;
+	}
+        values2.push([year, +city2[year][month].data.avg_temp]);
     }
   }
 
@@ -260,11 +261,9 @@ function compareLineChart(city1, state1, city2, state2, datapoint){
     .x(function(d) { return d[0] })
     .y(function(d) { return d[1] })
     .color(keyColor)
-    //.clipEdge(true);
 
     chart.xAxis
-    .showMaxMin(false)
-    .tickFormat(function(d) { return d3.time.format('%x')(new Date(d)) });
+    .showMaxMin(false);
 
     chart.yAxis
     .tickFormat(d3.format(',.2f'));
@@ -290,7 +289,6 @@ function compareStackedAreaChart(city1, state1, city2, state2, datapoint){
     $('#' + datapoint + "-compare-line-graph").show();
     compareLineChart(city1, state1, city2, state2, datapoint);  
   });
-
 
   var data = compareCitiesData(city1, state1, city2, state2, datapoint);
 
