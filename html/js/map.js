@@ -748,6 +748,10 @@ function compareUpdate() {
 }
 
 function secondTour() {
+
+	$("#firstTour").hide();
+	$("#secondTour").hide();
+
 	var part5 = document.getElementById("part5");
 	var part6 = document.getElementById("part6");
 	var part7 = document.getElementById("part7");
@@ -789,8 +793,8 @@ function secondTour() {
                 		        map.setCenter(new google.maps.LatLng(new_center.lat, new_center.lng));
                         		map.setZoom(6);
 
-		                        plotCity("Modesto", "IL");
-
+		                       plotCity("Modesto", "IL");
+					$("#firstTour").show();
 				});
 			
 
@@ -802,6 +806,9 @@ function secondTour() {
 }
 
 function firstTour() {
+	$("#firstTour").hide();
+	$("#secondTour").hide();
+
 	var introduction = document.getElementById("introduction");
 	var part2 = document.getElementById("part2");
 	var part3 = document.getElementById("part3");
@@ -836,6 +843,7 @@ function firstTour() {
 				window.setTimeout(function() {
 					$("#main_avg_temp").css("background-color", "black");
 				}, 6000);
+				$("#secondTour").show();
 			});
 		});
 
