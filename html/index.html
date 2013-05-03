@@ -121,41 +121,17 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal hide fade" id="compare_modal" style="width:1000px; margin-left: -500px; height: 700px">
+	<div class="modal hide fade blackText" id="compare_modal" style="margin-left: -500px; width: 1000px">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			<h3>Compare</h3>
 		</div>
-		<div class="modal-body" style="height: 700px">
-
+		<div class="modal-body" style="height: 1000px">
 			<label for="compareFirstCity"><b>First city:</b></label>
 			<input type="text" id="compareFirstCity" />
 			<label><b>Second city:</b></label>
 			<label><input type="text" id="compareSecondCity" /></label>
-			<div class="tabbable" style="height: 600px">
-				<ul class="nav nav-tabs" id="compareTabs">
-					<li class="active"><a href="#avg_temp_compare">Average Temperature</a></li>
-					<li><a href="#avg_max_temp_compare">Average Maximum Temperature</a></li>
-					<li><a href="#avg_min_temp_compare">Average Minimum Temperature</a></li>
-				</ul>
-				<div class="tab-content">
-					<div class="tab-pane active" id="avg_temp_compare">
-						<svg class="nv_svg" id="avg_temp-compare-line-graph"></svg>
-						<svg class="nv_svg" id="avg_temp-compare-stacked"></svg>
-						<button class="btn btn-inverse btn-small compareBtn " id="avg_temp-compare-btn"></button>
-					</div>
-					<div class="tab-pane" id="avg_max_temp_compare">
-						<svg class="nv_svg" id="avg_max_temp-compare-line-graph"></svg>
-						<svg class="nv_svg" id="avg_max_temp-compare-stacked"></svg>
-						<button class="btn btn-inverse btn-small compareBtn" id="avg_max_temp-compare-btn"></button>
-					</div>
-					<div class="tab-pane" id="avg_min_temp_compare">
-						<svg class="nv_svg" id="avg_min_temp-compare-line-graph"></svg>
-						<svg class="nv_svg" id="avg_min_temp-compare-stacked"></svg>
-						<button class="btn btn-inverse btn-small compareBtn" id="avg_min_temp-compare-btn"></button>
-					</div>
-				</div>
-			</div>
+			<svg class="nv_svg" id="avg_temp-compare-line-graph"></svg>
 		</div>
 	</div>
 	<div id="timeLapse">

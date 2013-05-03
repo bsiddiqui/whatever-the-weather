@@ -118,7 +118,7 @@ function lineChart(cityName, state, datapoint, yearRange){
 
   var datamap = {
     "avg_temp": "Average Temperature", 
-    "avg_max_temp": "Average Maximum Temperature", 
+    "avg_max_tempo": "Average Maximum Temperature", 
     "avg_min_temp": "Average Minimum Temperature"
   }
   tempTable(cityName, state, datapoint);
@@ -240,17 +240,6 @@ function compareCitiesData(city1Name, state1, city2Name, state2, datapoint){
 };
 
 function compareLineChart(city1, state1, city2, state2, datapoint){
-  $("#" + datapoint + "-compare-btn").show();
-  $('#' + datapoint + "-compare-line-graph").show();
-  $('#' + datapoint + "-compare-stacked").hide();
-  $("#" + datapoint + "-compare-btn").html("Show Stacked Area Chart")
-  $("#" + datapoint + "-compare-btn").unbind('click');
-  $("#" + datapoint + "-compare-btn").on('click', function() {
-    $('#' + datapoint + "-compare-line-graph").hide();
-    $('#' + datapoint + "-compare-stacked").show();
-    compareStackedAreaChart(city1, state1, city2, state2, datapoint); 
-  });
-
   var data = compareCitiesData(city1, state1, city2, state2, datapoint);
   var colors = d3.scale.category10();
   keyColor = function(d, i) {return colors(d.key)};
