@@ -75,12 +75,13 @@ function appendButton(yearRange, datapoint, cityName, state) {
     })
     .attr("class", "btn btn-inverse btn-small")
     .on("click", function() {
-      lineChart(cityName, state, datapoint, yearRange);
+      var month = $("#lineChartMonth").val();
+      lineChart(cityName, state, datapoint, yearRange, month);
     });
   }
 }
 
-function lineChart(cityName, state, datapoint, yearRange){
+function lineChart(cityName, state, datapoint, yearRange, month){
 
   var margin = {top: 20, right: 20, bottom: 30, left: 50},
   width = 600 - margin.left - margin.right,
@@ -140,6 +141,11 @@ function lineChart(cityName, state, datapoint, yearRange){
 
     for(var mo in cityData[year]) {
 
+      if (mo != month)
+      {
+	  continue;
+      }
+
       var d = cityData[year][mo];
       d["year"] = parseDate(mo + " " + year);
       d.data[datapoint] = +d.data[datapoint]
@@ -188,7 +194,8 @@ function lineChart(cityName, state, datapoint, yearRange){
     .insert("button", ":first-child").text("Reset View")
     .attr("class", "btn btn-inverse btn-small")
     .on("click", function() {
-      lineChart(cityName, state, datapoint);
+      var month = $("#lineChartMonth").val();
+      lineChart(cityName, state, datapoint, undefined, month);
     });
   }
 
