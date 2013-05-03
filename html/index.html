@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=UTF8">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
 	<meta charset="utf-8">
 	<title>Whatever the Weather</title>
 
@@ -29,8 +29,8 @@
 
 <body>
 	<div class = "header">
-		<img src="img/banner0.png"/><br>
-		<img src="img/banner1.png"/>
+		<img alt="Whatever the Weather" src="img/banner0.png"/><br>
+		<img alt="A visualization by Basil Siddiqui and Kevin Schmid" src="img/banner1.png"/>
 	</div>
 	<table class="table">
 		<tr>
@@ -165,9 +165,7 @@
 		<h3 id="curYear"></h3>
 		<div id="yearSlider"></div>
 		<h3 id="endYear">2007</h3>
-		<table>
-			<button id="startAnimationBtn" type="button" class="btn btn-inverse">Start Timelapse</button>
-		</table>
+		<button id="startAnimationBtn" class="btn btn-inverse">Start Timelapse</button>
 	</div>
 
 	<div id="audio">
@@ -181,8 +179,8 @@
 		<audio src="audio/part8.m4a" id="part8"></audio>
 	</div>
 	<div>
-		<button onclick="firstTour()">First Tour</button>
-		<button onclick="secondTour()">Second Tour</button>
+		<button onclick="firstTour()" class="btn btn-primary firstTour">First Tour</button>
+		<button onclick="secondTour()" class="btn btn-primary secondTour">Second Tour</button>
 	</div>
 	<footer></footer>
 </body>

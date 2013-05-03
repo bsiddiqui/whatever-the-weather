@@ -50,6 +50,7 @@ body {
 	color: white;
 	font-family: 'Vollkorn', serif;
 	padding: 20px 0px;
+	zoom: -1;
 }
 
 .header {
@@ -80,7 +81,7 @@ body {
 }
 
 #timeLapse {
-	margin-bottom: 150px;
+	margin-bottom: 70px;
 }
 
 .blackText {
