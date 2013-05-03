@@ -83,6 +83,11 @@ function appendButton(yearRange, datapoint, cityName, state) {
 
 function lineChart(cityName, state, datapoint, yearRange, month){
 
+  window.city = cityName;
+  window.state = state;
+  window.datapoint = datapoint;
+  window.yearRange = yearRange;
+
   var margin = {top: 20, right: 20, bottom: 30, left: 50},
   width = 600 - margin.left - margin.right,
   height = 300 - margin.top - margin.bottom;
@@ -232,7 +237,7 @@ function compareCitiesData(city1Name, state1, city2Name, state2, datapoint, mont
     for(var month in months)
     {
 
-     	if(month != "1")
+     	if(month != monthNum)
      	{
 		continue;
 	}
@@ -241,7 +246,6 @@ function compareCitiesData(city1Name, state1, city2Name, state2, datapoint, mont
   }
 
   var data=  [{key: city1Name, values: values1}, {key: city2Name, values: values2}]
-  console.log(JSON.stringify(data));
 
   return data; 
 };

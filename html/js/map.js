@@ -431,7 +431,9 @@ function plotCity(city, state)
 	var month = $("#lineChartMonth").val();
 	
 	$("#cityName").html(city + ", " + state);	
-	lineChart(city, state, "avg_temp", month);
+	$("#main_city_input").val(city + ", " + state);	
+
+	lineChart(city, state, "avg_temp", undefined, month);
 
 	$(".graph").css("visibility", "");
 }
@@ -535,6 +537,10 @@ function initialize() {
 		compareUpdate();
 	});
 
+	$("#lineChartMonth").change(function() {
+		lineChart(window.city, window.state, window.datapoint, window.yearRange, $(this).val());
+	});
+
 	initializeSlider(map);
 
 	$(".graph").css('visibility', 'hidden');
@@ -625,10 +631,31 @@ function initializeSlider(map, destroy) {
 	});
 
 	$("#startAnimationBtn").click(function() {
-		var range = $("#yearSlider").slider("values");
-		startTimelapse(map, range);
+		startAnimation(map);
 	});
 
+
+
+}
+
+function stopAnimation(map) {
+	$("#startAnimationBtn").html("Start Animation");
+	$("#startAnimationBtn").unbind();
+	$("#startAnimationBtn").click(function() {
+		startAnimation(map);
+	});
+	clearInterval(timelapseId);
+}
+
+function startAnimation(map) {
+	var range = $("#yearSlider").slider("values");
+	startTimelapse(map, range);
+	$("#startAnimationBtn").html("Stop Animation");
+	$("#startAnimationBtn").unbind();
+	$("#startAnimationBtn").click(function() {
+		stopAnimation(map)
+		initializeRangeSlider(map);
+	});
 
 }
 
