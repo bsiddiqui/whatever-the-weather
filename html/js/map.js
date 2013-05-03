@@ -612,7 +612,7 @@ function initializeSlider(map, destroy) {
 		min: 0, 
 		max: NUM_INCREMENTS, 
 		animate: "fast", 
-		value: MapState.year * MONTHS_PER_YEAR + (MapState.month - 1),
+		value: 0,
 		slide: function(event, ui) {
 
 			MapState.month = extractMonth(ui.value);
@@ -625,7 +625,7 @@ function initializeSlider(map, destroy) {
 		}
 	});
 
-	$("#curYear").html("December 2012");
+	$("#curYear").html("January 1948");
 	$("#endYear").hide();
 
 	$("#playMode").click(function() {
