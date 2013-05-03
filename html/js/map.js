@@ -428,8 +428,10 @@ function populate(map) {
 
 function plotCity(city, state)
 {
+	var month = $("#lineChartMonth").val();
+	
 	$("#cityName").html(city + ", " + state);	
-	lineChart(city, state, "avg_temp");
+	lineChart(city, state, "avg_temp", month);
 
 	$(".graph").css("visibility", "");
 }
