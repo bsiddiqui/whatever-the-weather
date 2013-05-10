@@ -408,7 +408,7 @@ function populate(map) {
 		var circ = new google.maps.Circle({
 			center:  loc,
 			fillColor: chooseColor(temp), 
-			radius: 40000,
+			radius: 50000,
 			map: map, 
 			strokeWeight: 0, 
 			fillOpacity: .8
